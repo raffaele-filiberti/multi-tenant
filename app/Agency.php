@@ -18,6 +18,11 @@ class Agency extends Model
 
     // TODO: filtro per agenzie che danno la possibilità di invitarsi
 
+    public function setNameAttribute($name)
+    {
+        $this->attributes['motto'] = empty($name) ?: $name;
+    }
+
     public function setMottoAttribute($motto)
     {
         $this->attributes['motto'] = empty($motto) ? null : $motto;
