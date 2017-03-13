@@ -12,9 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        $this->run(PermissionTableSeeder::class);
-//        $this->run(RoleTableSeeder::class);
-
         $agency = factory(\App\Agency::class, 1)->create();
 
         \HipsterJazzbo\Landlord\Facades\Landlord::AddTenant($agency);
