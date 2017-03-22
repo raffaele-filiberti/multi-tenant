@@ -17,7 +17,7 @@ class CreateDetailsTable extends Migration
             $table->increments('id');
             $table->integer('agency_id')->unsigned();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')

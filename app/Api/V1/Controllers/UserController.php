@@ -4,6 +4,7 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Requests\UserRequest;
 
+use App\Customer;
 use App\User;
 use App\Role;
 
@@ -69,15 +70,19 @@ class UserController extends Controller
         ]);
     } 
 
-    // TODO: add costumers relationship
-    public function confirmSubscribe(Request $request, $id)
+    // TODO: add customers relationship
+    public function confirmSubscribe(Request $request, $user_id)
     {
-        $user = User::find($id);
+        $user = User::find($user_id);
+        $role = Role::find($request->input('role_id'));
+        $customer = Customer::find($request->input('customer_id'));
+
         $user->subscribed = true;
         $user->save();
 
-        $role = Role::find($request->input('id'));
         $user->roles()->attach($role->id);
+        $user->customers()->attach($customer->id);
+
 
         return Response()->json([
            'status' => 'The Administrator has allowed your subscription'

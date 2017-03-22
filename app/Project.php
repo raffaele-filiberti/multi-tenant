@@ -2,17 +2,17 @@
 
 namespace App;
 
-use HipsterJazzbo\Landlord\BelongsToTenants;
 use Illuminate\Database\Eloquent\Model;
+use HipsterJazzbo\Landlord\BelongsToTenants;
 
-class Task extends Model
+class Project extends Model
 {
     use BelongsToTenants;
 
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
-        'user_id', 'template_id', 'name', 'description', 'archivied', 'private', 'billed'
+        'user_id', 'name', 'description', 'archivied', 'private'
     ];
 
     public function setNameAttribute($name)
@@ -35,34 +35,19 @@ class Task extends Model
         $this->attributes['archivied'] = empty($archivied) ? false : $archivied;
     }
 
-    public function setBilledAttribute($billed)
-    {
-        $this->attributes['billed'] = empty($billed) ? false : $billed;
-    }
 
-    public function steps()
+    public function tasks()
     {
-        return $this->belongsToMany(Step::class)
-            ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed');
-    }
-
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    public function files()
-    {
-        return $this->belongsToMany(File::class);
-    }
-
-    public function template()
-    {
-        return $this->belongsTo(Template::class);
+        return $this->hasMany('App\Task');
     }
 
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer');
     }
 }

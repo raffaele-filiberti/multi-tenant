@@ -18,7 +18,7 @@ class CreateStepsTable extends Migration
             $table->integer('agency_id')->unsigned();
             $table->integer('template_id')->unsigned();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')
@@ -36,7 +36,7 @@ class CreateStepsTable extends Migration
             // 0 -> refused 1 -> completed 2 -> processing
             $table->integer('status')->default(0);
             $table->boolean('missed')->default(false);
-            $table->text('ref_description');
+            $table->text('ref_description')->nullable();
             $table->timestamps();
 
             $table->foreign('step_id')->references('id')->on('steps')

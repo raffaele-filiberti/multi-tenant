@@ -29,3 +29,10 @@ $factory->define(App\Agency::class, function (Faker\Generator $faker) {
         'description' => $faker->catchPhrase
     ];
 });
+
+$factory->define(App\customer::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->sentence($nbWords = 4, $variableNbWords = true),
+        'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
+    ];
+});

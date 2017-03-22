@@ -20,7 +20,7 @@ class Agency extends Model
 
     public function setNameAttribute($name)
     {
-        $this->attributes['motto'] = empty($name) ?: $name;
+        $this->attributes['name'] = empty($name) ? $this->attributes['name'] : $name;
     }
 
     public function setMottoAttribute($motto)

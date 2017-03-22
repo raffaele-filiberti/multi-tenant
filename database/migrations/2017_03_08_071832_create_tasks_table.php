@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->integer('agency_id')->unsigned();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')
@@ -31,7 +31,7 @@ class CreateTasksTable extends Migration
             $table->integer('template_id')->unsigned();
             $table->integer('project_id')->unsigned();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->boolean('private')->default(false);
             $table->boolean('archivied')->default(false);
             $table->boolean('billed')->default(false);

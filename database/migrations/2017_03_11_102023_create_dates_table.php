@@ -17,8 +17,7 @@ class CreateDatesTable extends Migration
             $table->increments('id');
             $table->integer('agency_id')->unsigned();
             $table->date('data');
-            $table->text('description');
-            $table->integer('status');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')
@@ -28,6 +27,7 @@ class CreateDatesTable extends Migration
         Schema::create('detail_step_task_date', function (Blueprint $table) {
             $table->integer('detail_step_task_id')->unsigned();
             $table->integer('date_id')->unsigned();
+            $table->integer('status')->default(0);
 
             $table->foreign('detail_step_task_id')->references('id')->on('detail_step_task')
                 ->onUpdate('cascade')->onDelete('cascade');

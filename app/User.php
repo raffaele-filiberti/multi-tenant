@@ -22,29 +22,24 @@ class User extends Model implements AuthenticatableContract,
 
     protected $tenantColumns = ['agency_id'];
 
-    protected $fillable = ['name', 'email', 'password', 'agency_id'];
+    protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = ['password', 'remember_token'];
 
     public function setPasswordAttribute($password)
     {
-        if (trim($password) !== '') {
-            $this->attributes['password'] = Hash::make($password);
-        }
+        $this->attributes['password'] = empty($password) ? $this->attributes['password'] : Hash::make($password);
     }
 
     public function setNameAttribute($name)
     {
-        if (trim($name) !== '') {
-            $this->attributes['name'] = trim($name);
-        }
+        $this->attributes['name'] = empty($name) ? $this->attributes['name'] : $name;
+
     }
 
     public function setEmailAttribute($email)
     {
-        if (trim($email) !== '') {
-            $this->attributes['email'] = trim($email);
-        }
+        $this->attributes['email'] = empty($email) ? $this->attributes['name'] : $email;
     }
 
     public function getPermissions($filter = 0)
@@ -61,8 +56,8 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne('App\Agency');
     }
 
-    public function costumers()
+    public function customers()
     {
-        return $this->belongsToMany('App\Costumer');
+        return $this->belongsToMany('App\Customer');
     }
 }

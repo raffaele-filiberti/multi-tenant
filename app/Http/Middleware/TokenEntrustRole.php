@@ -2,8 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Costumer;
+use App\Customer;
+use App\Step;
+use App\Task;
+use App\Template;
 use App\User;
+use App\Project;
+
 use Closure;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
@@ -41,9 +46,6 @@ class TokenEntrustRole extends BaseMiddleware
         $this->events->fire('tymon.jwt.valid', $user);
 
         Landlord::AddTenant(\App\Agency::find(Auth::user()->agency_id));
-        User::bootBelongsToTenants();
-        Costumer::bootBelongsToTenants();
-
         return $next($request);
     }
 }

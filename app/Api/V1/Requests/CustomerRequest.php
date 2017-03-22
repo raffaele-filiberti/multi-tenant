@@ -4,7 +4,7 @@ namespace App\Api\V1\Requests;
 
 use Dingo\Api\Http\FormRequest;
 
-class CostumerRequest extends FormRequest
+class customerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

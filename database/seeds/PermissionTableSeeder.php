@@ -46,22 +46,39 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'delete_users',
                 'display_name' => 'Delete users '
             ],
-            //costumers
+            //customers
             [
-                'name' => 'view_costumers',
-                'display_name' => 'View costumers'
+                'name' => 'view_customers',
+                'display_name' => 'View customers'
             ],
             [
-                'name' => 'create_costumers',
-                'display_name' => 'Create costumers'
+                'name' => 'create_customers',
+                'display_name' => 'Create customers'
             ],
             [
-                'name' => 'update_costumers',
-                'display_name' => 'Update costumers'
+                'name' => 'update_customers',
+                'display_name' => 'Update customers'
             ],
             [
-                'name' => 'delete_costumers',
-                'display_name' => 'Delete  costumers'
+                'name' => 'delete_customers',
+                'display_name' => 'Delete  customers'
+            ],
+            //projects
+            [
+                'name' => 'view_projects',
+                'display_name' => 'View projects'
+            ],
+            [
+                'name' => 'create_projects',
+                'display_name' => 'Create projects'
+            ],
+            [
+                'name' => 'update_projects',
+                'display_name' => 'Update projects'
+            ],
+            [
+                'name' => 'delete_projects',
+                'display_name' => 'Delete  projects'
             ],
             //templates
             [
@@ -114,22 +131,22 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'delete_steps',
                 'display_name' => 'Delete steps '
             ],
-            //infos
+            //details
             [
-                'name' => 'view_infos',
-                'display_name' => 'View infos'
+                'name' => 'view_details',
+                'display_name' => 'View details'
             ],
             [
-                'name' => 'create_infos',
-                'display_name' => 'Create infos'
+                'name' => 'create_details',
+                'display_name' => 'Create details'
             ],
             [
-                'name' => 'update_infos',
-                'display_name' => 'Update infos'
+                'name' => 'update_details',
+                'display_name' => 'Update details'
             ],
             [
-                'name' => 'delete_infos',
-                'display_name' => 'Delete infos '
+                'name' => 'delete_details',
+                'display_name' => 'Delete details '
             ]
         ]);
     }

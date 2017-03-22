@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
 //      admin dell'agency è l'unico registrato
 //      gli altri utenti dovranno poi essere
 //      accettati selezionando la role
-        $admin = \App\User::find(1);
+        $id = ($agency->id == 1) ? 1 : ($agency->id * 20) - 19;
+        echo $id;
+        $admin = \App\User::find($id);
         $admin->subscribed = true;
         $admin->roles()->attach(1);
         $admin->save();
@@ -30,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $admin_role = Role::find(1);
         $admin_perms = \App\Permission::all();
         foreach ($admin_perms as $perm) {
-            $admin_role->permissions()->attach($perm->id);
-        } 
+            $admin_role->permissions()->sync([$perm->id]);
+        }
     }
 }

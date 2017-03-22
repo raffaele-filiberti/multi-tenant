@@ -9,11 +9,6 @@ class Role extends EntrustRole
 {
     use BelongsToTenants;
 
-//    public function agencies()
-//    {
-//        return $this->belongsToMany('App\Agency');
-//    }
-
     public function users()
     {
         return $this->belongsToMany('App\User');

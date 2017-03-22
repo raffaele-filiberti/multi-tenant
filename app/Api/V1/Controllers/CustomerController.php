@@ -2,15 +2,15 @@
 
 namespace App\Api\V1\Controllers;
 
-use App\Api\V1\Requests\CostumerRequest;
-use App\Costumer;
+use App\Api\V1\Requests\customerRequest;
+use App\Customer;
 use App\User;
 
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Http\Request;
 
-class CostumerController extends Controller
+class customerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class CostumerController extends Controller
     public function index()
     {
         return Response()->json([
-            'costumers' => Costumer::all()
+            'customers' => Customer::all()
         ]);
     }
 
@@ -30,17 +30,17 @@ class CostumerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CostumerRequest $request)
+    public function store(customerRequest $request)
     {
-        $costumer = Costumer::create([
+        $customer = Customer::create([
             'name' => $request->input('name'),
             'description' => $request->input('description')
         ]);
 
-        Auth::user()->costumers()->attach($costumer->id);
+//        Auth::user()->customers()->attach($customer->id);
 
         return Response()->json([
-            'status' => 'costumer created successfully'
+            'status' => 'customer created successfully'
         ]);
     }
 
@@ -53,7 +53,7 @@ class CostumerController extends Controller
     public function show($id)
     {
         return Response()->json([
-            'costumer' => Costumer::findOrFail($id)
+            'customer' => Customer::findOrFail($id)
         ]);
     }
 
@@ -64,15 +64,15 @@ class CostumerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CostumerRequest $request, $id)
+    public function update(customerRequest $request, $id)
     {
-        $costumer = Costumer::findOrFail($id);
-        $costumer->name = $request->input('name');
-        $costumer->description = $request->input('description');
-        $costumer->save();
+        $customer = Customer::findOrFail($id);
+        $customer->name = $request->input('name');
+        $customer->description = $request->input('description');
+        $customer->save();
 
         return Response()->json([
-            'status' => 'costumer updated successfully'
+            'status' => 'customer updated successfully'
         ]);
     }
 
@@ -84,11 +84,11 @@ class CostumerController extends Controller
      */
     public function destroy($id)
     {
-        $costumer = Costumer::findOrFail($id);
-        $costumer->delete();
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
 
         return Response()->json([
-            'status' => 'costumer deleted successfully'
+            'status' => 'customer deleted successfully'
         ]);
     }
 

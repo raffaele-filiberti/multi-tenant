@@ -18,16 +18,16 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('agency_id')->unsigned();
-            $table->integer('costumer_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->boolean('archivied')->default(false);
             $table->boolean('private')->default(false);
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('costumer_id')->references('id')->on('costumers')
+            $table->foreign('customer_id')->references('id')->on('customers')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCostumersTable extends Migration
+class CreatecustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCostumersTable extends Migration
      */
     public function up()
     {
-        Schema::create('costumers', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('agency_id')->unsigned();
             $table->string('name');
@@ -24,11 +24,11 @@ class CreateCostumersTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
         });
 
-        Schema::create('costumer_user', function (Blueprint $table) {
-            $table->integer('costumer_id')->unsigned();
+        Schema::create('customer_user', function (Blueprint $table) {
+            $table->integer('customer_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
-            $table->foreign('costumer_id')->references('id')->on('costumers')
+            $table->foreign('customer_id')->references('id')->on('customers')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -42,8 +42,8 @@ class CreateCostumersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('costumers');
-        Schema::dropIfExists('costumer_user');
+        Schema::dropIfExists('customers');
+        Schema::dropIfExists('customer_user');
 
     }
 }

@@ -2,36 +2,33 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Api\V1\Requests\StepRequest;
 use HipsterJazzbo\Landlord\BelongsToTenants;
+use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
-class Costumer extends Model
+class Detail extends Model
 {
     use BelongsToTenants;
 
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'detail_type', 'roled'
     ];
-
-    public function users()
-    {
-        $this->belongsToMany('App\User');
-    }
-
-    public function tasks()
-    {
-        $this->belongsToMany('App\Task');
-    }
 
     public function setNameAttribute($name)
     {
-        $this->attributes['name'] = empty($name) ? $this->attributes['name']  : $name;
+        $this->attributes['name'] = empty($name) ? $this->attributes['name'] : $name;
     }
 
     public function setDescriptionAttribute($description)
     {
         $this->attributes['description'] = empty($description) ? null : $description;
+    }
+
+    public function steps()
+    {
+        return $this->belongsToMany(Step::class);
     }
 }
