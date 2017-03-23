@@ -3,6 +3,7 @@
 namespace App\Api\V1\Requests;
 
 use Dingo\Api\Http\FormRequest;
+use Config;
 
 class SignUpAsSubscriberRequest extends FormRequest
 {
