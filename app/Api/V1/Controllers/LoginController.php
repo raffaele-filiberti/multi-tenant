@@ -31,7 +31,7 @@ class LoginController extends Controller
 
         // all good so return the token
         return response()->json([
-            'auth' => Auth::user(),
+            'auth' => Auth::user()->roles()->get(),
             'token' => $token
         ]);
     }
