@@ -2,12 +2,10 @@
 
 namespace App;
 
-use HipsterJazzbo\Landlord\BelongsToTenants;
 use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
-    use BelongsToTenants;
 
     public function users()
     {
