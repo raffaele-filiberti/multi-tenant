@@ -30,10 +30,6 @@ class SignUpController extends Controller
             'description' => $request->input('description')
         ]);
 
-        if(!$agency->save()) {
-            return response()->json(['error' => 'invalid_agency_name'], 401);
-        }
-
         Landlord::AddTenant($agency);
         User::bootBelongsToTenants();
 

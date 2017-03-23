@@ -8,7 +8,7 @@ return [
             'name' => 'required|max:255',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:6',
-            'agency' => 'required|max:255|unique:agencies'
+            'agency' => 'required|max:255'
         ]
     ],
 
@@ -18,7 +18,7 @@ return [
             'name' => 'required|max:255',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:6',
-            'agency' => 'required|integer'
+            'agency_id' => 'required|integer'
         ]
     ],
 
