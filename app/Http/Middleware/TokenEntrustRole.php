@@ -46,6 +46,7 @@ class TokenEntrustRole extends BaseMiddleware
         $this->events->fire('tymon.jwt.valid', $user);
 
         Landlord::AddTenant(\App\Agency::find(Auth::user()->agency_id));
+        User::bootBelongsToTenants();
         return $next($request);
     }
 }

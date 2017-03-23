@@ -34,6 +34,9 @@ class TokenEntrustPermission extends BaseMiddleware
         if (!$user->hasRole(explode('|', $permission))) {
             return $this->respond('tymon.jwt.invalid', $permission, 401, 'Unauthorized');
         }
+
+        Landlord::AddTenant(\App\Agency::find(Auth::user()->agency_id));
+        User::bootBelongsToTenants();
         $this->events->fire('tymon.jwt.valid', $user);
         return $next($request);
     }
