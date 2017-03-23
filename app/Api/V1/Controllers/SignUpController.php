@@ -2,6 +2,8 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Requests\SignUpAsAgencyRequest;
+use App\Api\V1\Requests\SignUpAsSubscriberRequest;
 use Config;
 use Auth;
 
@@ -20,7 +22,7 @@ class SignUpController extends Controller
 {
 
     // TODO: role and permission manager (now default)
-    public function signUpAsAgency(LoginRequest $request, JWTAuth $JWTAuth)
+    public function signUpAsAgency(SignUpAsAgencyRequest $request, JWTAuth $JWTAuth)
     {
         $agency = Agency::create([
             'name' => $request->input('agency'),
@@ -54,9 +56,9 @@ class SignUpController extends Controller
         ], 201);
     }
 
-    public function signUpAsSubscriber(LoginRequest $request)
+    public function signUpAsSubscriber(SignUpAsSubscriberRequest $request)
     {
-        $agency = Agency::where('name', '=', $request->input('agency'))->firstOrFail();
+        $agency = Agency::find($request->input('agency_id'));
 
         Landlord::AddTenant($agency);
         User::bootBelongsToTenants();

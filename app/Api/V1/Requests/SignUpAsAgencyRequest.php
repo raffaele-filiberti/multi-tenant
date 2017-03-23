@@ -5,11 +5,11 @@ namespace App\Api\V1\Requests;
 use Config;
 use Dingo\Api\Http\FormRequest;
 
-class SignUpRequest extends FormRequest
+class SignUpAsAgencyRequest extends FormRequest
 {
     public function rules()
     {
-        return Config::get('boilerplate.sign_up.validation_rules');
+        return Config::get('boilerplate.sign_up_as_agency.validation_rules');
     }
 
     public function authorize()

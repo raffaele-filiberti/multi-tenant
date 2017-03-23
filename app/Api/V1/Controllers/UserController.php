@@ -35,6 +35,9 @@ class UserController extends Controller
             'subscribed' => true
         ]);
 
+        $user->customers()->attach($request->input('customer_id'));
+        $user->roles()->attach($request->input('role_id'));
+
         return Response()->json([
             'status' => 'user created successfully'
         ]);

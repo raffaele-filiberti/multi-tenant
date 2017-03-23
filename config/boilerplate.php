@@ -2,15 +2,26 @@
 
 return [
 
-    'sign_up' => [
+    'sign_up_as_agency' => [
         'release_token' => env('SIGN_UP_RELEASE_TOKEN'),
         'validation_rules' => [
             'name' => 'required|max:255',
             'email' => 'required|unique:users|email',
             'password' => 'required|min:6',
-            'agency' => 'required|unique'
+            'agency' => 'required|max:255|unique:agencies'
         ]
     ],
+
+    'sign_up_as_subscriber' => [
+        'release_token' => env('SIGN_UP_RELEASE_TOKEN'),
+        'validation_rules' => [
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users|email',
+            'password' => 'required|min:6',
+            'agency' => 'required|integer'
+        ]
+    ],
+
 
     'login' => [
         'validation_rules' => [
