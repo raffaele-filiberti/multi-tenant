@@ -8,6 +8,10 @@ class Step_Task extends Model
 {
     protected $table = 'step_task';
 
+    protected $fillable = [
+        'ref_id', 'status', 'missed', 'ref_description', 'expiring_date', 'hidden'
+    ];
+
     public function task() {
         return $this->belongsTo(Task::class);
     }

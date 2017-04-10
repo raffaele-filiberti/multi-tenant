@@ -53,10 +53,12 @@ class TaskController extends Controller
         $task = Project::find($project_id)->tasks()->create([
             'user_id' => Auth::user()->id,
             'template_id' => $request->input('template_id'),
+            'product_manager_id' => $request->input('product_manager_id'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'archivied' => $request->input('archivied'),
-            'private' => $request->input('private')
+            'country' => $request->input('country'),
+            'private' => $request->input('private'),
+            'deadline' => $request->input('deadline')
         ]);
 
         $template = Template::find($task->template_id);
@@ -120,10 +122,16 @@ class TaskController extends Controller
     public function update(TaskRequest $request, $customer_id, $project_id, $id)
     {
         $task = Task::find($id);
+        $task->product_manager_id = $request->input('product_manager_id');
         $task->name = $request->input('name');
         $task->description = $request->input('description');
         $task->archivied = $request->input('archivied');
         $task->private = $request->input('private');
+        $task->billed = $request->input('billed');
+        $task->item_number = $request->input('item_number');
+        $task->design_type = $request->input('design_type');
+        $task->deadline = $request->input('deadline');
+        $task->country = $request->input('country');
         $task->save();
 
         return Response()->json([

@@ -32,11 +32,13 @@ class CreateStepsTable extends Migration
             $table->increments('id');
             $table->integer('step_id')->unsigned();
             $table->integer('task_id')->unsigned();
-            $table->integer('ref_id')->unsigned();
+            $table->integer('ref_id')->unsigned()->nullable();
             // 0 -> refused 1 -> completed 2 -> processing
             $table->integer('status')->default(0);
             $table->boolean('missed')->default(false);
+            $table->boolean('hidden')->default(false);
             $table->text('ref_description')->nullable();
+            $table->date('expiring_date');
             $table->timestamps();
 
             $table->foreign('step_id')->references('id')->on('steps')
