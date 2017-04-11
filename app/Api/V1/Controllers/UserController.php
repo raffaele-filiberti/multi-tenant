@@ -78,14 +78,11 @@ class UserController extends Controller
     {
         $user = User::find($user_id);
         $role = Role::find($request->input('role_id'));
-        $customer = Customer::find($request->input('customer_id'));
 
         $user->subscribed = true;
         $user->save();
 
         $user->roles()->attach($role->id);
-        $user->customers()->attach($customer->id);
-
 
         return Response()->json([
            'status' => 'The Administrator has allowed your subscription'
