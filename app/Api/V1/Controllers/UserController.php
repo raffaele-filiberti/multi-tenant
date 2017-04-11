@@ -92,9 +92,7 @@ class UserController extends Controller
     public function RemoveSubscribe($id)
     {
         $user = User::find($id);
-        $user->subscribed = false;
-        $user->agency_id = null;
-        $user->save();
+        $user->delete();
 
         return Response()->json([
             'status' => 'The Administrator has removed you to the agency'

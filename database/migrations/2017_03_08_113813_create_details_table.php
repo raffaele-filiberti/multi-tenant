@@ -18,6 +18,8 @@ class CreateDetailsTable extends Migration
             $table->integer('agency_id')->unsigned();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('roled');
+            $table->integer('detail_type');
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')
