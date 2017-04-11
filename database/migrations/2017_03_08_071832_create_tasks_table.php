@@ -39,11 +39,8 @@ class CreateTasksTable extends Migration
             $table->string('country')->default('EU');
             $table->boolean('private')->default(false);
             $table->boolean('archivied')->default(false);
-<<<<<<< HEAD
             $table->boolean('billed')->default(false);
-=======
             $table->integer('billed')->unsigned()->default(0);
->>>>>>> origin/master
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')

@@ -4,6 +4,7 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Requests\SignUpAsAgencyRequest;
 use App\Api\V1\Requests\SignUpAsSubscriberRequest;
+use App\Customer;
 use Config;
 use Auth;
 
@@ -55,6 +56,7 @@ class SignUpController extends Controller
     public function signUpAsSubscriber(SignUpAsSubscriberRequest $request)
     {
         $agency = Agency::find($request->input('agency_id'));
+        $customer = Customer::find($request->input('customer_id'));
 
         Landlord::AddTenant($agency);
         User::bootBelongsToTenants();
@@ -65,6 +67,8 @@ class SignUpController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         ]);
+
+        $user->costumers()->attach($customer->id);
 
         return response()->json([
             'status' => 'ok',
