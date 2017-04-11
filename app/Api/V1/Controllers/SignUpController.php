@@ -68,7 +68,7 @@ class SignUpController extends Controller
             'password' => $request->input('password')
         ]);
 
-        $user->costumers()->attach($customer->id);
+        $user->customers()->attach($customer->id);
 
         return response()->json([
             'status' => 'ok',
