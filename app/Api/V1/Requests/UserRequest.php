@@ -48,12 +48,12 @@ class UserRequest extends FormRequest
             case 'PATCH':
             {
                 return [
-                    'customer_id' => 'required|integer',
-                    'role_id' => 'required|integer',
+                    'customer_id' => 'integer',
+                    'role_id' => 'integer',
                     'name' => 'max:255',
                     'email' => 'unique:users|email',
                     'password' => 'min:6',
-                    'avatar_path' => 'file|image'
+                    'avatar_path' => 'image|mimes:jpg,png|max:5000'
                 ];
             }
             default:break;
