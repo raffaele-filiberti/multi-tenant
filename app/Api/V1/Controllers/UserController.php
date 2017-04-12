@@ -49,8 +49,19 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');
+
+        //avatar upload
+        if ($request->hasFile('avatar')) {
+            $url = 'images/avatar'. $user->name;
+            $user->avatar_path = $url;
+            $request->photo->store($url);
+        }
+
         $user->subscribed = true;
         $user->save();
+
+        $user->customers()->syncWithoutDetaching([$request->input('customer_id')]);
+        $user->roles()->syncWithoutDetaching([$request->input('role_id')]);
 
         return Response()->json([
             'status' => 'user updated successfully'

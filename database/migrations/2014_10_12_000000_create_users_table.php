@@ -29,7 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('avatar_path')->nullable();
             $table->boolean('ibernate')->default(false);
             $table->boolean('notify')->default(true);
             $table->boolean('subscribed')->default(false);
