@@ -39,8 +39,8 @@ class UserRequest extends FormRequest
                     'name' => 'required|max:255',
                     'email' => 'required|unique:users|email',
                     'password' => 'required|min:6',
-                    'customer_id' => 'required|integer',
-                    'role_id' => 'required|integer'
+                    'customer_id' => 'required',
+                    'role_id' => 'required'
 
                 ];
             }
@@ -48,8 +48,8 @@ class UserRequest extends FormRequest
             case 'PATCH':
             {
                 return [
-                    'customer_id' => 'integer',
-                    'role_id' => 'integer',
+                    'customer_id' => '',
+                    'role_id' => '',
                     'name' => 'max:255',
                     'email' => 'unique:users|email',
                     'password' => 'min:6',
