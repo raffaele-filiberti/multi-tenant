@@ -18,7 +18,7 @@ $api->version('v1', function (Router $api) {
     });
 
     //role : admin
-    $api->group(['middleware' => '[role:admin, cors]', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
+    $api->group(['middleware' => 'role:admin', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
 
         //SUBSCRIBE ROUTES
         $api->get('subscriber', 'UserController@getSubscriber');
