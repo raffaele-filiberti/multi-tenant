@@ -39,9 +39,8 @@ class UserRequest extends FormRequest
                     'name' => 'required|max:255',
                     'email' => 'required|unique:users|email',
                     'password' => 'required|min:6',
-//                    'customer_id' => 'required',
-//                    'role_id' => 'required'
-
+                    'customer_id' => 'required|integer',
+                    'role_id' => 'required|integer'
                 ];
             }
             case 'PUT':

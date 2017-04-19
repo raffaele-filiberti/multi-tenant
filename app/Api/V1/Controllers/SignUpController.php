@@ -39,7 +39,7 @@ class SignUpController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'subscribed' => 1
+            'subscribed' => true
         ]);
 
         //  assign role admin to the agency owner
