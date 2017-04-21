@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
 
-        $user = User::find($this->route('users'));
+        $user = User::find($this->route('users')[id]);
         switch($this->method())
         {
             case 'GET':
@@ -52,7 +52,7 @@ class UserRequest extends FormRequest
                     'customer_id' => 'integer|nullable',
                     'role_id' => 'integer|nullable',
                     'name' => 'max:255',
-                    'email' => 'unique:users|email'.$user->id,
+                    'email' => 'unique:users|email'.$user,
                     'password' => 'min:6',
                     'avatar_path' => 'image|mimes:jpg,png|max:5000'
                 ];
