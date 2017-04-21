@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         return Response()->json([
-            'users' => User::with('roles', 'customersg')->get()
+            'users' => User::with('roles', 'customers')->get()
         ]);
     }
 
