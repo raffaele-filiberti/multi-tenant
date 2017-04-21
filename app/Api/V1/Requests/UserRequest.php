@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Requests;
 
+use App\User;
 use Dingo\Api\Contract\Http\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,7 +27,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
 
-
+        $user = User::find($this->users);
         switch($this->method())
         {
             case 'GET':
@@ -51,7 +52,7 @@ class UserRequest extends FormRequest
                     'customer_id' => 'integer|nullable',
                     'role_id' => 'integer|nullable',
                     'name' => 'max:255',
-                    'email' => 'unique:users|email'.$this->get('id'),
+                    'email' => 'unique:users|email'.$user->id,
                     'password' => 'min:6',
                     'avatar_path' => 'image|mimes:jpg,png|max:5000'
                 ];
