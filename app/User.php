@@ -37,10 +37,10 @@ class User extends Model implements AuthenticatableContract,
 
     }
 
-//    public function setEmailAttribute($email)
-//    {
-//        $this->attributes['email'] = empty($email) ? $this->attributes['name'] : $email;
-//    }
+    public function setEmailAttribute($email)
+    {
+        $this->attributes['email'] = empty($email) ? $this->attributes['name'] : $email;
+    }
 
     public function getPermissions($filter = 0)
     {

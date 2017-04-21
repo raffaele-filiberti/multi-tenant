@@ -61,9 +61,9 @@ class UserController extends Controller
         $user->save();
 
         if(!empty($request->input('customer_id')))
-            $user->customers()->syncWithoutDetaching([$request->input('customer_id')]);
+            $user->customers()->sync([$request->input('customer_id')]);
         if(!empty($request->input('role_id')))
-            $user->roles()->syncWithoutDetaching([$request->input('role_id')]);
+            $user->roles()->sync([$request->input('role_id')]);
 
         return Response()->json([
             'status' => 'user updated successfully'
