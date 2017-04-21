@@ -52,7 +52,7 @@ class UserRequest extends FormRequest
                     'customer_id' => 'integer|nullable',
                     'role_id' => 'integer|nullable',
                     'name' => 'max:255',
-                    'email' => 'unique:users|email'.$user,
+                    'email' => 'unique:users|email|'.$user,
                     'password' => 'min:6',
                     'avatar_path' => 'image|mimes:jpg,png|max:5000'
                 ];
