@@ -26,6 +26,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
 
+
         switch($this->method())
         {
             case 'GET':
@@ -50,7 +51,7 @@ class UserRequest extends FormRequest
                     'customer_id' => 'integer|nullable',
                     'role_id' => 'integer|nullable',
                     'name' => 'max:255',
-                    'email' => 'unique:users|email',
+                    'email' => 'unique:users|email'.$this->get('id'),
                     'password' => 'min:6',
                     'avatar_path' => 'image|mimes:jpg,png|max:5000'
                 ];
