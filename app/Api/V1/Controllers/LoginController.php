@@ -31,6 +31,7 @@ class LoginController extends Controller
 
         // all good so return the token
         return response()->json([
+            'agency' => Agency::find(Auth::user()->agency_id),
             'auth' => Auth::user()->roles()->get(),
             'token' => $token
         ]);
