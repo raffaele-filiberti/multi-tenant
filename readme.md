@@ -1,7 +1,7 @@
 ## Multy-tenancy Restful API CRM 
 based on Laravel Framework
 
-### routes
+### routes beta
 | Host | Method    | URI                                                             | Name              | Action
 |      | POST      | /api/auth/agency/signup                                         |                   | App\Api\V1\Controllers\SignUpController@signUpAsAgency
 |      | POST      | /api/auth/signup                                                |                   | App\Api\V1\Controllers\SignUpController@signUpAsSubscriber
