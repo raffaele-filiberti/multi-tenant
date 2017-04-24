@@ -2,6 +2,7 @@
 based on Laravel Framework
 
 ### routes beta
+```
 | Host | Method    | URI                                                             | Name              | Action
 |      | POST      | /api/auth/agency/signup                                         |                   | App\Api\V1\Controllers\SignUpController@signUpAsAgency
 |      | POST      | /api/auth/signup                                                |                   | App\Api\V1\Controllers\SignUpController@signUpAsSubscriber
@@ -46,4 +47,4 @@ based on Laravel Framework
 |      | GET|HEAD  | /api/templates/{template_id}/steps/{detail_id}/details/{detail} | details.show      | App\Api\V1\Controllers\DetailController@show
 |      | PUT|PATCH | /api/templates/{template_id}/steps/{detail_id}/details/{detail} | details.update    | App\Api\V1\Controllers\DetailController@update
 |      | DELETE    | /api/templates/{template_id}/steps/{detail_id}/details/{detail} | details.destroy   | App\Api\V1\Controllers\DetailController@destroy
-
+```
