@@ -28,11 +28,6 @@ class TemplateController extends Controller
      */
     public function store(TemplateRequest $request)
     {
-        return Response()->json([
-            'request' => $request->all(),
-            'status' => 'template created successfully'
-        ]);
-
         $template = Template::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -47,6 +42,11 @@ class TemplateController extends Controller
                 ]);
             }
         }
+
+        return Response()->json([
+            'request' => $request->all(),
+            'status' => 'template created successfully'
+        ]);
 
 
 
