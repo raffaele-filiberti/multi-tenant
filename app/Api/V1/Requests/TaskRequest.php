@@ -35,7 +35,9 @@ class TaskRequest extends FormRequest
                 return [
 //                  'user_id' => ...
                     'template_id' => 'required|integer',
-                    'product_manager_id' => 'required|integer',
+                    'product_manager_id' => 'integer|nullable',
+                    'item_number' => 'max:255|nullable',
+                    'design_type' => 'integer|nullable',
                     'name' => 'required|max:255',
                     'description' => 'nullable',
                     'country' => 'max:5|nullable',
@@ -48,13 +50,13 @@ class TaskRequest extends FormRequest
             {
                 return [
                     'product_manager_id' => 'integer',
+                    'item_number' => 'max:255|nullable',
+                    'design_type' => 'integer|nullable',
                     'name' => 'max:255',
                     'description' => 'nullable',
                     'archivied' => 'boolean',
                     'billed' => 'boolean',
                     'private' => 'boolean',
-                    'item_number' => 'max:255',
-                    'design_type' => 'integer',
                     'deadline' => 'date',
                     'country' => 'max:5|nullable'
                 ];

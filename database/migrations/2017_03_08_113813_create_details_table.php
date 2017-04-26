@@ -43,7 +43,7 @@ class CreateDetailsTable extends Migration
             $table->increments('id');
             $table->integer('detail_id')->unsigned();
             $table->integer('step_task_id')->unsigned();
-
+            $table->integer('status')->default(0);
             $table->foreign('step_task_id')->references('id')->on('step_task')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('detail_id')->references('id')->on('details')

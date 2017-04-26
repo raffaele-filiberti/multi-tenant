@@ -54,6 +54,8 @@ class TaskController extends Controller
             'user_id' => Auth::user()->id,
             'template_id' => $request->input('template_id'),
             'product_manager_id' => $request->input('product_manager_id'),
+            'item_number' => $request->input('item_number'),
+            'design_type' => $request->input('design_type'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'country' => $request->input('country'),
@@ -65,14 +67,22 @@ class TaskController extends Controller
 
         foreach ($template->steps as $key => $step)
         {
-
-            $task->steps()->attach($step->id);
+            //TODO: handle special features for steps
+            $task->steps()->attach($step->id,
+                [
+                    'expiring_date' => $request->input('steps.'.$key.'.expiring_date'),
+/*                    'hidden' => $request->input('steps.'.$key.'.hidden'),
+                    'missed' => $request->input('steps.'.$key.'.missed'),
+                    'ref_id' => $request->input('steps.'.$key.'.ref_id'),
+                    'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
+                ]);
             $pivot = $task->steps;
 
             foreach ($step->details as $detail)
             {
                 $step_task = Step_Task::find($pivot[$key]->pivot->id);
-                $step_task->details()->attach( $detail->id);
+                //TODO: aggiungere field extra se ci sono
+                $step_task->details()->attach($detail->id);
             }
         }
 

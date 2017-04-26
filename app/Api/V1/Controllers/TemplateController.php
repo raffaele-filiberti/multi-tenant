@@ -28,14 +28,28 @@ class TemplateController extends Controller
      */
     public function store(TemplateRequest $request)
     {
+        return Response()->json([
+            'request' => $request->all(),
+            'status' => 'template created successfully'
+        ]);
+
         $template = Template::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
         ]);
 
-        return Response()->json([
-            'status' => 'template created successfully'
-        ]);
+        if($request->has('steps')){
+            $steps = $request->input('steps');
+            foreach ($steps as $step) {
+                Template::find($template->id)->steps()->create([
+                    'name' => $step->name,
+                    'description' => $step->description
+                ]);
+            }
+        }
+
+
+
 
     }
 
