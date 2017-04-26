@@ -3,6 +3,7 @@
 namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Requests\TemplateRequest;
+use App\Step;
 use App\Template;
 use App\Http\Controllers\Controller;
 
@@ -34,12 +35,21 @@ class TemplateController extends Controller
         ]);
 
         if($request->has('steps')){
-            $steps = $request->input('steps');
-            foreach ($steps as $step) {
-                Template::find($template->id)->steps()->create([
-                    'name' => $step->name,
-                    'description' => $step->description
+            $arr_steps = $request->input('steps');
+            foreach ($arr_steps as $arr_step) {
+                $step = Template::find($template->id)->steps()->create([
+                    'name' => $arr_step['name'],
+                    'description' => $arr_step['description']
                 ]);
+                if($arr_step['details']){
+                    foreach ($arr_step['details'] as $detail)
+                    {
+                        Step::find($step->id)->details()->create([
+                            'name' => empty($detail['name']) ? null : $detail['name'],
+                            'description' => empty($detail['description']) ? null : $detail['description']
+                        ]);
+                    }
+                }
             }
         }
 
