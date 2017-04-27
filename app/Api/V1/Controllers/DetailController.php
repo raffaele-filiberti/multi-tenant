@@ -48,7 +48,7 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($template_id, $id)
+    public function show($template_id, $step_id, $id)
     {
         return Response()->json([
             'step' => Step::find($id)
@@ -82,7 +82,7 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($template_id, $step_id, $id)
     {
         $detail = Detail::find($id);
         $detail->delete();
