@@ -17,6 +17,10 @@ class Detail extends Model
         'name', 'description', 'detail_type', 'roled'
     ];
 
+    protected $hidden = [
+        'agency_id'
+    ];
+
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = empty($name) ? $this->attributes['name'] : $name;
