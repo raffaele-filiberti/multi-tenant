@@ -34,9 +34,9 @@ class DetailRequest extends FormRequest
             {
                 return [
                     'name' => 'required|max:255',
-                    'description' => 'nullable',
-                    'detail_type' => 'integer',
-                    'roled' => 'boolean'
+                    'description' => 'required|nullable',
+                    'detail_type' => 'required|integer',
+                    'roled' => 'required|boolean'
                 ];
             }
             case 'PUT':
