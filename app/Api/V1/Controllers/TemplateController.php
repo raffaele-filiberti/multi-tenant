@@ -71,9 +71,9 @@ class TemplateController extends Controller
      */
     public function show($id)
     {
-            return Response()->json([
-                'template' => Template::find($id)
-            ]);
+        return Response()->json([
+            'template' => Template::find($id)
+        ]);
     }
 
     /**

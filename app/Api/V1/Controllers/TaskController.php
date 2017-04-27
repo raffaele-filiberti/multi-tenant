@@ -71,10 +71,10 @@ class TaskController extends Controller
             $task->steps()->attach($step->id,
                 [
                     'expiring_date' => $request->input('steps.'.$key.'.expiring_date'),
-/*                    'hidden' => $request->input('steps.'.$key.'.hidden'),
-                    'missed' => $request->input('steps.'.$key.'.missed'),
-                    'ref_id' => $request->input('steps.'.$key.'.ref_id'),
-                    'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
+                    /*                    'hidden' => $request->input('steps.'.$key.'.hidden'),
+                                        'missed' => $request->input('steps.'.$key.'.missed'),
+                                        'ref_id' => $request->input('steps.'.$key.'.ref_id'),
+                                        'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
                 ]);
             $pivot = $task->steps;
 

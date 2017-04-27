@@ -62,7 +62,7 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DetailRequest $request, $template_id, $id)
+    public function update(DetailRequest $request, $template_id, $step_id, $id)
     {
         $detail = Detail::find($id);
         $detail->name = $request->input('name');

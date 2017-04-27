@@ -84,7 +84,7 @@ class UserController extends Controller
         return Response()->json([
             'users' => User::where('subscribed','=',false)->get()
         ]);
-    } 
+    }
 
     // TODO: add customers relationship
     public function confirmSubscribe(Request $request, $user_id)
@@ -98,7 +98,7 @@ class UserController extends Controller
         $user->roles()->attach($role->id);
 
         return Response()->json([
-           'status' => 'The Administrator has allowed your subscription'
+            'status' => 'The Administrator has allowed your subscription'
         ]);
     }
 
