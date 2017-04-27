@@ -27,6 +27,7 @@ class TaskController extends Controller
             return Response()->json([
                 'tasks' => Project::find($project_id)->tasks()
                     ->where('archivied', '=', false)
+                    ->with('steps')
                     ->get()
             ]);
         }
@@ -37,6 +38,7 @@ class TaskController extends Controller
                 'tasks' => Project::find($project_id)->tasks()
                     ->where('archivied', '=', false)
                     ->where('private', '=', false)
+                    ->with('steps')
                     ->get()
             ]);
         }
