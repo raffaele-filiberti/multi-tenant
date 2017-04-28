@@ -17,7 +17,7 @@ class TemplateController extends Controller
     public function index()
     {
         return Response()->json([
-            'templates' => Template::all()
+            'templates' => Template::with('steps')->get()
         ]);
     }
 
