@@ -43,7 +43,7 @@ class Task extends Model
     public function steps()
     {
         return $this->belongsToMany(Step::class)
-            ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed');
+            ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
     }
 
     public function project()
