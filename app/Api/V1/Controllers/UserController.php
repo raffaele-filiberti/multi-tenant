@@ -23,7 +23,7 @@ class UserController extends Controller
     public function show($id)
     {
         return Response()->json([
-            'users' => User::findOrFail($id)
+            'users' => User::with('roles', 'customers')->find($id)
         ]);
     }
 
