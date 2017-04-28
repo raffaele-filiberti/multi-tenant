@@ -32,6 +32,7 @@ class Template extends Model
 
     public function steps()
     {
-        return $this->hasMany(Step::class);
+        return $this->hasMany(Step::class)
+            ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
     }
 }
