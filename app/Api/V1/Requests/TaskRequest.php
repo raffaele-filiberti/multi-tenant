@@ -32,8 +32,7 @@ class TaskRequest extends FormRequest
             }
             case 'POST':
             {
-                return [
-//                  'user_id' => ...
+                $rules = [
                     'template_id' => 'required|integer',
                     'product_manager_id' => 'integer|nullable',
                     'item_number' => 'max:255|nullable',
@@ -44,6 +43,13 @@ class TaskRequest extends FormRequest
                     'private' => 'boolean',
                     'deadline' => 'required|date'
                 ];
+
+                foreach($this->request->get('steps') as $key => $val)
+                {
+                    $rules['steps.'.$key.'expiring_date'] = 'required|date_format:yyyy-mm-dd';
+                }
+
+                return $rules;
             }
             case 'PUT':
             case 'PATCH':
