@@ -63,7 +63,7 @@ class UserController extends Controller
         if($request->has('customer_id'))
             $user->customers()->sync([$request->input('customer_id')]);
         else
-            $user->customers()->deatach();
+            $user->customers()->detach();
 
         if(!empty($request->input('role_id')))
             $user->roles()->sync([$request->input('role_id')]);
