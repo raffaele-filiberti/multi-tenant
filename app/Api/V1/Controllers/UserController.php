@@ -51,9 +51,9 @@ class UserController extends Controller
         $user->password = $request->input('password');
 
         //avatar upload
-        if ($request->avatar_path) {
+        if ($request->hasFile('avatar_path')) {
             return Response()->json([
-                'status' => $request->avatar_path
+                'status' => 'has File'
             ]);
 
             $url = 'images/avatar'. $user->name;
