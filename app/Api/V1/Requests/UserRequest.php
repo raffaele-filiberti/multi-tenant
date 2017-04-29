@@ -53,7 +53,7 @@ class UserRequest extends FormRequest
                     'name' => 'max:255',
                     'email' => 'unique:users,email,'.$this->route('user'),
                     'password' => 'min:6',
-                    'avatar_path' => 'image|mimes:jpg,png|max:5000'
+                    'avatar_path' => 'image|max:5000'
                 ];
             }
             default:break;
