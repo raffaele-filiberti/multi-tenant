@@ -52,6 +52,10 @@ class UserController extends Controller
 
         //avatar upload
         if ($request->hasFile('avatar_path')) {
+            return Response()->json([
+                'status' => 'has File'
+            ]);
+
             $url = 'images/avatar'. $user->name;
             $user->avatar_path = $url;
             $request->avatar_path->store($url);
