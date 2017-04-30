@@ -63,6 +63,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)
+            ->withPivot('id','name','display_name','description');
     }
 }
