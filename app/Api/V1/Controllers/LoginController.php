@@ -37,7 +37,7 @@ class LoginController extends Controller
         }
 
         // the token is valid and we have found the user via the sub claim
-        return response()->json(compact('user'));
+        return compact('user');
     }
 
     public function login(LoginRequest $request, JWTAuth $JWTAuth)
@@ -58,7 +58,8 @@ class LoginController extends Controller
         // all good so return the token
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
-            'user' => Auth::user()->with('roles')->get(),
+            'auth' => Auth::user(),
+            'user' => $this->getAuthenticatedUser(),
             'token' => $token
         ]);
     }
