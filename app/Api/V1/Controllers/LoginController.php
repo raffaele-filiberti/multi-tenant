@@ -14,6 +14,32 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class LoginController extends Controller
 {
+    public function getAuthenticatedUser()
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getStatusCode());
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('user'));
+    }
+
     public function login(LoginRequest $request, JWTAuth $JWTAuth)
     {
         // grab credentials from the request
@@ -32,7 +58,7 @@ class LoginController extends Controller
         // all good so return the token
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
-            'user' => Auth::user()->get(),
+            'user' => Auth::user()->with('roles')->get(),
             'token' => $token
         ]);
     }
