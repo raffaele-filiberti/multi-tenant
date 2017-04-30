@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         try {
 
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
+            if (! $user = JWTAuth->parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
 
