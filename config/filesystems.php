@@ -26,7 +26,9 @@ return [
     |
     */
 
-    'cloud' => 's3',
+    'cloud' => 'google', // Optional: set Google Drive as default cloud storage
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -54,12 +56,13 @@ return [
             'visibility' => 'public',
         ],
 
-        's3' => [
-            'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+
+        'google' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
         ],
 
     ],

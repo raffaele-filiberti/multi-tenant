@@ -22,7 +22,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class SignUpController extends Controller
 {
 
-    // TODO: role and permission manager (now default)
     public function signUpAsAgency(SignUpAsAgencyRequest $request, JWTAuth $JWTAuth)
     {
         $agency = Agency::create([

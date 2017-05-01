@@ -82,7 +82,6 @@ class UserController extends Controller
         ]);
     }
 
-    // TODO: add customers relationship
     public function confirmSubscribe(Request $request, $user_id)
     {
         $user = User::find($user_id);
