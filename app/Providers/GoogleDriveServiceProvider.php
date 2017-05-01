@@ -16,8 +16,19 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->setClientId(env('GOOGLE_DRIVE_CLIENT_ID'));
             $client->setClientSecret(env('GOOGLE_DRIVE_CLIENT_SECRET'));
             $client->refreshToken(env('GOOGLE_DRIVE_REFRESH_TOKEN'));
+            $client->setAccessType('offline');
+            $client->setIncludeGrantedScopes(true);
+            $client->addScope(\Google_Service_Drive::DRIVE);
+            $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+            $client->setRedirectUri($redirect_uri);
             $service = new \Google_Service_Drive($client);
-            $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, env('GOOGLE_DRIVE_FOLDER_ID'));
+
+            if (isset($_GET['code'])) {
+                $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+                $client->setAccessToken($token);
+            }
+
+            $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, null);
             return new \League\Flysystem\Filesystem($adapter);
         });
     }
