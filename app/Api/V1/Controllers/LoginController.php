@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         try {
 
-            if (! $user = JWTAuth->parseToken()->authenticate()) {
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
 
@@ -59,7 +59,7 @@ class LoginController extends Controller
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
             'auth' => Auth::user(),
-            'user' => $this->getAuthenticatedUser(),
+            'authRole' => Auth::user()->roles()->get(),
             'token' => $token
         ]);
     }
