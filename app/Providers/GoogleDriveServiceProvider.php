@@ -21,12 +21,13 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->addScope(\Google_Service_Drive::DRIVE);
             $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
             $client->setRedirectUri($redirect_uri);
-            $service = new \Google_Service_Drive($client);
 
             if (isset($_GET['code'])) {
                 $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
                 $client->setAccessToken($token);
             }
+
+            $service = new \Google_Service_Drive($client);
 
             $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, null);
             return new \League\Flysystem\Filesystem($adapter);
