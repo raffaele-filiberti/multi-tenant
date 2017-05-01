@@ -17,7 +17,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->setClientSecret(env(GOOGLE_DRIVE_CLIENT_SECRET));
             $client->refreshToken(env(GOOGLE_DRIVE_REFRESH_TOKEN));
             $service = new \Google_Service_Drive($client);
-            $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, GOOGLE_DRIVE_FOLDER_ID);
+            $adapter = new \Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter($service, env(GOOGLE_DRIVE_FOLDER_ID));
             return new \League\Flysystem\Filesystem($adapter);
         });
     }
