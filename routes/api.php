@@ -38,7 +38,7 @@ $api->version('v1', function (Router $api) {
         $api->resource('customers/{customer_id}/projects/{project_id}/tasks', 'TaskController', ['except' => ['create', 'edit']]);
 
         //FILE STEP TASK ROUTES
-        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps', 'TaskController@storeStepFiles');
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps', 'FileController@storeStepFiles');
 
         //TEMPLATE ROUTES
         $api->resource('templates', 'TemplateController', ['except' => ['create', 'edit']]);
