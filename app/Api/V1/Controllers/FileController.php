@@ -17,7 +17,7 @@ class FileController extends Controller
         return response()->json([
             'description' => $request->input('description'),
             'step_task_id' => $request->input('step_task_id'),
-            'file' => $request->file->extension(),
+            'file' => $request->all(),
         ]);
     }
 }
