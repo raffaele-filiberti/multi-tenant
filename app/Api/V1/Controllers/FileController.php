@@ -15,7 +15,6 @@ class FileController extends Controller
     public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
     {
         $file = $request->file('file')->getRealPath();
-        Storage::disk('google')->put('test.txt', 'Hello World Guys');
 
         return response()->json([
             'description' => $request->input('description'),
