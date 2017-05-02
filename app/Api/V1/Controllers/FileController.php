@@ -14,7 +14,9 @@ class FileController extends Controller
 {
     public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
     {
-        Storage::disk('google')->put($request->file('file')->getClientOriginalName(), utf8_encode(file_get_contents($request->file('file')->getRealPath())));
+        $extension = $request->file('file')->getClientOriginalExtension();
+        $contents = ( $extension == 'jpg' || $extension == 'png' )? file_get_contents($request->file('file')->getRealPath()) : utf8_encode(file_get_contents($request->file('file')->getRealPath()));
+        Storage::disk('google')->put($request->file('file')->getClientOriginalName(), $contents);
 
         return response()->json([
             'description' => $request->input('description'),
