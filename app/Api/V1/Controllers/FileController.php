@@ -14,12 +14,11 @@ class FileController extends Controller
 {
     public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
     {
-        $file = $request->file('file');
-
         return response()->json([
             'description' => $request->input('description'),
             'step_task_id' => $request->input('step_task_id'),
-            'file' => $file->getRealPath()
+            'file' => $request->file('file')->getClientOriginalName(),
+            'file_content' => file_get_contents($request->file('file'))
         ]);
     }
 }
