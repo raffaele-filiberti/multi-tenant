@@ -18,7 +18,7 @@ class FileController extends Controller
             'description' => $request->input('description'),
             'step_task_id' => $request->input('step_task_id'),
             'file' => $request->file('file')->getClientOriginalName(),
-            'file_content' => file_get_contents($request->file('file'))
+            'file_content' => file_get_contents($request->file('file')->getRealPath())
         ]);
     }
 }
