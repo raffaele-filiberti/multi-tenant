@@ -12,8 +12,12 @@ use App\Http\Controllers\Controller;
 
 class FileController extends Controller
 {
-    public function storeStepFiles(FileRequest $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
+    public function storeStepFiles(FileRequest $request, $customer_id, $project_id, $task_id)
     {
-
+        return response()->json([
+            'description' => $request->input('description'),
+            'step_task_id' => $request->input('step_task_id'),
+            'file' => $request->hasFile('file')
+        ]);
     }
 }
