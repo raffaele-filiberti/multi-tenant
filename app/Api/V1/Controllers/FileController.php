@@ -16,9 +16,7 @@ class FileController extends Controller
     {
         $file = $request->file('file');
 
-        $path = Storage::putFileAs(
-            'tests', $request->file('file'), $request->file('file')->getClientOriginalName(), 'googl'
-        );
+        Storage::disk('google')->put('tests', $request->file('file'));
 
         return response()->json([
             'description' => $request->input('description'),
