@@ -78,14 +78,20 @@ class TaskController extends Controller
                                         'ref_id' => $request->input('steps.'.$key.'.ref_id'),
                                         'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
                 ]);
-            $pivot = $task->steps;
-            $count = $key;
 
-            foreach ($step->details as $detail)
-            {
-                $step_task = Step_Task::find($pivot[$count]->pivot->id);
-                $step_task->details()->attach($detail->id);
-            }
+
+            $pivot = $task->steps;
+
+                foreach ($step->details as $detail) {
+                    if($key == 1)
+                        return Response()->json([
+                            'status' => $pivot
+                        ]);
+                    $step_task = Step_Task::find($pivot[$key]->pivot->id);
+                    $step_task->details()->attach($detail->id);
+
+                }
+
         }
 
         return Response()->json([
