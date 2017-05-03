@@ -46,6 +46,12 @@ class Task extends Model
             ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
     }
 
+    public function step_task()
+    {
+        return $this->belongsTo(Step_Task::class);
+    }
+
+
     public function project()
     {
         return $this->belongsTo(Project::class);
