@@ -17,7 +17,7 @@ class Detail_Step_Task extends Model
     }
 
     public function files() {
-        return $this->belongsToMany(File::class)
+        return $this->belongsToMany(File::class, 'detail_step_task_file','detail_step_task_id','file_id')
             ->withPivot('status');
     }
 
