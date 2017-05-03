@@ -79,7 +79,7 @@ class GoogleUpload
         if($folder_id == null)
             $adapter    = new GoogleDriveAdapter($this->service, $this->folder_id);
         else
-            $adapter    = new GoogleDriveAdapter($this->service, folder_id);
+            $adapter    = new GoogleDriveAdapter($this->service, $folder_id);
 
         $filesystem = new Filesystem($adapter);
         $filesystem->write($file, $read);
