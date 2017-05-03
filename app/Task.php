@@ -48,7 +48,8 @@ class Task extends Model
 
     public function step_task()
     {
-        return $this->hasMany(Step_Task::class);
+        return $this->hasMany(Step_Task::class)
+            ->with('step_task_id', 'id');
     }
 
 
