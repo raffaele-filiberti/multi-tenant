@@ -81,7 +81,7 @@ class GoogleUpload
      */
     public function upload_files($file, $read, $folder_id = null)
     {
-        $folder_id = ($folder_id == null)?: $this->folder_id;
+        $folder_id = ($folder_id != null)?: $this->folder_id;
 
         $adapter    = new GoogleDriveAdapter($this->service, $folder_id);
 
