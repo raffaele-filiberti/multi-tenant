@@ -80,13 +80,10 @@ class TaskController extends Controller
                 ]);
 
 
-            $pivot = $task->steps;
+            $pivot = $task->steps()->get();
 
                 foreach ($step->details as $detail) {
-                    if($key == 1)
-                        return Response()->json([
-                            'status' => $pivot
-                        ]);
+
                     $step_task = Step_Task::find($pivot[$key]->pivot->id);
                     $step_task->details()->attach($detail->id);
 
