@@ -46,10 +46,9 @@ class Task extends Model
             ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
     }
 
-    public function step_task()
+    public function detail_step_task()
     {
-        return $this->hasMany(Step_Task::class)
-            ->with('step_task_id', 'id');
+        return $this->hasManyThrough(Step_Task::class, Detail_Step_Task::class);
     }
 
 
