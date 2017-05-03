@@ -48,7 +48,7 @@ class Task extends Model
 
     public function step_task()
     {
-        return $this->belongsTo(Step_Task::class);
+        return $this->hasMany(Step_Task::class);
     }
 
 
