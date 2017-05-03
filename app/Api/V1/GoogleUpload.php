@@ -35,11 +35,15 @@ class GoogleUpload
      *
      * @return [type] [description]
      */
-    public function create_folder($folder_name)
+    public function create_folder($folder_name, $parent_folder = null)
     {
+        $parent_folder = ($parent_folder != null)?: $this->folder_id;
+
+
         $fileMetadata = new \Google_Service_Drive_DriveFile([
             'name'     => $folder_name,
             'mimeType' => 'application/vnd.google-apps.folder',
+            'parents' => array($parent_folder)
         ]);
         $folder = $this->service->files->create($fileMetadata, ['fields' => 'id']);
         return $folder->id;
@@ -76,10 +80,9 @@ class GoogleUpload
      */
     public function upload_files($file, $read, $folder_id = null)
     {
-        if($folder_id == null)
-            $adapter    = new GoogleDriveAdapter($this->service, $this->folder_id);
-        else
-            $adapter    = new GoogleDriveAdapter($this->service, $folder_id);
+        $folder_id = ($folder_id != null)?: $this->folder_id;
+
+        $adapter    = new GoogleDriveAdapter($this->service, $folder_id);
 
         $filesystem = new Filesystem($adapter);
         $filesystem->write($file, $read);
