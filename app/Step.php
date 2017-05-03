@@ -35,6 +35,14 @@ class Step extends Model
         return $this->belongsToMany(Detail::class);
     }
 
+    public function detail_step_task()
+    {
+        return $this->hasManyThrough(
+            Detail_Step_Task::class, Step_Task::class,
+            'step_id', 'step_task_id', 'id'
+        );
+    }
+
     public function tasks()
     {
         return $this->belongsToMany(Task::class)
