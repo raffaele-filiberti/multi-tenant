@@ -35,4 +35,9 @@ class Detail extends Model
     {
         return $this->belongsToMany(Step::class);
     }
+
+    public function step_task()
+    {
+        return $this->belongsTo(Step_Task::class);
+    }
 }

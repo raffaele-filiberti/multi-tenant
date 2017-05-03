@@ -18,6 +18,7 @@ class FileController extends Controller
         $contents = ( $extension == 'jpg' || $extension == 'png' )? file_get_contents($request->file('file')->getRealPath()) : utf8_encode(file_get_contents($request->file('file')->getRealPath()));
         Storage::disk('google')->put($request->file('file')->getClientOriginalName(), $contents);
 
+
         return response()->json([
             'description' => $request->input('description'),
             'step_task_id' => $request->input('step_task_id'),
