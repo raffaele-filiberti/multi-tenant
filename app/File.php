@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use HipsterJazzbo\Landlord\BelongsToTenants;
 
 class File extends Model
 {
+    use BelongsToTenants;
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
