@@ -46,7 +46,7 @@ class TaskRequest extends FormRequest
 
                 foreach($this->request->get('steps') as $key => $val)
                 {
-                    $rules['steps.'.$key.'.expiring_date'] = 'required|date_format:yyyy-mm-dd';
+                    $rules['steps.'.$key.'.expiring_date'] = 'required|date_format:Y-m-d';
                 }
 
                 return $rules;
