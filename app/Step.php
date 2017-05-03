@@ -40,4 +40,9 @@ class Step extends Model
         return $this->belongsToMany(Task::class)
             ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
     }
+
+    public function detail_step_task()
+    {
+        return $this->belongsTo(Detail_Step_Task::class);
+    }
 }
