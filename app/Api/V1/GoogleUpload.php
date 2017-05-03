@@ -16,28 +16,29 @@ class GoogleUpload
     public function __construct()
     {
         $this->client = new \Google_Client();
-        $this->client->setClientId($this->ClientId);
-        $this->client->setClientSecret($this->ClientSecret);
-        $this->client->refreshToken($this->refreshToken);
+        $this->client->setClientId(env('GOOGLE_DRIVE_CLIENT_ID'));
+        $this->client->setClientSecret(env('GOOGLE_DRIVE_CLIENT_SECRET'));
+        $this->client->refreshToken(env('GOOGLE_DRIVE_REFRESH_TOKEN'));
+        $this->folder_id = env('GOOGLE_DRIVE_REFRESH_TOKEN');
         $this->service = new \Google_Service_Drive($this->client);
         // we cache the id to avoid having google creating
         // a new folder on each time we call it,
         // because google drive works with 'id' not 'name'
         // & thats why u could have duplicated folders under the same name
-        Cache::rememberForever('folder_id', function () {
-            return $this->create_folder();
-        });
-        $this->folder_id = Cache::get('folder_id');
+        //        Cache::rememberForever('folder_id', function () {
+        //            return $this->create_folder();
+        //        });
+        //        $this->folder_id = Cache::get('folder_id');
     }
     /**
      * create folder in google drive.
      *
      * @return [type] [description]
      */
-    protected function create_folder()
+    public function create_folder($folder_name)
     {
         $fileMetadata = new \Google_Service_Drive_DriveFile([
-            'name'     => 'google_drive_folder_name',
+            'name'     => $folder_name,
             'mimeType' => 'application/vnd.google-apps.folder',
         ]);
         $folder = $this->service->files->create($fileMetadata, ['fields' => 'id']);
@@ -73,25 +74,30 @@ class GoogleUpload
      *
      * @return [type] [description]
      */
-    public function upload_files()
+    public function upload_files($file, $read, $folder_id = null)
     {
-        $adapter    = new GoogleDriveAdapter($this->service, Cache::get('folder_id'));
+        if($folder_id == null)
+            $adapter    = new GoogleDriveAdapter($this->service, $this->folder_id);
+        else
+            $adapter    = new GoogleDriveAdapter($this->service, folder_id);
+
         $filesystem = new Filesystem($adapter);
-        // here we are uploading files from local storage
-        // we first get all the files
-        $files = Storage::files();
-        // loop over the found files
-        foreach ($files as $file) {
-            // remove file from google drive in case we have something under the same name
-            // comment out if its okay to have files under the same name
-            $this->remove_duplicated($file);
-            // read the file content
-            $read = Storage::get($file);
-            // save to google drive
-            $filesystem->write($file, $read);
-            // remove the local file
-            Storage::delete($file);
-        }
+        $filesystem->write($file, $read);
+        //        // here we are uploading files from local storage
+        //        // we first get all the files
+        //        $files = Storage::files();
+        //        // loop over the found files
+        //        foreach ($files as $file) {
+        //            // remove file from google drive in case we have something under the same name
+        //            // comment out if its okay to have files under the same name
+        //            $this->remove_duplicated($file);
+        //            // read the file content
+        //            $read = Storage::get($file);
+        //            // save to google drive
+        //            $filesystem->write($file, $read);
+        //            // remove the local file
+        //            Storage::delete($file);
+        //        }
     }
     /**
      * in case u want to get the total file count
