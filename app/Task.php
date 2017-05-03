@@ -50,7 +50,7 @@ class Task extends Model
     {
         return $this->hasManyThrough(
             Detail_Step_Task::class, Step_Task::class,
-            'task_step_id', 'task_id', 'id'
+            'step_task_id', 'task_id', 'id'
         );
     }
 
