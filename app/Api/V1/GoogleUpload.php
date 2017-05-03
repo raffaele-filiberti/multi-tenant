@@ -39,7 +39,6 @@ class GoogleUpload
     {
         $parent_folder = ($parent_folder != null)?: $this->folder_id;
 
-
         $fileMetadata = new \Google_Service_Drive_DriveFile([
             'name'     => $folder_name,
             'mimeType' => 'application/vnd.google-apps.folder',
@@ -47,7 +46,6 @@ class GoogleUpload
         ]);
         $folder = $this->service->files->create($fileMetadata, [
             'fields' => 'id',
-            'uploadType' => 'multipart',
         ]);
         return $folder->id;
     }
