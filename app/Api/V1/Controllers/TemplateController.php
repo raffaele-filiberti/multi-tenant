@@ -46,7 +46,9 @@ class TemplateController extends Controller
                     {
                         Step::find($step->id)->details()->create([
                             'name' => empty($detail['name']) ? null : $detail['name'],
-                            'description' => empty($detail['description']) ? null : $detail['description']
+                            'description' => empty($detail['description']) ? null : $detail['description'],
+                            'roled' => $detail['roled'],
+                            'detail_type' => $detail['detail_type']
                         ]);
                     }
                 }
