@@ -48,7 +48,10 @@ class Task extends Model
 
     public function detail_step_task()
     {
-        return $this->hasManyThrough( Detail_Step_Task::class, Step_Task::class);
+        return $this->hasManyThrough(
+            Detail_Step_Task::class, Step_Task::class,
+            'task_step_id', 'task_id', 'id'
+        );
     }
 
 
