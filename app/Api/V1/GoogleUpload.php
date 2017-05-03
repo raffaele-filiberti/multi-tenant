@@ -19,7 +19,7 @@ class GoogleUpload
         $this->client->setClientId(env('GOOGLE_DRIVE_CLIENT_ID'));
         $this->client->setClientSecret(env('GOOGLE_DRIVE_CLIENT_SECRET'));
         $this->client->refreshToken(env('GOOGLE_DRIVE_REFRESH_TOKEN'));
-        $this->folder_id = env('GOOGLE_DRIVE_REFRESH_TOKEN');
+        $this->folder_id = env('GOOGLE_DRIVE_FOLDER_ID');
         $this->service = new \Google_Service_Drive($this->client);
         // we cache the id to avoid having google creating
         // a new folder on each time we call it,
