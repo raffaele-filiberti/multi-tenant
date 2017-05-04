@@ -38,7 +38,29 @@ $api->version('v1', function (Router $api) {
         $api->resource('customers/{customer_id}/projects/{project_id}/tasks', 'TaskController', ['except' => ['create', 'edit']]);
 
         //FILE STEP TASK ROUTES
-        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps', 'FileController@storeStepFiles');
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/files', 'FileController@storeStepFiles');
+
+        //FILE LIST STEP TASK ROUTE
+        $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files', 'FileController@getStepFiles');
+
+        //FILE APPPROVATION STEP TASK ROUTES
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files/{file_id}/approve', 'FileController@approveStepFiles');
+
+        //FILE DISAPPROVATION STEP TASK ROUTES
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files/{file_id}/disapprove', 'FileController@disapproveStepFiles');
+
+        //DATE STEP TASK ROUTES
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/dates', 'DateController@storeStepDates');
+
+        //DATE LIST STEP TASK ROUTE
+        $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates', 'DateController@getStepDates');
+
+        //DATE CONFIRMATION STEP TASK ROUTES
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/confirm', 'DateController@approveStepDates');
+
+        //DATE DISAPPROVATION STEP TASK ROUTES
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/refuse', 'DateController@disapproveStepDates');
+
 
         //TEMPLATE ROUTES
         $api->resource('templates', 'TemplateController', ['except' => ['create', 'edit']]);

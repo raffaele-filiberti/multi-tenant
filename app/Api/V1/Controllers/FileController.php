@@ -15,17 +15,28 @@ use App\Http\Controllers\Controller;
 
 class FileController extends Controller
 {
+    //TODO:
+    public function getStepFiles (Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
+    {
+        $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
+
+        return response()->json([
+            'files' => $detail_step_task->files()->get(),
+        ]);
+
+    }
+
     public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
     {
         $task = Task::find($task_id);
+        $detail_step_task = Detail_Step_Task::find($request->input('step_task_id'));
         $extension = $request->file('file')->getClientOriginalExtension();
         $contents = ( $extension == 'jpg' || $extension == 'png' )? file_get_contents($request->file('file')->getRealPath()) : utf8_encode(file_get_contents($request->file('file')->getRealPath()));
 
         $google_drive = new GoogleUpload();
         $google_drive->upload_files(trim($request->file('file')->getClientOriginalName()), $contents, $task->folder_id);
-//        Storage::disk('google')->put(trim($request->file('file')->getClientOriginalName()), $contents);
 
-        Detail_Step_Task::find($request->input('step_task_id'))->files()->create([
+        $detail_step_task->files()->create([
             'filename' => trim($request->file('file')->getClientOriginalName()),
             'description' => $request->input('description'),
             'path' => '0B1CM3tHysanbbmpYUnVxalZqeTQ',
@@ -34,10 +45,32 @@ class FileController extends Controller
         ]);
 
         return response()->json([
-            'description' => $request->input('description'),
-            'detail_step_task_id' => $request->input('step_task_id'),
-            'file' => $request->file('file')->getClientOriginalName(),
-            'file_content' => utf8_encode(file_get_contents($request->file('file')->getRealPath()))
+            'status' => 'file uploaded successfully',
+            'files' => $detail_step_task->files()->get()
+        ]);
+    }
+
+    public function approveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
+    {
+        File::find($file_id)->detail_step_task()->updateExistingPivot(
+            $detail_step_task_id, [
+                    'status' => 1
+                ]);
+
+        return response()->json([
+            'status' => 'file approved'
+        ]);
+    }
+
+    public function disapproveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
+    {
+        File::find($file_id)->detail_step_task()->updateExistingPivot(
+            $detail_step_task_id, [
+            'status' => 0
+        ]);
+
+        return response()->json([
+            'status' => 'file approved'
         ]);
     }
 }
