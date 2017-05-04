@@ -12,7 +12,7 @@ class Task extends Model
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
-        'user_id', 'template_id', 'product_manager_id', 'design_type', 'name', 'description', 'country', 'item_number', 'archivied', 'private', 'billed', 'deadline'
+        'folder_id', 'user_id', 'template_id', 'product_manager_id', 'design_type', 'name', 'description', 'country', 'item_number', 'archivied', 'private', 'billed', 'deadline'
     ];
 
     public function setNameAttribute($name)

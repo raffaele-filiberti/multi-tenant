@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\GoogleUpload;
 use App\Api\V1\Requests\TaskRequest;
 use App\Project;
 use App\Step;
@@ -52,7 +53,12 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request, $customer_id, $project_id)
     {
-        $task = Project::find($project_id)->tasks()->create([
+        $project = Project::find($project_id);
+        $google_drive = new GoogleUpload();
+        $folder_id = $google_drive->create_folder($request->input('name'), $project->folder_id);
+
+        $task = $project->tasks()->create([
+            'folder_id' => $folder_id,
             'user_id' => Auth::user()->id,
             'template_id' => $request->input('template_id'),
             'product_manager_id' => $request->input('product_manager_id'),
