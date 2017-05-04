@@ -49,7 +49,7 @@ class ProjectController extends Controller
     {
         $customer = Customer::find($customer_id);
         $google_drive = new GoogleUpload();
-        $folder_id = $google_drive->create_folder($request->input('name'), $customer->name);
+        $folder_id = $google_drive->create_folder($request->input('name'), $customer->folder_id);
 
         $project = $customer->projects()->create([
             'folder_id' => $folder_id,
