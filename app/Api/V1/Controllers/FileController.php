@@ -18,9 +18,6 @@ class FileController extends Controller
     public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
     {
         $task = Task::find($task_id);
-        //TODO: add create google drive folder to customer -> project -> task
-        //TODO: add field folder_id to db table of customer -> project -> task
-        //TODO: store in path the task folder id
         $extension = $request->file('file')->getClientOriginalExtension();
         $contents = ( $extension == 'jpg' || $extension == 'png' )? file_get_contents($request->file('file')->getRealPath()) : utf8_encode(file_get_contents($request->file('file')->getRealPath()));
 

@@ -4,6 +4,7 @@ based on Laravel Framework
 ### routes beta
 ```
 | Host | Method    | URI                                                             | Name              | Action
+|      | GET       | /api/refresh                                                    | refresh.token     |
 |      | POST      | /api/auth/agency/signup                                         |                   | App\Api\V1\Controllers\SignUpController@signUpAsAgency
 |      | POST      | /api/auth/signup                                                |                   | App\Api\V1\Controllers\SignUpController@signUpAsSubscriber
 |      | POST      | /api/auth/login                                                 |                   | App\Api\V1\Controllers\LoginController@login
