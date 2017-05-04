@@ -12,7 +12,7 @@ class Project extends Model
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
-        'user_id', 'name', 'description', 'archivied', 'private'
+        'folder_id', 'user_id', 'name', 'description', 'archivied', 'private'
     ];
 
     public function setNameAttribute($name)

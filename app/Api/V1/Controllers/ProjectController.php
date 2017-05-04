@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\GoogleUpload;
 use App\Api\V1\Requests\ProjectRequest;
 
 use App\Project;
@@ -46,7 +47,12 @@ class ProjectController extends Controller
      */
     public function store(ProjectRequest $request, $customer_id)
     {
-        $project = Customer::find($customer_id)->projects()->create([
+        $customer = Customer::find($customer_id);
+        $google_drive = new GoogleUpload();
+        $folder_id = $google_drive->create_folder($request->input('name'), $customer->name);
+
+        $project = $customer->projects()->create([
+            'folder_id' => $folder_id,
             'user_id' => Auth::user()->id,
             'name' => $request->input('name'),
             'description' => $request->input('description'),
