@@ -22,7 +22,7 @@ class Detail_Step_Task extends Model
     }
 
     public function dates() {
-        return $this->belongsToMany(Date::class)
+        return $this->belongsToMany(Date::class, 'detail_step_task_date','detail_step_task_id','date_id')
             ->withPivot('status');
     }
 }

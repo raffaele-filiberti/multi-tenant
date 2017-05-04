@@ -64,13 +64,13 @@ class FileController extends Controller
 
     public function disapproveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
     {
-        File::find($file_id)->detail_step_task()->updateExistingPivot(
+        ile::find($file_id)->detail_step_task()->updateExistingPivot(
             $detail_step_task_id, [
             'status' => 0
         ]);
 
         return response()->json([
-            'status' => 'file approved'
+            'status' => 'file disapproved '
         ]);
     }
 }

@@ -17,8 +17,8 @@ class Date extends Model
         $this->attributes['description'] = empty($description) ? null : $description;
     }
 
-    public function Detail_Step_Tasks() {
-        return $this->belongsToMany(Detail_Step_Task::class, 'detail_step_task_date')
+    public function detail_step_task() {
+        return $this->belongsToMany(Detail_Step_Task::class, 'detail_step_task_date', 'date_id','detail_step_task_id')
             ->withPivot('status');
     }
 }
