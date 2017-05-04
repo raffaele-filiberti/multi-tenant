@@ -56,10 +56,10 @@ $api->version('v1', function (Router $api) {
         $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates', 'DateController@getStepDates');
 
         //DATE CONFIRMATION STEP TASK ROUTES
-        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/confirm', 'DateController@approveStepDates');
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/approve', 'DateController@approveStepDates');
 
         //DATE DISAPPROVATION STEP TASK ROUTES
-        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/refuse', 'DateController@disapproveStepDates');
+        $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/disapprove', 'DateController@disapproveStepDates');
 
 
         //TEMPLATE ROUTES
