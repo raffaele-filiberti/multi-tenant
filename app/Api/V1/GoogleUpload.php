@@ -37,7 +37,7 @@ class GoogleUpload
      */
     public function create_folder($folder_name, $parent_folder = null)
     {
-        $parent_folder = ($parent_folder != null)?: $this->folder_id;
+        $parent_folder = ($parent_folder == null)? $this->folder_id : $parent_folder;
 
 
         $fileMetadata = new \Google_Service_Drive_DriveFile([
