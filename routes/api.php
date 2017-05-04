@@ -61,6 +61,9 @@ $api->version('v1', function (Router $api) {
         //DATE DISAPPROVATION STEP TASK ROUTES
         $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/disapprove', 'DateController@disapproveStepDates');
 
+        //DATE DELETE STEP TASK ROUTES
+        $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}', 'DateController@destroy');
+
 
         //TEMPLATE ROUTES
         $api->resource('templates', 'TemplateController', ['except' => ['create', 'edit']]);

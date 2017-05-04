@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Date;
 use App\Detail_Step_Task;
 use App\Http\Controllers\Controller;
 use Dingo\Api\Http\Request;
@@ -54,4 +55,13 @@ class DateController extends Controller
         ]);
     }
 
+    public function destroy($customer_id, $project_id, $task_id, $detail_step_task_id, $date_id)
+    {
+        $date = Date::find($date_id);
+        $date->delete();
+
+        return Response()->json([
+            'status' => 'date deleted successfully'
+        ]);
+    }
 }
