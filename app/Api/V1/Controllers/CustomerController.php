@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\GoogleUpload;
 use App\Api\V1\Requests\customerRequest;
 use App\Customer;
 use App\User;
@@ -32,12 +33,15 @@ class CustomerController extends Controller
      */
     public function store(customerRequest $request)
     {
+        //creo la cartella su drive
+        $google_drive = new GoogleUpload();
+        $folder_id = $google_drive->create_folder($request->input('name'));
+
         $customer = Customer::create([
             'name' => $request->input('name'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'folder_id' => $folder_id
         ]);
-
-//        Auth::user()->customers()->attach($customer->id);
 
         return Response()->json([
             'status' => 'customer created successfully'

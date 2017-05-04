@@ -12,7 +12,7 @@ class Customer extends Model
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'folder_id'
     ];
 
     public function setNameAttribute($name)
