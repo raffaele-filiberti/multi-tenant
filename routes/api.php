@@ -79,7 +79,14 @@ $api->version('v1', function (Router $api) {
         $api->get('agencies/{id}', 'AgencyController@show');
         $api->put('agencies/{id}', 'AgencyController@update');
     });
-
+    $api->get('refresh', [
+        'middleware' => 'jwt.refresh',
+        function() {
+            return response()->json([
+                'message' => 'By accessing this endpoint, you can refresh your access token at each request. Check out this response headers!'
+            ]);
+        }
+    ]);
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
 
         //TENANT TEST
@@ -98,13 +105,6 @@ $api->version('v1', function (Router $api) {
             ]);
         });
 
-        $api->get('refresh', [
-            'middleware' => 'jwt.refresh',
-            function() {
-                return response()->json([
-                    'message' => 'By accessing this endpoint, you can refresh your access token at each request. Check out this response headers!'
-                ]);
-            }
-        ]);
+
     });
 });

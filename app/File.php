@@ -14,6 +14,10 @@ class File extends Model
         'filename', 'description', 'mime', 'path', 'size'
     ];
 
+    protected $hidden = [
+        'path'
+    ];
+
     public function setFilenameAttribute($filename)
     {
         $this->attributes['filename'] = empty($filename) ? $this->attributes['filename'] : $filename;
