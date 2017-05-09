@@ -87,89 +87,89 @@ $api->version('v1', function (Router $api) {
     });
 
     //SUBSCRIBE ROUTES
-    $api->group(['middleware' => 'permission:view_subscribers|confirm_subscribers|delete_subscribers', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
+    $api->group(['middleware' => ['permission:view_subscribers|confirm_subscribers|delete_subscribers'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         $api->get('subscriber', 'UserController@getSubscriber');
         $api->post('{user_id}/confirm', 'UserController@confirmSubscribe');
         $api->post('{user_id}/subscription', 'UserController@removeSubscribe');
     });
 
     //USER ROUTES
-    $api->group(['middleware' => 'permission:view_users|create_users|update_users|delete_users,', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
+    $api->group(['middleware' => ['permission:view_users|create_users|update_users|delete_users'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         $api->resource('users', 'UserController', ['except' => ['create', 'edit']]);
     });
 
     //CUSTOMER ROUTES
-    $api->group(['middleware' => 'permission:view_customers|create_customers|update_customers|delete_customers,', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
+    $api->group(['middleware' => ['permission:view_customers|create_customers|update_customers|delete_customers'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         $api->resource('customers', 'CustomerController', ['except' => ['create', 'edit']]);
     });
 
     //PROJECT ROUTES
-    $api->group(['middleware' => 'permission:view_projects|create_projects|update_projects|delete_projects,', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
+    $api->group(['middleware' => ['permission:view_projects|create_projects|update_projects|delete_projects'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         $api->resource('customers/{customer_id}/projects', 'ProjectController', ['except' => ['create', 'edit']]);
     });
 
     //TASK ROUTES
-    $api->group(['middleware' => 'permission:view_tasks|create_tasks|update_tasks|delete_tasks,', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
+    $api->group(['middleware' => ['permission:view_tasks|create_tasks|update_tasks|delete_tasks'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         $api->resource('customers/{customer_id}/projects/{project_id}/tasks', 'TaskController', ['except' => ['create', 'edit']]);
     });
 
     //FILE STEP TASK ROUTES
     $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/files', [
-        'middleware' => 'permission:upload_step_task_files',
+        'middleware' => ['permission:upload_step_task_files'],
         'uses' => 'FileController@storeStepFiles'
     ]);
 
     //FILE DELETION STEP TASK ROUTES
     $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files/{file_id}', [
-        'middleware' => 'permission:delete_step_task_files',
+        'middleware' => ['permission:delete_step_task_files'],
         'uses' => 'FileController@deleteStepFiles'
     ]);
 
     //FILE LIST STEP TASK ROUTE
     $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files', [
-        'middleware' => 'permission:view_step_task_files',
+        'middleware' => ['permission:view_step_task_files'],
         'uses' => 'FileController@getStepFiles'
     ]);
 
     //FILE APPPROVATION STEP TASK ROUTES
     $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files/{file_id}/approve', [
-        'middleware' => 'permission:approve_step_task_files',
+        'middleware' => ['permission:approve_step_task_files'],
         'uses' => 'FileController@approveStepFiles'
     ]);
 
     //FILE DISAPPROVATION STEP TASK ROUTES
     $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files/{file_id}/disapprove', [
-        'middleware' => 'permission:disapprove_step_task_files',
+        'middleware' => ['permission:disapprove_step_task_files'],
         'uses' => 'FileController@disapproveStepFiles'
     ]);
 
     //DATE STEP TASK ROUTES
     $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/dates', [
-        'middleware' => 'permission:store_step_task_dates',
+        'middleware' => ['permission:store_step_task_dates'],
         'uses' => 'DateController@storeStepDates'
     ]);
 
     //DATE LIST STEP TASK ROUTE
     $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates', [
-        'middleware' => 'permission:view_step_task_dates',
+        'middleware' => ['permission:view_step_task_dates'],
         'uses' => 'DateController@getStepDates'
     ]);
 
     //DATE CONFIRMATION STEP TASK ROUTES
     $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/approve', [
-        'middleware' => 'permission:approve_step_task_dates',
+        'middleware' => ['permission:approve_step_task_dates'],
         'uses' => 'DateController@approveStepDates'
     ]);
 
     //DATE DISAPPROVATION STEP TASK ROUTES
     $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}/disapprove', [
-        'middleware' => 'permission:disapprove_step_task_dates',
+        'middleware' => ['permission:disapprove_step_task_dates'],
         'uses' => 'DateController@disapproveStepDates'
     ]);
 
     //DATE DELETE STEP TASK ROUTES
     $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates/{date_id}', [
-        'middleware' => 'permission:delete_step_task_dates',
+        'middleware' => ['permission:delete_step_task_dates'],
         'uses' => 'DateController@destroy'
     ]);
 
