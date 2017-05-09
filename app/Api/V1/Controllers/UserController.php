@@ -9,6 +9,7 @@ use App\User;
 use App\Role;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Dingo\Api\Contract\Http\Request;
 
 class UserController extends Controller
@@ -16,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         return Response()->json([
-            'users' => User::with('roles', 'customers')->get()
+            'users' => User::with('roles', 'roles.permissions', 'customers')->get()
         ]);
     }
 

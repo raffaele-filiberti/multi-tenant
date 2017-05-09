@@ -94,19 +94,68 @@ $api->version('v1', function (Router $api) {
     });
 
     //USER ROUTES
-    $api->group(['middleware' => ['permission:view_users|create_users|update_users|delete_users'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
-        $api->resource('users', 'UserController', ['except' => ['create', 'edit']]);
-    });
+    $api->get('users', [
+        'middleware' => 'permission:view_users',
+        'uses' => 'App\Api\V1\Controllers\UserController@index'
+    ]);
+
+    $api->post('users', [
+        'middleware' => 'permission:store_users',
+        'uses' => 'App\Api\V1\Controllers\UserController@store'
+    ]);
+
+    $api->put('users/{user_id}', [
+        'middleware' => 'permission:update_users',
+        'uses' => 'App\Api\V1\Controllers\UserController@update'
+    ]);
+
+    $api->delete('users/{user_id}', [
+        'middleware' => 'permission:delete_users',
+        'uses' => 'App\Api\V1\Controllers\UserController@destroy'
+    ]);
 
     //CUSTOMER ROUTES
-    $api->group(['middleware' => ['permission:view_customers|create_customers|update_customers|delete_customers'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
-        $api->resource('customers', 'CustomerController', ['except' => ['create', 'edit']]);
-    });
+    $api->get('customers', [
+        'middleware' => 'permission:view_customers',
+        'uses' => 'App\Api\V1\Controllers\CustomerController@index'
+    ]);
+
+    $api->post('customers', [
+        'middleware' => 'permission:store_customers',
+        'uses' => 'App\Api\V1\Controllers\CustomerController@store'
+    ]);
+
+    $api->put('customers/{customer_id}', [
+        'middleware' => 'permission:update_customers',
+        'uses' => 'App\Api\V1\Controllers\CustomerController@update'
+    ]);
+
+    $api->delete('customers/{customer_id}', [
+        'middleware' => 'permission:delete_customers',
+        'uses' => 'App\Api\V1\Controllers\CustomerController@destroy'
+    ]);
 
     //PROJECT ROUTES
-    $api->group(['middleware' => ['permission:view_projects|create_projects|update_projects|delete_projects'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
-        $api->resource('customers/{customer_id}/projects', 'ProjectController', ['except' => ['create', 'edit']]);
-    });
+
+    $api->get('customers/{customer_id}/projects', [
+        'middleware' => 'permission:view_projects',
+        'uses' => 'App\Api\V1\Controllers\ProjectController@index'
+    ]);
+
+    $api->post('customers/{customer_id}/projects', [
+        'middleware' => 'permission:store_projects',
+        'uses' => 'App\Api\V1\Controllers\ProjectController@store'
+    ]);
+
+    $api->put('customers/{customer_id}/projects/{project_id}', [
+        'middleware' => 'permission:update_projects',
+        'uses' => 'App\Api\V1\Controllers\ProjectController@update'
+    ]);
+
+    $api->delete('customers/{customer_id}/projects/{project_id}', [
+        'middleware' => 'permission:delete_projects',
+        'uses' => 'App\Api\V1\Controllers\ProjectController@destroy'
+    ]);
 
     //TASK ROUTES
     $api->group(['middleware' => ['permission:view_tasks|create_tasks|update_tasks|delete_tasks'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
