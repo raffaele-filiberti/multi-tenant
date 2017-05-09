@@ -44,6 +44,7 @@ class CreateDetailsTable extends Migration
             $table->integer('detail_id')->unsigned();
             $table->integer('step_task_id')->unsigned();
             $table->integer('status')->default(0);
+
             $table->foreign('step_task_id')->references('id')->on('step_task')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('detail_id')->references('id')->on('details')
@@ -61,5 +62,7 @@ class CreateDetailsTable extends Migration
     {
         Schema::dropIfExists('details');
         Schema::dropIfExists('detail_step');
+        Schema::dropIfExists('detail_step_task');
+
     }
 }

@@ -18,14 +18,19 @@ class AgencyRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'name' => 'required|max:255|unique:agencies'
+                    'name' => 'required|max:255|unique:agencies',
+                    'description' => 'max:1000|nullable',
+                    'motto' => 'max:255|nullable'
                 ];
             }
             case 'PUT':
             case 'PATCH':
             {
                 return [
-                    'name' => 'max:255'
+                    'name' => 'max:255|unique:agencies,name,' .$this->route('id'),
+                    'description' => 'max:1000|nullable',
+                    'motto' => 'max:255|nullable'
+
 
                 ];
             }

@@ -18,24 +18,29 @@ class CreateUsersTable extends Migration
             $table->string('name')->unique();
             $table->string('motto')->nullable();
             $table->text('description')->nullable();
+            $table->string('folder_id')->nullable();
             $table->boolean('hidden')->default(false);
             $table->timestamps();
         });
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('agency_id')->unsigned();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('avatar_path')->nullable();
+            $table->string('cell_phone')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('address')->nullable();
+            $table->string('cap')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('nation')->nullable();
             $table->boolean('ibernate')->default(false);
             $table->boolean('notify')->default(true);
             $table->boolean('subscribed')->default(false);
-
             $table->rememberToken();
             $table->timestamps();
 

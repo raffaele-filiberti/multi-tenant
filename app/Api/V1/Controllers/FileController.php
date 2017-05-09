@@ -64,13 +64,26 @@ class FileController extends Controller
 
     public function disapproveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
     {
-        ile::find($file_id)->detail_step_task()->updateExistingPivot(
+        File::findOrFail($file_id)->detail_step_task()->updateExistingPivot(
             $detail_step_task_id, [
             'status' => 0
         ]);
 
         return response()->json([
             'status' => 'file disapproved '
+        ]);
+    }
+
+    public function deleteStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id){
+        $file = File::findOrFail($file_id);
+
+        $google_drive = new GoogleUpload();
+        $google_drive->delete_files($file->file_id);
+
+        $file->delete();
+
+        return response()->json([
+            'status' => 'file deleted successfully'
         ]);
     }
 }

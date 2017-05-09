@@ -22,7 +22,10 @@ class User extends Model implements AuthenticatableContract,
 
     protected $tenantColumns = ['agency_id'];
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = [
+        'name', 'email', 'password', 'first_name', 'last_name', 'cell_phone', 'fax', 'address',
+        'cap', 'province', 'city', 'nation', 'ibernate', 'notify', 'subscribed'
+    ];
 
     protected $hidden = ['password', 'remember_token'];
 

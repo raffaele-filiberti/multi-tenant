@@ -16,6 +16,7 @@ class CreateCostumersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('agency_id')->unsigned();
+            $table->string('folder_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();

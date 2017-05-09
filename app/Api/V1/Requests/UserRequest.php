@@ -40,8 +40,20 @@ class UserRequest extends FormRequest
                     'name' => 'required|max:255',
                     'email' => 'required|unique:users|email',
                     'password' => 'required|min:6',
-                    'customer_id' => 'integer',
-                    'role_id' => 'required|integer'
+                    'customer_id' => 'integer|nullable',
+                    'role_id' => 'required|integer',
+                    'first_name' => 'nullable|max:255',
+                    'last_name' => 'nullable|max:255',
+                    'cell_phone' => 'nullable|max:255',
+                    'fax' => 'nullable|max:255',
+                    'address' => 'nullable|max:255',
+                    'cap' => 'nullable|max:255',
+                    'province' => 'nullable|max:255',
+                    'city' => 'nullable|max:255',
+                    'nation' => 'nullable|max:255',
+                    'ibernate' => 'boolean',
+                    'notify' => 'boolean',
+                    'subscribed' => 'boolean'
                 ];
             }
             case 'PUT':
@@ -53,8 +65,18 @@ class UserRequest extends FormRequest
                     'name' => 'max:255',
                     'email' => 'unique:users,email,'.$this->route('user'),
                     'password' => 'min:6',
-                    'avatar_path' => 'image|max:5000'
-                ];
+                    'first_name' => 'nullable|max:255',
+                    'last_name' => 'nullable|max:255',
+                    'cell_phone' => 'nullable|max:255',
+                    'fax' => 'nullable|max:255',
+                    'address' => 'nullable|max:255',
+                    'cap' => 'nullable|max:255',
+                    'province' => 'nullable|max:255',
+                    'city' => 'nullable|max:255',
+                    'nation' => 'nullable|max:255',
+                    'ibernate' => 'boolean',
+                    'notify' => 'boolean',
+                    'subscribed' => 'boolean'                ];
             }
             default:break;
         }

@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('agency_id')->unsigned();
             $table->integer('customer_id')->unsigned();
+            $table->string('folder_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('archivied')->default(false);

@@ -34,7 +34,7 @@ class customerRequest extends FormRequest
             {
                 return [
                     'name' => 'required|max:255',
-                    'description' => 'max:1000'
+                    'description' => 'max:1000|nullable'
                 ];
             }
             case 'PUT':
@@ -42,7 +42,7 @@ class customerRequest extends FormRequest
             {
                 return [
                     'name' => 'max:255',
-                    'description' =>  'max:1000'
+                    'description' =>  'max:1000|nullable'
                 ];
             }
             default:break;
