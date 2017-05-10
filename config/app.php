@@ -172,13 +172,14 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         HipsterJazzbo\Landlord\LandlordServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        NotificationChannels\WebPush\WebPushServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 

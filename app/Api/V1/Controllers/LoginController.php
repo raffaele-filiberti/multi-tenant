@@ -3,6 +3,7 @@
 namespace App\Api\V1\Controllers;
 
 use App\Agency;
+use App\Notifications\LoginSuccess;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -54,6 +55,9 @@ class LoginController extends Controller
             // something went wrong whilst attempting to encode the token
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+
+        //TODO: login test notification
+        Auth::user()->notify(new LoginSuccess);
 
         // all good so return the token
         return response()->json([
