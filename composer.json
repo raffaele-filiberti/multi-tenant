@@ -12,7 +12,9 @@
         "barryvdh/laravel-cors": "^0.8.2",
         "hipsterjazzbo/landlord": "^2.0",
         "zizaco/entrust": "5.2.x-dev",
-        "nao-pon/flysystem-google-drive": "~1.1"
+        "nao-pon/flysystem-google-drive": "~1.1",
+        "laravel-notification-channels/webpush": "^1.0",
+        "pusher/pusher-php-server": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
