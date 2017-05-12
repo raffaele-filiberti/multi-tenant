@@ -18,3 +18,21 @@ Route::get('/', function () {
 Route::get('test', function() {
     Storage::disk('google')->put('test.txt', 'Hello World Guys');
 });
+
+use Illuminate\Support\Facades\App;
+
+Route::get('/bridge', function() {
+    $pusher = App::make('pusher');
+
+    $pusher->trigger( 'test-channel',
+        'test-event',
+        array('text' => 'Preparing the Pusher Laracon.eu workshop!'));
+
+    return view('welcome');
+});
+
+Route::get('/broadcast', function() {
+    event(new \App\Events\Users\NewSubscriber('Broadcasting in Laravel using Pusher!'));
+
+    return view('welcome');
+});

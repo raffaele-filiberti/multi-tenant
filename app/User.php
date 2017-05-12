@@ -13,14 +13,13 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Notifications\Notifiable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use HipsterJazzbo\Landlord\BelongsToTenants;
-use NotificationChannels\WebPush\HasPushSubscriptions;
 
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
 
 {
-    use Authenticatable, CanResetPassword, EntrustUserTrait, BelongsToTenants, HasPushSubscriptions, Notifiable;
+    use Authenticatable, CanResetPassword, EntrustUserTrait, BelongsToTenants, Notifiable;
 
     protected $tenantColumns = ['agency_id'];
 

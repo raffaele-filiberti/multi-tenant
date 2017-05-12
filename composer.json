@@ -13,8 +13,8 @@
         "hipsterjazzbo/landlord": "^2.0",
         "zizaco/entrust": "5.2.x-dev",
         "nao-pon/flysystem-google-drive": "~1.1",
-        "laravel-notification-channels/webpush": "^1.0",
-        "pusher/pusher-php-server": "^2.6"
+        "pusher/pusher-php-server": "^2.6",
+        "vinkla/pusher": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

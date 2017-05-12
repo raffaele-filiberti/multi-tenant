@@ -172,8 +172,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         HipsterJazzbo\Landlord\LandlordServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        NotificationChannels\WebPush\WebPushServiceProvider::class,
-
+        Vinkla\Pusher\PusherServiceProvider::class,
         /*
          * Application Service Providers...
          */

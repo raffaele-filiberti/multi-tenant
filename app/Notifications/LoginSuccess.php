@@ -6,10 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use NotificationChannels\WebPush\WebPushMessage;
-use NotificationChannels\WebPush\WebPushChannel;
 
-class LoginSuccess extends Notification
+class LoginSuccess extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -31,7 +29,7 @@ class LoginSuccess extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast', WebPushChannel::class];
+        return ['database', 'broadcast'];
     }
     /**
      * Get the array representation of the notification.
@@ -42,26 +40,10 @@ class LoginSuccess extends Notification
     public function toArray($notifiable)
     {
         return [
-            'title' => 'Hello from Laravel!',
+            'title' => 'Hello ' . $notifiable->name . 'from Laravel!',
             'body' => 'Thank you for using our application.',
             'action_url' => 'https://laravel.com',
             'created' => Carbon::now()->toIso8601String()
         ];
-    }
-    /**
-     * Get the web push representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @param  mixed  $notification
-     * @return WebPushMessage
-     */
-    public function toWebPush($notifiable, $notification)
-    {
-        return WebPushMessage::create()
-            ->id($notification->id)
-            ->title('Hello from Laravel!')
-            ->icon('/notification-icon.png')
-            ->body('Thank you for using our application.')
-            ->action('View app', 'view_app');
     }
 }
