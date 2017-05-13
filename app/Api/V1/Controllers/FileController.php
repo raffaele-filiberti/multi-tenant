@@ -26,6 +26,7 @@ class FileController extends Controller
 
     }
 
+    //TODO: get file id from drive upload
     public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
     {
         $task = Task::find($task_id);
@@ -37,9 +38,10 @@ class FileController extends Controller
         $google_drive->upload_files(trim($request->file('file')->getClientOriginalName()), $contents, $task->folder_id);
 
         $detail_step_task->files()->create([
+            'file_id' => 1,
             'filename' => trim($request->file('file')->getClientOriginalName()),
             'description' => $request->input('description'),
-            'path' => '0B1CM3tHysanbbmpYUnVxalZqeTQ',
+            'path' => $task->folder_id,
             'mime' => $request->file('file')->getClientMimeType(),
             'size' => $request->file('file')->getClientSize()
         ]);
@@ -77,8 +79,9 @@ class FileController extends Controller
     public function deleteStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id){
         $file = File::findOrFail($file_id);
 
-        $google_drive = new GoogleUpload();
-        $google_drive->delete_files($file->file_id);
+//        TODO: file id is missed
+//        $google_drive = new GoogleUpload();
+//        $google_drive->delete_files($file->file_id);
 
         $file->delete();
 

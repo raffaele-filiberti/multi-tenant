@@ -11,7 +11,7 @@ class File extends Model
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
-        'filename', 'description', 'mime', 'path', 'size'
+        'file_id', 'filename', 'description', 'mime', 'path', 'size'
     ];
 
     protected $hidden = [
