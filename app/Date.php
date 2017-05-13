@@ -2,10 +2,13 @@
 
 namespace App;
 
+use HipsterJazzbo\Landlord\BelongsToTenants;
 use Illuminate\Database\Eloquent\Model;
 
 class Date extends Model
 {
+    use BelongsToTenants;
+
     protected $tenantColumns = ['agency_id'];
 
     protected $fillable = [
