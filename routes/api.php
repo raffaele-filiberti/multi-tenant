@@ -209,7 +209,7 @@ $api->version('v1', function (Router $api) {
     ]);
 
     //DATE STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/dates/{$detail_step_task_id}', [
+    $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/dates', [
         'middleware' => 'permission:store_step_task_dates',
         'uses' => 'App\Api\V1\Controllers\DateController@storeStepDates'
     ]);
