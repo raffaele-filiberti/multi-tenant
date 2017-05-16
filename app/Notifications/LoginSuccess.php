@@ -49,13 +49,5 @@ class LoginSuccess extends Notification implements ShouldQueue
         ];
     }
 
-    public function toBroadcast($notifiable)
-    {
-        return [
-            'title' => 'Online User',
-            'body' => $this->user->name . 'is online now!',
-            'action_url' => 'https://laravel.com',
-            'created' => Carbon::now()->toIso8601String()
-        ];
-    }
+
 }

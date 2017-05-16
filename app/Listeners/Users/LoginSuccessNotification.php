@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Listeners\Users;
+
+use App\Events\Users\LoginSuccess;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class LoginSuccessNotification
+{
+    /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Handle the event.
+     *
+     * @param  LoginSuccess  $event
+     * @return void
+     */
+    public function handle(LoginSuccess $event)
+    {
+    }
+}

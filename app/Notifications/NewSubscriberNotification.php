@@ -3,10 +3,11 @@
 namespace App\Notifications;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class NewSubscriberNotification extends Notification
 {
@@ -38,11 +39,16 @@ class NewSubscriberNotification extends Notification
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toBroadcast($notifiable)
     {
-
+        return new BroadcastMessage([
+            'title' => 'New Subscriber',
+            'body' => $this->user->name . 'has requested to be subscribed',
+            //TODO: problema express js da fixare
+            'action_url' => 'https://laravel.com',
+            'created' => Carbon::now()->toIso8601String()
+        ]);
     }
 
     /**

@@ -61,8 +61,7 @@ class LoginController extends Controller
         }
 
         //TODO: login test notification
-        Notification::send(Auth::user(), new LoginSuccess(Auth::user()));
-//        $this->dispatch(new NewSubscriber(Auth::user()));
+        broadcast(new \App\Events\Users\LoginSuccess(Auth::user()));
 
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
