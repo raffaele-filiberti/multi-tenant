@@ -5,8 +5,10 @@ namespace App\Api\V1\Controllers;
 use App\Agency;
 use App\Jobs\NewSubscriber;
 use App\Notifications\LoginSuccess;
+use App\Notifications\NewSubscriberNotification;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
+use Illuminate\Notifications\Notification;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
@@ -58,9 +60,9 @@ class LoginController extends Controller
         }
 
         //TODO: login test notification
-        Auth::user()->notify(new LoginSuccess);
-        $this->dispatch(new NewSubscriber(Auth::user()));
-        // all good so return the token
+        Notification::send(new LoginSuccess(Auth::user()));
+//        $this->dispatch(new NewSubscriber(Auth::user()));
+
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
             'auth' => Auth::user(),

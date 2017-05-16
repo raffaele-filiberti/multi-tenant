@@ -3,12 +3,12 @@
 namespace App\Notifications;
 
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 
-class LoginSuccess extends Notification implements ShouldQueue
+class NewSubscriberNotification extends Notification
 {
     use Queueable;
 
@@ -31,8 +31,20 @@ class LoginSuccess extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database','broadcast'];
     }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toBroadcast($notifiable)
+    {
+
+    }
+
     /**
      * Get the array representation of the notification.
      *
@@ -42,8 +54,9 @@ class LoginSuccess extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'title' => 'Online User',
-            'body' => $this->user->name . 'is online now!',
+            'title' => 'New Subscriber',
+            'body' => $this->user->name . 'has requested to be subscribed',
+            //TODO: problema express js da fixare
             'action_url' => 'https://laravel.com',
             'created' => Carbon::now()->toIso8601String()
         ];

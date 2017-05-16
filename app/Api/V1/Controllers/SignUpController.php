@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Requests\SignUpAsAgencyRequest;
 use App\Api\V1\Requests\SignUpAsSubscriberRequest;
 use App\Customer;
+use App\Notifications\NewSubscriberNotification;
 use Config;
 use Auth;
 
@@ -68,6 +69,8 @@ class SignUpController extends Controller
         ]);
 
         $user->customers()->attach($customer->id);
+
+        $user->notify(new NewSubscriberNotification($user));
 
         return response()->json([
             'status' => 'ok',
