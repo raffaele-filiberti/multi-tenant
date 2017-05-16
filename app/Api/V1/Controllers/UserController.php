@@ -138,7 +138,7 @@ class UserController extends Controller
 
         $auth = $pusher->socket_auth($request->channel_name, $request->socket_id);
 
-        return response()->json(compact('auth'));
+        return response()->json($auth);
     }
 
 
