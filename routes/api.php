@@ -1,6 +1,7 @@
 <?php
 
 use Dingo\Api\Routing\Router;
+use Illuminate\Support\Facades\Broadcast;
 
 $api = app(Router::class);
 //TODO: fix middleware role & perms
@@ -57,6 +58,8 @@ $api = app(Router::class);
 //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 $api->version('v1', function (Router $api) {
+
+    Broadcast::routes();
 
     // AUTH ROUTES
     // role: nessuna
