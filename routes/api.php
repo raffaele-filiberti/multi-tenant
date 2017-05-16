@@ -59,8 +59,6 @@ $api = app(Router::class);
 
 $api->version('v1', function (Router $api) {
 
-    Broadcast::routes();
-
     // AUTH ROUTES
     // role: nessuna
     $api->group(['prefix' => 'auth', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
