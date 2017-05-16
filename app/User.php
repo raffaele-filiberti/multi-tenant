@@ -69,11 +69,4 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany(Role::class);
     }
-
-    public function receivesBroadcastNotificationsOn()
-    {
-        return [
-            'global'
-        ];
-    }
 }
