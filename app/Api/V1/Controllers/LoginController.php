@@ -6,6 +6,7 @@ use App\Agency;
 use App\Jobs\NewSubscriber;
 use App\Notifications\LoginSuccess;
 use App\Notifications\NewSubscriberNotification;
+use App\User;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
 use Illuminate\Notifications\Notification;
