@@ -118,5 +118,28 @@ class UserController extends Controller
         }
     }
 
+    public function getAuthPusher(\Dingo\Api\Http\Request $request)
+    {
+        $this->validate($request, [
+            'channel_name' => 'required',
+            'socket_id' => 'required',
+        ]);
+
+        $options = array(
+            'cluster' =>  env('PUSHER_CLUSTER'),
+            'encrypted' => true
+        );
+        $pusher = new \Pusher(
+            env('PUSHER_KEY'),
+            env('PUSHER_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $auth = $pusher->socket_auth($request->channel_name, $request->socket_id);
+
+        return response()->json(compact('auth'));
+    }
+
 
 }

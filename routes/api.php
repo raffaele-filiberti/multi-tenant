@@ -248,13 +248,11 @@ $api->version('v1', function (Router $api) {
         }
     ]);
 
-    $api->post('broadcasting/auth ', [
-        'middleware' => ['api','jwt.auth'],
-        function() {
-            $pusher = new Pusher(env('PUSHER_KEY'), env('PUSHER_SECRET'), env('PUSHER_APP_ID'));
-            return response()->json(compact($pusher->socket_auth($_POST['channel_name'], $_POST['socket_id'])));
-        }
+    $api->post('users', [
+        'middleware' => 'jwt.auth',
+        'uses' => 'App\Api\V1\Controllers\UserController@getAuthPusher'
     ]);
+
 
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
 
