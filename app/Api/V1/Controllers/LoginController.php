@@ -6,10 +6,8 @@ use App\Agency;
 use App\Jobs\NewSubscriber;
 use App\Notifications\LoginSuccess;
 use App\Notifications\NewSubscriberNotification;
-use App\User;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
-use Illuminate\Notifications\Notification;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
@@ -61,7 +59,7 @@ class LoginController extends Controller
         }
 
         //TODO: login test notification
-        \Illuminate\Support\Facades\Notification::send(User::all(), new LoginSuccess(Auth::user()));
+        Auth::user()->notify(new LoginSuccess(Auth::user()));
 //        $this->dispatch(new NewSubscriber(Auth::user()));
 
         return response()->json([
