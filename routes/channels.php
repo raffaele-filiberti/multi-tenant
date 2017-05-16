@@ -9,6 +9,6 @@
 | used to check if an authenticated user can listen to the channel.
 |
 */
-\Illuminate\Support\Facades\Broadcast::channel('private-App.User.{id}', function ($user, $id) {
+\Illuminate\Support\Facades\Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int)$user->id === (int)$id;
 });
