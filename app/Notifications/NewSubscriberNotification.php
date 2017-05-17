@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class NewSubscriberNotification extends Notification
+class NewSubscriberNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -35,21 +35,6 @@ class NewSubscriberNotification extends Notification
         return ['database','broadcast'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     */
-    public function toBroadcast($notifiable)
-    {
-        return new BroadcastMessage([
-            'title' => 'New Subscriber',
-            'body' => $this->user->name . 'has requested to be subscribed',
-            //TODO: problema express js da fixare
-            'action_url' => 'https://laravel.com',
-            'created' => Carbon::now()->toIso8601String()
-        ]);
-    }
 
     /**
      * Get the array representation of the notification.
@@ -61,8 +46,7 @@ class NewSubscriberNotification extends Notification
     {
         return [
             'title' => 'New Subscriber',
-            'body' => $this->user->name . 'has requested to be subscribed',
-            //TODO: problema express js da fixare
+            'body' => $this->user->name . ' has requested to be subscribed',
             'action_url' => 'https://laravel.com',
             'created' => Carbon::now()->toIso8601String()
         ];

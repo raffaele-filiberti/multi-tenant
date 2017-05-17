@@ -6,6 +6,7 @@ use App\Api\V1\Requests\SignUpAsAgencyRequest;
 use App\Api\V1\Requests\SignUpAsSubscriberRequest;
 use App\Customer;
 use App\Notifications\NewSubscriberNotification;
+use App\Permission;
 use Config;
 use Auth;
 
@@ -14,6 +15,7 @@ use App\Agency;
 use App\Role;
 
 use Dingo\Api\Http\Response;
+use Notification;
 use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Requests\LoginRequest;
@@ -70,7 +72,12 @@ class SignUpController extends Controller
 
         $user->customers()->attach($customer->id);
 
-        $user->notify(new NewSubscriberNotification($user));
+        $permission = Permission::where('name', '=', 'view_subscribers')->first();
+        foreach( $permission->roles as $role ) {
+            $users = $role->users;
+            Notification::send($users, new NewSubscriberNotification($user));
+        }
+
 
         return response()->json([
             'status' => 'ok',

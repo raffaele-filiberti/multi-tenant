@@ -27,6 +27,16 @@ class LoginSuccess implements ShouldBroadcast
     }
 
     /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+//    public function broadcastWith()
+//    {
+//        return ['id' => $this->message->id];
+//    }
+
+    /**
      * Get the channels the event should broadcast on.
      *
      * @return Channel|array
