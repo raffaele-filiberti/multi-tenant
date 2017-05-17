@@ -61,8 +61,8 @@ class LoginController extends Controller
         }
 
         //TODO: login test notification
-//        broadcast(new \App\Events\Users\LoginSuccess(Auth::user()))->toOthers();;
-        Auth::user()->notify(new LoginSuccess(Auth::user()));
+        broadcast(new \App\Events\Users\LoginSuccess(Auth::user()))->toOthers();;
+//        Auth::user()->notify(new LoginSuccess(Auth::user()));
 
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
