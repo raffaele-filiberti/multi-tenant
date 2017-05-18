@@ -20,6 +20,26 @@ class Task extends Model
         $this->attributes['name'] = empty($name) ? $this->attributes['name'] : $name;
     }
 
+    public function setItemNumberAttribute($item_number)
+    {
+        $this->attributes['item_number'] = empty($item_number) ? $this->attributes['item_number'] : $item_number;
+    }
+
+    public function setDesignTypeAttribute($design_type)
+    {
+        $this->attributes['design_type'] = empty($design_type) ? $this->attributes['design_type'] : $design_type;
+    }
+
+    public function setDeadlineAttribute($deadline)
+    {
+        $this->attributes['deadline'] = empty($deadline) ? $this->attributes['deadline'] : $deadline;
+    }
+
+    public function setCountryAttribute($country)
+    {
+        $this->attributes['country'] = empty($country) ? $this->attributes['country'] : $country;
+    }
+
     public function setDescriptionAttribute($description)
     {
         $this->attributes['description'] = empty($description) ? null : $description;

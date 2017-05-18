@@ -154,6 +154,24 @@ class TaskController extends Controller
         $task->country = $request->input('country');
         $task->save();
 
+
+        $template = Template::find($task->template_id);
+
+        foreach ($template->steps as $key => $step)
+        {
+            //TODO: handle special features for steps
+            if (!empty($request->input('steps.'.$key.'.expiring_date'))) {
+                $task->steps()->updateExistingPivot($step->id,
+                    [
+                        'expiring_date' => $request->input('steps.' . $key . '.expiring_date'),
+                        /*                    'hidden' => $request->input('steps.'.$key.'.hidden'),
+                                            'missed' => $request->input('steps.'.$key.'.missed'),
+                                            'ref_id' => $request->input('steps.'.$key.'.ref_id'),
+                                            'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
+                    ]);
+            }
+        }
+
         return Response()->json([
             'status' => 'task updated successfully'
         ]);

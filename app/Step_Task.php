@@ -12,6 +12,11 @@ class Step_Task extends Model
         'ref_id', 'status', 'missed', 'ref_description', 'expiring_date', 'hidden'
     ];
 
+    public function setExpiringDateAttribute($expiring_date)
+    {
+        $this->attributes['expiring_date'] = empty($expiring_date) ? $this->attributes['expiring_date'] : $expiring_date;
+    }
+
     public function task() {
         return $this->belongsTo(Task::class);
     }

@@ -35,13 +35,13 @@ class TaskRequest extends FormRequest
                 $rules = [
                     'template_id' => 'required|integer',
                     'product_manager_id' => 'integer|nullable',
-                    'item_number' => 'max:255|nullable',
-                    'design_type' => 'integer|nullable',
+                    'item_number' => 'max:255',
+                    'design_type' => 'integer',
                     'name' => 'required|max:255',
-                    'description' => 'nullable',
-                    'country' => 'max:5|nullable',
-                    'private' => 'boolean',
-                    'deadline' => 'required|date'
+                    'description' => 'max:1000|nullable',
+                    'deadline' => 'required|date',
+                    'country' => 'max:5',
+                    'private' => 'boolean'
                 ];
 
                 foreach($this->request->get('steps') as $key => $val)
@@ -54,18 +54,26 @@ class TaskRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
             {
-                return [
+                $rules = [
                     'product_manager_id' => 'integer',
-                    'item_number' => 'max:255|nullable',
-                    'design_type' => 'integer|nullable',
+                    'item_number' => 'max:255',
+                    'design_type' => 'integer',
                     'name' => 'max:255',
-                    'description' => 'nullable',
-                    'archivied' => 'boolean',
-                    'billed' => 'boolean',
-                    'private' => 'boolean',
+                    'description' => 'max:1000|nullable',
                     'deadline' => 'date',
-                    'country' => 'max:5|nullable'
+                    'country' => 'max:5',
+                    'private' => 'boolean',
+                    'archivied' => 'boolean',
+                    'billed' => 'boolean'
                 ];
+
+                foreach($this->request->get('steps') as $key => $val)
+                {
+                    $rules['steps.'.$key.'.expiring_date'] = 'date';
+                }
+
+                return $rules;
+
             }
             default:break;
         }
