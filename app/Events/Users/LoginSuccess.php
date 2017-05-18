@@ -23,6 +23,7 @@ class LoginSuccess implements ShouldBroadcast
      */
     public function __construct(User $user)
     {
+        $this->dontBroadcastToCurrentUser();
         $this->message = $user->name . 'is online now!';
     }
 
