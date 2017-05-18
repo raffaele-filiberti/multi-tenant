@@ -4,6 +4,7 @@ namespace App\Events\Users;
 
 use App\User;
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,7 +12,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class LoginSuccess implements ShouldBroadcast
+class LoginSuccess implements ShouldBroadcastNow
 {
     use InteractsWithSockets, SerializesModels;
 
