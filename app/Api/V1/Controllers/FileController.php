@@ -42,7 +42,7 @@ class FileController extends Controller
             'size' => $request->file('file')->getClientSize()
         ]);
 
-        dispatch(new GoogleDriveFilesUpload(base64_encode($request->file('file')), $task->folder_id));
+        dispatch(new GoogleDriveFilesUpload($request->file('file'), base64_encode(file_get_contents($request->file('file'))), $task->folder_id));
 
         return response()->json([
             'status' => 'file uploaded successfully',
