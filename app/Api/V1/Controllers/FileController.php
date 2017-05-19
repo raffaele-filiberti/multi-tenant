@@ -32,7 +32,7 @@ class FileController extends Controller
     {
         $task = Task::find($task_id);
         $detail_step_task = Detail_Step_Task::find($request->input('step_task_id'));
-        Storage::disk('local')->put('text.txt', utf8_encode(file_get_contents($request->file('file')->getRealPath())));
+        Storage::disk('s3')->put($request->file('file')->getClientOriginalName(), fopen($request->file('file')->getRealPath(), 'rb'), 'public');
 
         $detail_step_task->files()->create([
             'file_id' => 1,
@@ -43,10 +43,7 @@ class FileController extends Controller
             'size' => $request->file('file')->getClientSize()
         ]);
 
-        dispatch(new GoogleDriveFilesUpload($request->file('file')->getClientOriginalName(), $request->file('file')->getRealPath(), $request->file('file')->getClientOriginalExtension(), $task->folder_id));
-
         return response()->json([
-            'isup' => Storage::disk('local')->exists('text.txt'),
             'status' => 'file uploaded successfully',
             'files' => $detail_step_task->files()->get()
         ]);
