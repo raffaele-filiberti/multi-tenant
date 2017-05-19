@@ -32,7 +32,7 @@ class FileController extends Controller
     {
         $task = Task::find($task_id);
         $detail_step_task = Detail_Step_Task::find($request->input('step_task_id'));
-        Storage::disk('s3')->put($request->file('file')->getFilename(), fopen($request->file('file')->getRealPath(), 'rb'), 'public');
+        Storage::disk('s3')->put('pippo.jpg', fopen($request->file('file')->getRealPath(), 'rb'), 'public');
 
         $detail_step_task->files()->create([
             'file_id' => 1,
