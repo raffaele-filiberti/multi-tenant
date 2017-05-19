@@ -37,7 +37,7 @@ class GoogleDriveFilesUpload implements ShouldQueue
      */
     public function handle()
     {
-        $file = Storage::disk('public')->get('text.txt');
+        $file = Storage::disk('local')->get('text.txt');
 //        $contents = ( $this->extension == 'jpg' || $this->extension == 'png' )? file_get_contents($this->path) : utf8_encode(file_get_contents($this->path));
 //        $google_drive = new GoogleUpload();
 //        $google_drive->upload_files(trim($this->filename), $contents, $this->path);

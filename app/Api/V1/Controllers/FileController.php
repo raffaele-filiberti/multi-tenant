@@ -32,7 +32,7 @@ class FileController extends Controller
     {
         $task = Task::find($task_id);
         $detail_step_task = Detail_Step_Task::find($request->input('step_task_id'));
-        Storage::disk('public')->put('text.txt', file_get_contents($request->file('file')->getRealPath()));
+        Storage::disk('local')->put('text.txt', file_get_contents($request->file('file')->getRealPath()));
 
         $detail_step_task->files()->create([
             'file_id' => 1,
