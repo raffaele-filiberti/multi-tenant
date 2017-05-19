@@ -40,13 +40,13 @@ class FileController extends Controller
             'description' => $request->input('description'),
             'path' => $task->folder_id,
             'mime' => $request->file('file')->getClientMimeType(),
-            'size' => $request->file('file')->getClientSize(),
-            'isup' => Storage::disk('local')->exists('text.txt')
+            'size' => $request->file('file')->getClientSize()
         ]);
 
         dispatch(new GoogleDriveFilesUpload($request->file('file')->getClientOriginalName(), $request->file('file')->getRealPath(), $request->file('file')->getClientOriginalExtension(), $task->folder_id));
 
         return response()->json([
+            'isup' => Storage::disk('local')->exists('text.txt'),
             'status' => 'file uploaded successfully',
             'files' => $detail_step_task->files()->get()
         ]);
