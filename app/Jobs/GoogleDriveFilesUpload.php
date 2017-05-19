@@ -12,20 +12,21 @@ class GoogleDriveFilesUpload implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $file;
-    protected $content;
-    protected $extension;
+    protected $filename;
     protected $path;
+    protected $extension;
+    protected $drive_folder;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($file, $content, $path)
+    public function __construct($filename, $path, $extension, $drive_folder)
     {
-        $this->file = $file;
-        $this->extension = $this->file->getClientOriginalExtension();
+        $this->filename = $filename;
         $this->path = $path;
+        $this->extension = $extension;
+        $this->drive_folder = $drive_folder;
     }
 
     /**
@@ -35,9 +36,8 @@ class GoogleDriveFilesUpload implements ShouldQueue
      */
     public function handle()
     {
-
+        $contents = ( $this->extension == 'jpg' || $this->extension == 'png' )? file_get_contents($this->path) : utf8_encode(file_get_contents($this->path));
         $google_drive = new GoogleUpload();
-        $google_drive->upload_files(trim($this->file->getClientOriginalName()), $this->content, $this->path);
-
+        $google_drive->upload_files(trim($this->filename), $contents, $this->path);
     }
 }
