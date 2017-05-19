@@ -4,6 +4,7 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Requests\FileRequest;
 use App\Detail_Step_Task;
+use App\Jobs\GoogleDriveFilesUpload;
 use App\Task;
 use Dingo\Api\Http\Request;
 
@@ -31,11 +32,6 @@ class FileController extends Controller
     {
         $task = Task::find($task_id);
         $detail_step_task = Detail_Step_Task::find($request->input('step_task_id'));
-        $extension = $request->file('file')->getClientOriginalExtension();
-        $contents = ( $extension == 'jpg' || $extension == 'png' )? file_get_contents($request->file('file')->getRealPath()) : utf8_encode(file_get_contents($request->file('file')->getRealPath()));
-
-        $google_drive = new GoogleUpload();
-        $google_drive->upload_files(trim($request->file('file')->getClientOriginalName()), $contents, $task->folder_id);
 
         $detail_step_task->files()->create([
             'file_id' => 1,
@@ -45,6 +41,8 @@ class FileController extends Controller
             'mime' => $request->file('file')->getClientMimeType(),
             'size' => $request->file('file')->getClientSize()
         ]);
+
+        dispatch(new GoogleDriveFilesUpload($request->file('file')->getClientOriginalName(), $request->file('file')->getRealPath(), $request->file('file')->getClientOriginalExtension(), $task->folder_id));
 
         return response()->json([
             'status' => 'file uploaded successfully',
