@@ -1,3 +1,3 @@
 web: vendor/bin/heroku-php-apache2 public/
-worker:  php artisan queue:listen database
+worker:  php artisan queue:listen database --tries=3
 
