@@ -25,6 +25,11 @@ class Customer extends Model
         $this->attributes['description'] = empty($description) ? null : $description;
     }
 
+    public function agency()
+    {
+        return $this->hasOne(Agency::class);
+    }
+
     public function users()
     {
         return $this->belongsToMany('App\User');

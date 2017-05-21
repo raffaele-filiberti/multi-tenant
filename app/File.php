@@ -28,8 +28,15 @@ class File extends Model
         $this->attributes['description'] = empty($description) ? null : $description;
     }
 
+    public function agency()
+    {
+        return $this->hasOne(Agency::class);
+    }
+
     public function detail_step_task() {
-        return $this->belongsToMany(Detail_Step_Task::class, 'detail_step_task_file', 'file_id','detail_step_task_id')
+        return $this->belongsToMany(
+            Detail_Step_Task::class, 'detail_step_task_file',
+            'file_id','detail_step_task_id')
             ->withPivot('status');
     }
 

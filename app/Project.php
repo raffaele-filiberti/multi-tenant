@@ -35,6 +35,10 @@ class Project extends Model
         $this->attributes['archivied'] = empty($archivied) ? false : $archivied;
     }
 
+    public function agency()
+    {
+        return $this->hasOne(Agency::class);
+    }
 
     public function tasks()
     {

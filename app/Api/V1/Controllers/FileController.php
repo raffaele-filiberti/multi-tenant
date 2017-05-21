@@ -6,6 +6,7 @@ use App\Api\V1\Requests\FileRequest;
 use App\Detail_Step_Task;
 use App\Jobs\GoogleDriveFilesUpload;
 use App\Task;
+use Aws\Laravel\AwsFacade as AWS;
 use Dingo\Api\Http\Request;
 
 use App\File;
@@ -27,26 +28,33 @@ class FileController extends Controller
 
     }
 
-    //TODO: get file id from drive upload
-    public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id)
+    //TODO: cloud extra upload
+    public function storeStepFiles(Request $request, $task_id, $detail_step_task_id)
     {
         $task = Task::find($task_id);
-        $detail_step_task = Detail_Step_Task::find($request->input('step_task_id'));
-        Storage::disk('s3')->put($request->file('file')->getClientOriginalName(), fopen($request->file('file')->getRealPath(), 'rb'), 'public');
-
-        $detail_step_task->files()->create([
-            'file_id' => 1,
-            'filename' => trim($request->file('file')->getClientOriginalName()),
+        Detail_Step_Task::find($detail_step_task_id)->files()->create([
+            'file_id' => null,
+            'filename' => trim($request->input('filename')),
             'description' => $request->input('description'),
-            'path' => $task->folder_id,
-            'mime' => $request->file('file')->getClientMimeType(),
-            'size' => $request->file('file')->getClientSize()
+            'path' => $request->input('path'),
+            'mime' => $request->input('mime'),
+            'size' => $request->input('size')
         ]);
 
         return response()->json([
             'status' => 'file uploaded successfully',
-            'files' => $detail_step_task->files()->get()
         ]);
+    }
+
+    public function downloadFiles($file_id)
+    {
+        $file = File::findOrFail($file_id);
+        $s3 = AWS::createClient('s3');
+        $agency = $file->agency();
+        $downloadUrl = $s3->getObjectUrl($agency->name, $file->filename, '+5 minutes', array(
+            'ResponseContentDisposition' => 'attachment; filename=$file',
+            'Content-Type' => 'application/octet-stream',
+        ));
     }
 
     public function approveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)

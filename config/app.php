@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Aws\Laravel\AwsServiceProvider::class,
         App\Providers\GoogleDriveServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
@@ -236,7 +237,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'Landlord'   => HipsterJazzbo\Landlord\Facades\Landlord::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-
+        'AWS' => Aws\Laravel\AwsFacade::class
 
     ],
 

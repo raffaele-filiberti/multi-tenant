@@ -28,7 +28,9 @@ class User extends Model implements AuthenticatableContract,
         'cap', 'province', 'city', 'nation', 'ibernate', 'notify', 'subscribed'
     ];
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password', 'remember_token'
+    ];
 
     public function setPasswordAttribute($password)
     {
@@ -44,15 +46,6 @@ class User extends Model implements AuthenticatableContract,
     public function setEmailAttribute($email)
     {
         $this->attributes['email'] = empty($email) ? $this->attributes['email'] : $email;
-    }
-
-    public function getPermissions($filter = 0)
-    {
-        if ($filter) {
-            return $this->roles()->first()->permissions()->select($filter);
-        } else {
-            return $this->roles()->first()->permissions();
-        }
     }
 
     public function agency()

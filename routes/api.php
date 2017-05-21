@@ -180,9 +180,14 @@ $api->version('v1', function (Router $api) {
     ]);
 
     //FILE STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/files', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files', [
         'middleware' => 'permission:upload_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@storeStepFiles'
+    ]);
+
+    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/details/{detail_step_task_id}/files/{file_id}/download', [
+        'middleware' => 'permission:upload_step_task_files',
+        'uses' => 'App\Api\V1\Controllers\FileController@downloadFiles'
     ]);
 
     //FILE DELETION STEP TASK ROUTES

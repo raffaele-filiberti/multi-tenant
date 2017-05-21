@@ -11,13 +11,6 @@ class Agency extends Model
         'name', 'motto', 'description'
     ];
 
-    public function users()
-    {
-        return $this->belongsToMany('App\User');
-    }
-
-    // TODO: filtro per agenzie che danno la possibilità di invitarsi
-
     public function setNameAttribute($name)
     {
         $this->attributes['name'] = empty($name) ? $this->attributes['name'] : $name;
@@ -32,4 +25,10 @@ class Agency extends Model
     {
         $this->attributes['description'] = empty($description) ? null : $description;
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }

@@ -2,10 +2,17 @@
 
 namespace App;
 
+use HipsterJazzbo\Landlord\BelongsToTenants;
 use Illuminate\Database\Eloquent\Model;
 
 class Step_Task extends Model
 {
+    use BelongsToTenants;
+
+    protected $tenantColumns = [
+        'agency_id'
+    ];
+
     protected $table = 'step_task';
 
     protected $fillable = [
@@ -15,6 +22,11 @@ class Step_Task extends Model
     public function setExpiringDateAttribute($expiring_date)
     {
         $this->attributes['expiring_date'] = empty($expiring_date) ? $this->attributes['expiring_date'] : $expiring_date;
+    }
+
+    public function agency()
+    {
+        return $this->hasOne(Agency::class);
     }
 
     public function task() {

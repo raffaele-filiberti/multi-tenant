@@ -60,12 +60,16 @@ class Task extends Model
         $this->attributes['billed'] = empty($billed) ? false : $billed;
     }
 
+    public function agency()
+    {
+        return $this->hasOne('App\Agency');
+    }
+
     public function steps()
     {
         return $this->belongsToMany(Step::class)
             ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
     }
-
 
     public function detail_step_task()
     {
@@ -74,7 +78,6 @@ class Task extends Model
             'task_id', 'step_task_id', 'id'
         );
     }
-
 
     public function project()
     {

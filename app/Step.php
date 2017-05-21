@@ -25,6 +25,11 @@ class Step extends Model
         $this->attributes['description'] = empty($description) ? null : $description;
     }
 
+    public function agency()
+    {
+        return $this->hasOne(Agency::class);
+    }
+
     public function template()
     {
         return $this->belongsTo(Template::class);

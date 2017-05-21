@@ -25,6 +25,11 @@ class Template extends Model
         $this->attributes['description'] = empty($description) ? null : $description;
     }
 
+    public function agency()
+    {
+        return $this->hasOne('App\Agency');
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);

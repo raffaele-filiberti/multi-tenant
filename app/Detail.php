@@ -31,6 +31,11 @@ class Detail extends Model
         $this->attributes['description'] = empty($description) ? null : $description;
     }
 
+    public function agency()
+    {
+        return $this->hasOne(Agency::class);
+    }
+
     public function steps()
     {
         return $this->belongsToMany(Step::class);
