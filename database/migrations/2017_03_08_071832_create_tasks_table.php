@@ -30,17 +30,18 @@ class CreateTasksTable extends Migration
             $table->integer('agency_id')->unsigned();
             $table->integer('template_id')->unsigned();
             $table->integer('project_id')->unsigned();
-            $table->integer('product_manager_id')->unsigned()->nullable();
+            $table->integer('product_manager_id')->nullable();
             $table->string('folder_id')->nullable();
-            $table->string('item_number')->default('n.a')->nullable();
-            $table->string('design_type')->unsigned()->nullable();
+            $table->string('item_number')->default('n.a');
+            $table->string('design_type')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
             $table->date('deadline');
-            $table->string('country')->default('EU')->nullable();
+            $table->string('country')->default('EU');
             $table->boolean('private')->default(false);
             $table->boolean('archivied')->default(false);
-            $table->integer('billed')->unsigned()->default(0);
+            $table->boolean('billed')->default(0);
+            $table->boolean('status')->default(0);
             $table->timestamps();
 
             $table->foreign('agency_id')->references('id')->on('agencies')

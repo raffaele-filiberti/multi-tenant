@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,17 +21,16 @@ class DatabaseSeeder extends Seeder
 //      gli altri utenti dovranno poi essere
 //      accettati selezionando la role
         $id = ($agency->id == 1) ? 1 : ($agency->id * 20) - 19;
-        echo $id;
+        $admin_role = \App\Role::where('name', '=', 'admin')->first();
         $admin = \App\User::find($id);
         $admin->subscribed = true;
         $admin->roles()->attach(1);
         $admin->save();
 
 //      cerco la role admin e gli aggiungo tutti i permessi
-        $admin_role = Role::find(1);
         $admin_perms = \App\Permission::all();
         foreach ($admin_perms as $perm) {
-            $admin_role->permissions()->sync([$perm->id]);
+            $admin_role->permissions()->attach($perm->id);
         }
     }
 }

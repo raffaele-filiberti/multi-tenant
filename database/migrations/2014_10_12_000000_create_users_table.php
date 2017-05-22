@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('cell_phone')->nullable();
             $table->string('fax')->nullable();
             $table->string('address')->nullable();
-            $table->string('cap')->nullable();
+            $table->string('postcode')->nullable();
             $table->string('province')->nullable();
             $table->string('city')->nullable();
             $table->string('nation')->nullable();

@@ -7,6 +7,7 @@ use App\Api\V1\Requests\SignUpAsSubscriberRequest;
 use App\Customer;
 use App\Notifications\NewSubscriberNotification;
 use App\Permission;
+use Aws\Laravel\AwsFacade as AWS;
 use Config;
 use Auth;
 
@@ -44,6 +45,8 @@ class SignUpController extends Controller
             'subscribed' => true
         ]);
 
+        $s3 = AWS::createClient('s3');
+        $s3->createBucket();
         //  assign role admin to the agency owner
         $role = Role::where('name', '=', 'admin')->first();
         $user->roles()->attach($role->id);

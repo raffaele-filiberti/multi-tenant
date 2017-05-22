@@ -16,6 +16,8 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('agency_id')->unsigned();
+            $table->string('google_drive_id');
+
             $table->string('filename');
             $table->text('description');
             $table->string('mime');

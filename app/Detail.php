@@ -33,7 +33,7 @@ class Detail extends Model
 
     public function agency()
     {
-        return $this->hasOne(Agency::class);
+        return $this->belongsTo(Agency::class);
     }
 
     public function steps()

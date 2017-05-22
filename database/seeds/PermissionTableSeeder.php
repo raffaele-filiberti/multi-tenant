@@ -18,8 +18,8 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'View agencies'
             ],
             [
-                'name' => 'create_agencies',
-                'display_name' => 'Create agencies'
+                'name' => 'store_agencies',
+                'display_name' => 'Store agencies'
             ],
             [
                 'name' => 'update_agencies',
@@ -35,8 +35,8 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'View users'
             ],
             [
-                'name' => 'create_users',
-                'display_name' => 'Create users'
+                'name' => 'store_users',
+                'display_name' => 'Store users'
             ],
             [
                 'name' => 'update_users',
@@ -52,8 +52,8 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'View customers'
             ],
             [
-                'name' => 'create_customers',
-                'display_name' => 'Create customers'
+                'name' => 'store_customers',
+                'display_name' => 'Store customers'
             ],
             [
                 'name' => 'update_customers',
@@ -69,8 +69,8 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'View projects'
             ],
             [
-                'name' => 'create_projects',
-                'display_name' => 'Create projects'
+                'name' => 'store_projects',
+                'display_name' => 'Store projects'
             ],
             [
                 'name' => 'update_projects',
@@ -80,14 +80,90 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'delete_projects',
                 'display_name' => 'Delete  projects'
             ],
+            //tasks
+            [
+                'name' => 'view_tasks',
+                'display_name' => 'View tasks'
+            ],
+            [
+                'name' => 'store_tasks',
+                'display_name' => 'Store tasks'
+            ],
+            [
+                'name' => 'update_tasks',
+                'display_name' => 'Update tasks'
+            ],
+            [
+                'name' => 'delete_tasks',
+                'display_name' => 'Delete tasks'
+            ],
+            //files
+            [
+                'name' => 'upload_step_task_files',
+                'display_name' => 'Upload Step Task Files'
+            ],
+            [
+                'name' => 'delete_step_task_files',
+                'display_name' => 'Delete Step Task Files'
+            ],
+            [
+                'name' => 'view_step_task_files',
+                'display_name' => 'View Step Task Files'
+            ],
+            [
+                'name' => 'download_step_task_files',
+                'display_name' => 'Download Step Task Files'
+            ],
+            [
+                'name' => 'approve_step_task_files',
+                'display_name' => 'Approve Step Task Files'
+            ],
+            [
+                'name' => 'disapprove_step_task_files',
+                'display_name' => 'Disapprove Step Task Files'
+            ],
+            //dates
+            [
+                'name' => 'store_step_task_dates',
+                'display_name' => 'Upload Step Task Dates'
+            ],
+            [
+                'name' => 'delete_step_task_dates',
+                'display_name' => 'Delete Step Task Dates'
+            ],
+            [
+                'name' => 'view_step_task_dates',
+                'display_name' => 'View Step Task Dates'
+            ],
+            [
+                'name' => 'approve_step_task_dates',
+                'display_name' => 'Approve Step Task Dates'
+            ],
+            [
+                'name' => 'disapprove_step_task_dates',
+                'display_name' => 'Disapprove Step Task Dates'
+            ],
+            //subscribers
+            [
+                'name' => 'view_subscriber',
+                'display_name' => 'View Subscribers'
+            ],
+            [
+                'name' => 'confirm_subscriber',
+                'display_name' => 'Confirm Subscribers'
+            ],
+            [
+                'name' => 'delete_subscriber',
+                'display_name' => 'Delete Subscribers'
+            ],
             //templates
             [
                 'name' => 'view_templates',
                 'display_name' => 'View templates'
             ],
             [
-                'name' => 'create_templates',
-                'display_name' => 'Create templates'
+                'name' => 'store_templates',
+                'display_name' => 'Store templates'
             ],
             [
                 'name' => 'update_templates',
@@ -97,31 +173,14 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'delete_templates',
                 'display_name' => 'Delete  templates'
             ],
-            //tasks
-            [
-                'name' => 'view_tasks',
-                'display_name' => 'View tasks'
-            ],
-            [
-                'name' => 'create_tasks',
-                'display_name' => 'Create tasks'
-            ],
-            [
-                'name' => 'update_tasks',
-                'display_name' => 'Update tasks'
-            ],
-            [
-                'name' => 'delete_tasks',
-                'display_name' => 'Delete tasks '
-            ],
             //steps
             [
                 'name' => 'view_steps',
                 'display_name' => 'View steps'
             ],
             [
-                'name' => 'create_steps',
-                'display_name' => 'Create steps'
+                'name' => 'store_steps',
+                'display_name' => 'Store steps'
             ],
             [
                 'name' => 'update_steps',
@@ -137,8 +196,8 @@ class PermissionTableSeeder extends Seeder
                 'display_name' => 'View details'
             ],
             [
-                'name' => 'create_details',
-                'display_name' => 'Create details'
+                'name' => 'store_details',
+                'display_name' => 'Store details'
             ],
             [
                 'name' => 'update_details',

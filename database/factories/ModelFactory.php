@@ -19,6 +19,16 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => 'secret',
         'remember_token' => str_random(10),
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'cell_phone' => $faker->phoneNumber,
+        'fax' => $faker->tollFreePhoneNumber,
+        'address' => $faker->streetAddress,
+        'postcode' => $faker->postcode,
+        'province' => $faker->stateAbbr,
+        'city' => $faker->city,
+        'nation' => $faker->country,
+        'subscribed' => true
     ];
 });
 

@@ -25,7 +25,7 @@ class User extends Model implements AuthenticatableContract,
 
     protected $fillable = [
         'name', 'email', 'password', 'first_name', 'last_name', 'cell_phone', 'fax', 'address',
-        'cap', 'province', 'city', 'nation', 'ibernate', 'notify', 'subscribed'
+        'postcode', 'province', 'city', 'nation', 'ibernate', 'notify', 'subscribed'
     ];
 
     protected $hidden = [

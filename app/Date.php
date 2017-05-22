@@ -22,7 +22,7 @@ class Date extends Model
 
     public function agency()
     {
-        return $this->hasOne(Agency::class);
+        return $this->belongsTo(Agency::class);
     }
 
     public function detail_step_task() {
