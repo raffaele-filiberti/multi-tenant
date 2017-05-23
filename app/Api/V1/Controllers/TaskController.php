@@ -70,7 +70,7 @@ class TaskController extends Controller
             'template_id' => $request->input('template_id'),
             'product_manager_id' => $request->input('product_manager_id'),
             'item_number' => $request->input('item_number', 'n.a'),
-            'design_type' => $request->input('design_type'),
+            'design_type' => $request->input('design_type', null),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'country' => $request->input('country', 'EU'),

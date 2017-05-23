@@ -27,7 +27,7 @@ class Task extends Model
 
     public function setDesignTypeAttribute($design_type)
     {
-        $this->attributes['design_type'] = empty($design_type) ? $this->attributes['design_type'] : $design_type;
+        $this->attributes['design_type'] = empty($design_type) ? null : $design_type;
     }
 
     public function setDeadlineAttribute($deadline)
