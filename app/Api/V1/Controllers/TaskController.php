@@ -70,7 +70,7 @@ class TaskController extends Controller
             'user_id' => Auth::user()->id,
             'template_id' => $request->input('template_id'),
             'product_manager_id' => $request->input('product_manager_id'),
-            'item_number' => $request->input('item_number'),
+            'item_number' => $request->input('item_number', 'n.a'),
             'design_type' => $request->input('design_type'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
