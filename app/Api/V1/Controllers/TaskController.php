@@ -4,6 +4,7 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\GoogleUpload;
 use App\Api\V1\Requests\TaskRequest;
+use App\Customer;
 use App\Project;
 use App\Step;
 use App\Step_Task;
@@ -58,7 +59,8 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request, $customer_id, $project_id)
     {
-        $project = Project::find($project_id);
+        $project = Project::findOrFail($project_id);
+        $customer = Customer::findOrFail($customer_id);
         $google_drive = new GoogleUpload();
         $folder_id = $google_drive->create_folder($request->input('name'), $project->folder_id);
 
@@ -106,7 +108,7 @@ class TaskController extends Controller
         $s3 = AWS::createClient('s3');
         $s3->putObject(array(
             'Bucket' => strtolower($bucket),
-            'Key'    => $task->name . '/',
+            'Key'    => $customer->name . '/'. $project->name . '/' . $task->name . '/',
             'Body'   => '',
         ));
 

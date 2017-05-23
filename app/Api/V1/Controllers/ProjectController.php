@@ -65,7 +65,7 @@ class ProjectController extends Controller
         $s3 = AWS::createClient('s3');
         $s3->putObject(array(
             'Bucket' => strtolower($bucket),
-            'Key'    => $project->name . '/',
+            'Key'    => $customer->name . '/' . $project->name . '/',
             'Body'   => '',
         ));
 
