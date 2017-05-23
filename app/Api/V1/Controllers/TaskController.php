@@ -15,6 +15,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Aws\Laravel\AwsFacade as AWS;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class TaskController
@@ -69,8 +70,8 @@ class TaskController extends Controller
             'user_id' => Auth::user()->id,
             'template_id' => $request->input('template_id'),
             'product_manager_id' => $request->input('product_manager_id'),
-            'item_number' => $request->input('item_number', 'n.a'),
-            'design_type' => $request->input('design_type', null),
+            'item_number' => $request->input('item_number'),
+            'design_type' => $request->input('design_type'),
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'country' => $request->input('country', 'EU'),
@@ -97,6 +98,7 @@ class TaskController extends Controller
 
                 foreach ($step->details as $detail) {
                     $step_task = Step_Task::find($pivot[$key]->pivot->id);
+                    Log::info('step task -> ' $pivot[$key]->pivot->id);
                     $step_task->details()->attach($detail->id);
 
                 }
