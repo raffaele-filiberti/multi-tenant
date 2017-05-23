@@ -63,7 +63,7 @@ class UserRequest extends FormRequest
                     'customer_id' => 'integer|nullable',
                     'role_id' => 'integer|nullable',
                     'name' => 'max:255',
-                    'email' => 'unique:users,email,'.$this->route('user'),
+                    'email' => 'unique:users,email,'.$this->route('user_id'),
                     'password' => 'min:6',
                     'first_name' => 'nullable|max:255',
                     'last_name' => 'nullable|max:255',

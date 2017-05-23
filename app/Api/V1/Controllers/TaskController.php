@@ -14,6 +14,10 @@ use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Class TaskController
+ * @package App\Api\V1\Controllers
+ */
 class TaskController extends Controller
 {
     /**

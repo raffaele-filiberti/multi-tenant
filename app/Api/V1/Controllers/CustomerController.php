@@ -82,9 +82,21 @@ class CustomerController extends Controller
     public function update(customerRequest $request, $id)
     {
         $customer = Customer::findOrFail($id);
+        $old_name = $customer->name;
         $customer->name = $request->input('name');
         $customer->description = $request->input('description');
         $customer->save();
+
+        $bucket = preg_replace('/\s*/', '', $customer->agency->name);
+
+        $s3 = AWS::createClient('s3');
+        $s3->copyObject(array(
+            'Bucket' => strtolower($bucket),
+            'CopySource' => $old_name . '/',
+            'Key'    => $customer->name . '/',
+            'Body'   => '',
+        ));
+        unlink('s3://' . strtolower($bucket) . '/' . $customer->name . '/');
 
         return Response()->json([
             'status' => 'customer updated successfully'

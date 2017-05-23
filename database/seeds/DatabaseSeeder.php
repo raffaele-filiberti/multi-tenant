@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Aws\Laravel\AwsFacade as AWS;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,26 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $agency = factory(\App\Agency::class, 1)->create();
+
+        $bucket = preg_replace('/[^A-Za-z0-9\-]\s*/', '', $agency->name);
+
+        $s3 = AWS::createClient('s3');
+        //create bucket
+        $s3->createBucket(array('Bucket' => strtolower($bucket)));
+        //store CORS rules
+        $result = $s3->putBucketCors(array(
+            'Bucket' => strtolower($bucket),
+            'CORSConfiguration' => array(
+                'CORSRules' => array(
+                    array(
+                        'AllowedOrigins' => array('*'),
+                        'AllowedMethods' => array('POST', 'GET', 'PUT'),
+                        'ExposeHeaders' => array('ETag', 'x-amz-server-side-encryption'),
+                        'AllowedHeaders' => array('*')
+                    )
+                )
+            )
+        ));
 
         \HipsterJazzbo\Landlord\Facades\Landlord::AddTenant($agency);
         \App\User::bootBelongsToTenants();

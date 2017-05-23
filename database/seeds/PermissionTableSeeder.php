@@ -145,15 +145,15 @@ class PermissionTableSeeder extends Seeder
             ],
             //subscribers
             [
-                'name' => 'view_subscriber',
+                'name' => 'view_subscribers',
                 'display_name' => 'View Subscribers'
             ],
             [
-                'name' => 'confirm_subscriber',
+                'name' => 'confirm_subscribers',
                 'display_name' => 'Confirm Subscribers'
             ],
             [
-                'name' => 'delete_subscriber',
+                'name' => 'delete_subscribers',
                 'display_name' => 'Delete Subscribers'
             ],
             //templates
