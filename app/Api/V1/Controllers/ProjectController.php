@@ -10,6 +10,7 @@ use App\Customer;
 
 use Auth;
 
+use Aws\Laravel\AwsFacade as AWS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -48,11 +49,11 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request, $customer_id)
     {
         $customer = Customer::find($customer_id);
-        $google_drive = new GoogleUpload();
-        $folder_id = $google_drive->create_folder($request->input('name'), $customer->folder_id);
+//        $google_drive = new GoogleUpload();
+//        $folder_id = $google_drive->create_folder($request->input('name'), $customer->folder_id);
 
         $project = $customer->projects()->create([
-            'folder_id' => $folder_id,
+            'folder_id' => null,
             'user_id' => Auth::user()->id,
             'name' => $request->input('name'),
             'description' => $request->input('description'),

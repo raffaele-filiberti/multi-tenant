@@ -12,6 +12,7 @@ use App\Template;
 use Auth;
 
 use App\Http\Controllers\Controller;
+use Aws\Laravel\AwsFacade as AWS;
 use Illuminate\Http\Request;
 
 /**
