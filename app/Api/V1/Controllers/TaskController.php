@@ -111,6 +111,9 @@ class TaskController extends Controller
         } catch (\Exception $e) {
             $task->steps()->delete();
             $task->delete();
+            return Response()->json([
+                'status' => $e->getMessage()
+            ]);
         }
 
         $bucket = preg_replace('/\s*/', '', $task->agency->name);
@@ -123,7 +126,7 @@ class TaskController extends Controller
         ));
 
         return Response()->json([
-            'status' => 'task created successfully 2'
+            'status' => 'task created successfully'
         ]);
 
     }
