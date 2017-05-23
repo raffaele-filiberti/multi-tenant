@@ -59,6 +59,15 @@ class ProjectController extends Controller
             'private' => $request->input('private')
         ]);
 
+        $bucket = preg_replace('/\s*/', '', $project->agency->name);
+
+        $s3 = AWS::createClient('s3');
+        $s3->putObject(array(
+            'Bucket' => strtolower($bucket),
+            'Key'    => $project->name . '/',
+            'Body'   => '',
+        ));
+
         return Response()->json([
             'status' => 'project created successfully'
         ]);

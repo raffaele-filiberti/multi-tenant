@@ -96,6 +96,15 @@ class TaskController extends Controller
 
         }
 
+        $bucket = preg_replace('/\s*/', '', $task->agency->name);
+
+        $s3 = AWS::createClient('s3');
+        $s3->putObject(array(
+            'Bucket' => strtolower($bucket),
+            'Key'    => $task->name . '/',
+            'Body'   => '',
+        ));
+
         return Response()->json([
             'status' => 'task created successfully 2'
         ]);

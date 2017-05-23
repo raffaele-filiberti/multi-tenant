@@ -49,7 +49,7 @@ class CustomerController extends Controller
 
         $s3 = AWS::createClient('s3');
         $s3->putObject(array(
-            'Bucket' => 'oberbrunnerltd1',
+            'Bucket' => strtolower($bucket),
             'Key'    => $customer->name . '/',
             'Body'   => '',
         ));

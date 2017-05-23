@@ -24,5 +24,6 @@ return [
         ],
         'region' => env('S3_REGION'),
         'version' => 'latest',
+        'http' => [ 'verify' => false ]
 
 ];
