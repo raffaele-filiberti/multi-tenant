@@ -39,7 +39,7 @@ class TemplateController extends Controller
             foreach ($arr_steps as $arr_step) {
                 $step = Template::find($template->id)->steps()->create([
                     'name' => $arr_step['name'],
-                    'description' => $arr_step['description']
+                    'description' => empty($arr_step['description']) ? null : $arr_step['description']
                 ]);
                 if($arr_step['details']){
                     foreach ($arr_step['details'] as $detail)
