@@ -57,8 +57,7 @@ class SignUpController extends Controller
 
         $bucket = preg_replace('/\s*/', '', $agency->name);
 
-        $job = (new S3BucketCreator(strtolower($bucket)))->onQueue('S3');
-        dispatch($job);
+        $this->dispatch(new S3BucketCreator(strtolower($bucket)));
 
         //  assign role admin to the agency owner
         $role = Role::where('name', '=', 'admin')->first();
