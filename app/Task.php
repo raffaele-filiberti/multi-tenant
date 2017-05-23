@@ -62,7 +62,7 @@ class Task extends Model
 
     public function agency()
     {
-        return $this->hasOne('App\Agency');
+        return $this->belongsTo(Agency::class);
     }
 
     public function steps()
