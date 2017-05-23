@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Requests\SignUpAsAgencyRequest;
 use App\Api\V1\Requests\SignUpAsSubscriberRequest;
 use App\Customer;
+use App\Jobs\S3BucketCreator;
 use App\Notifications\NewSubscriberNotification;
 use App\Permission;
 use Aws\Laravel\AwsFacade as AWS;
@@ -23,15 +24,24 @@ use App\Api\V1\Requests\LoginRequest;
 use HipsterJazzbo\Landlord\Facades\Landlord;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * Class SignUpController
+ * @package App\Api\V1\Controllers
+ */
 class SignUpController extends Controller
 {
 
+    /**
+     * @param SignUpAsAgencyRequest $request
+     * @param JWTAuth $JWTAuth
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function signUpAsAgency(SignUpAsAgencyRequest $request, JWTAuth $JWTAuth)
     {
         $agency = Agency::create([
             'name' => $request->input('agency'),
             'motto' => $request->input('motto'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
         ]);
 
         Landlord::AddTenant($agency);
@@ -45,8 +55,10 @@ class SignUpController extends Controller
             'subscribed' => true
         ]);
 
-        $s3 = AWS::createClient('s3');
-        $s3->createBucket();
+        $bucket = preg_replace('/\s*/', '', $agency->name);
+
+        $this->dispatch(new S3BucketCreator(strtolower($bucket)))->onQueue('S3');
+
         //  assign role admin to the agency owner
         $role = Role::where('name', '=', 'admin')->first();
         $user->roles()->attach($role->id);
@@ -58,6 +70,10 @@ class SignUpController extends Controller
         ], 201);
     }
 
+    /**
+     * @param SignUpAsSubscriberRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function signUpAsSubscriber(SignUpAsSubscriberRequest $request)
     {
         $agency = Agency::find($request->input('agency_id'));
