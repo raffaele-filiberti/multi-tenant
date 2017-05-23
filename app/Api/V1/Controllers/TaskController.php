@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Aws\Laravel\AwsFacade as AWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Psy\Exception\ErrorException;
 
 /**
  * Class TaskController
@@ -79,22 +80,23 @@ class TaskController extends Controller
             'deadline' => $request->input('deadline')
         ]);
 
-        $template = Template::find($task->template_id);
+        try {
 
-        foreach ($template->steps as $key => $step)
-        {
-            //TODO: handle special features for steps
-            $task->steps()->attach($step->id,
-                [
-                    'expiring_date' => $request->input('steps.'.$key.'.expiring_date'),
-                    /*                    'hidden' => $request->input('steps.'.$key.'.hidden'),
-                                        'missed' => $request->input('steps.'.$key.'.missed'),
-                                        'ref_id' => $request->input('steps.'.$key.'.ref_id'),
-                                        'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
-                ]);
+            $template = Template::find($task->template_id);
+
+            foreach ($template->steps as $key => $step) {
+                //TODO: handle special features for steps
+                $task->steps()->attach($step->id,
+                    [
+                        'expiring_date' => $request->input('steps.' . $key . '.expiring_date'),
+                        /*                    'hidden' => $request->input('steps.'.$key.'.hidden'),
+                                            'missed' => $request->input('steps.'.$key.'.missed'),
+                                            'ref_id' => $request->input('steps.'.$key.'.ref_id'),
+                                            'ref_description' => $request->input('steps.'.$key.'.ref_description')*/
+                    ]);
 
 
-            $pivot = $task->steps()->get();
+                $pivot = $task->steps()->get();
 
                 foreach ($step->details as $detail) {
                     $step_task = Step_Task::find($pivot[$key]->pivot->id);
@@ -105,6 +107,10 @@ class TaskController extends Controller
 
                 }
 
+            }
+        } catch (\Exception $e) {
+            $task->steps()->delete();
+            $task->delete();
         }
 
         $bucket = preg_replace('/\s*/', '', $task->agency->name);

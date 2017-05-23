@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Step_Task extends Model
 {
-    use BelongsToTenants;
-
-    protected $tenantColumns = [
-        'agency_id'
-    ];
 
     protected $table = 'step_task';
 
