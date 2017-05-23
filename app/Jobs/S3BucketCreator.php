@@ -34,12 +34,12 @@ class S3BucketCreator implements ShouldQueue
     {
         $s3 = AWS::createClient('s3');
         //create bucket
-        $s3->createBucket(array('Bucket' => $bucket));
+        $s3->createBucket(array('Bucket' => $this->bucket));
         //wait until the bucket is created
-        $s3->waitUntil('BucketExists', array('Bucket' => $bucket));
+        $s3->waitUntil('BucketExists', array('Bucket' => $this->bucket));
         //store CORS rules
         $result = $s3->putBucketCors(array(
-            'Bucket' => $bucket,
+            'Bucket' => $this->bucket,
             'CORSRules' => array(
                 [
                     'AllowedHeaders' => ['string', '*'],
