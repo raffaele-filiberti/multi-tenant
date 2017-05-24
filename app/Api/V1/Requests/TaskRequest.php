@@ -52,8 +52,7 @@ class TaskRequest extends FormRequest
                 return $rules;
             }
             case 'PUT':
-            case 'PATCH':
-            {
+            case 'PATCH': {
                 $rules = [
                     'product_manager_id' => 'integer',
                     'item_number' => 'max:255',
@@ -67,9 +66,11 @@ class TaskRequest extends FormRequest
                     'billed' => 'boolean'
                 ];
 
-                foreach($this->request->get('steps') as $key => $val)
+                if ($this->request->get('steps'))
                 {
-                    $rules['steps.'.$key.'.expiring_date'] = 'date';
+                    foreach ($this->request->get('steps') as $key => $val) {
+                        $rules['steps.' . $key . '.expiring_date'] = 'date';
+                    }
                 }
 
                 return $rules;

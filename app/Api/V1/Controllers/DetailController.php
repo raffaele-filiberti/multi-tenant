@@ -71,6 +71,8 @@ class DetailController extends Controller
         $detail->detail_type = $request->input('detail_type');
         $detail->save();
 
+        //TODO: remove dates and files stored
+
         return Response()->json([
             'status' => 'detail updated successfully'
         ]);

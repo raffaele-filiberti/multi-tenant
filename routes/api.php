@@ -84,7 +84,7 @@ $api->version('v1', function (Router $api) {
         $api->resource('templates/{template_id}/steps', 'StepController', ['except' => ['create', 'edit']]);
 
         //DETAIL_TEMPLATE ROUTES
-        $api->resource('templates/{template_id}/steps/{detail_id}/details', 'DetailController', ['except' => ['create', 'edit']]);
+        $api->resource('templates/{template_id}/steps/{step_id}/details', 'DetailController', ['except' => ['create', 'edit']]);
     });
 
     //SUBSCRIBE ROUTES
