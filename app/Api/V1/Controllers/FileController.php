@@ -33,7 +33,7 @@ class FileController extends Controller
     {
         $task = Task::find($task_id);
         Detail_Step_Task::find($detail_step_task_id)->files()->create([
-            'file_id' => null,
+            'google_drive_id' => null,
             'filename' => trim($request->input('filename')),
             'description' => $request->input('description'),
             'path' => $request->input('path'),
