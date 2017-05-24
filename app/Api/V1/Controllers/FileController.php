@@ -32,6 +32,9 @@ class FileController extends Controller
     public function storeStepFiles(Request $request, $task_id, $detail_step_task_id)
     {
         $task = Task::find($task_id);
+        return response()->json([
+            'status' =>$detail_step_task_id,
+        ]);
         Detail_Step_Task::find($detail_step_task_id)->files()->create([
             'google_drive_id' => null,
             'filename' => trim($request->input('filename')),
