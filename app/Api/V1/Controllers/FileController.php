@@ -55,7 +55,7 @@ class FileController extends Controller
         $bucket = preg_replace('/\s*/', '', $task->agency->name);
 
 
-        $downloadUrl = $s3->getObjectUrl(strtolower($bucket), $file->filename, '+5 minutes', array(
+        $downloadUrl = $s3->getObjectUrl(strtolower($bucket), $file->path . $file->filename, '+5 minutes', array(
             'ResponseContentDisposition' => 'attachment; filename=$file',
             'Content-Type' => 'application/octet-stream',
         ));
