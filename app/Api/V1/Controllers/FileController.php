@@ -46,11 +46,12 @@ class FileController extends Controller
         ]);
     }
 
-    public function downloadFiles($file_id)
+    public function downloadFiles($customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
     {
+        $task = Task::find($task_id);
         $file = File::findOrFail($file_id);
         $s3 = AWS::createClient('s3');
-        $agency = $file->agency();
+        $agency = $task->agency();
         $downloadUrl = $s3->getObjectUrl($agency->name, $file->filename, '+5 minutes', array(
             'ResponseContentDisposition' => 'attachment; filename=$file',
             'Content-Type' => 'application/octet-stream',
