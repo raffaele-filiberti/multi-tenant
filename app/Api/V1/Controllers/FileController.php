@@ -29,7 +29,7 @@ class FileController extends Controller
     }
 
     //TODO: cloud extra upload
-    public function storeStepFiles(Request $request, $task_id, $detail_step_task_id)
+    public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
     {
         $task = Task::find($task_id);
         return response()->json([
