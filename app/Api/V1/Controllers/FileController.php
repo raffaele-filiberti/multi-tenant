@@ -56,6 +56,10 @@ class FileController extends Controller
             'ResponseContentDisposition' => 'attachment; filename=$file',
             'Content-Type' => 'application/octet-stream',
         ));
+
+        return response()->json([
+            'url' => $downloadUrl,
+        ]);
     }
 
     public function approveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
