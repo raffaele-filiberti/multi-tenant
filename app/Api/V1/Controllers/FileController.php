@@ -52,7 +52,10 @@ class FileController extends Controller
         $file = File::findOrFail($file_id);
         $s3 = AWS::createClient('s3');
 
-        $downloadUrl = $s3->getObjectUrl($task->agency->name, $file->filename, '+5 minutes', array(
+        $bucket = preg_replace('/\s*/', '', $task->agency->name);
+
+
+        $downloadUrl = $s3->getObjectUrl(strtolower($bucket), $file->filename, '+5 minutes', array(
             'ResponseContentDisposition' => 'attachment; filename=$file',
             'Content-Type' => 'application/octet-stream',
         ));
