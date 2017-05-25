@@ -17,12 +17,13 @@ toc_footers:
 
 Welcome to the generated API reference.
 [Get Postman Collection](http://localhost/docs/collection.json)
-
 <!-- END_INFO -->
 
 #AgencyController
 <!-- START_5958d1208c8617e4544406f922a29556 -->
-## Display a listing of the agencies.
+## index
+
+Display a listing of the agencies.
 
 > Example request:
 

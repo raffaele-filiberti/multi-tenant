@@ -17,6 +17,8 @@ class AgencyController extends Controller
 {
 
     /**
+     * index
+     *
      * Display a listing of the agencies.
      */
     public function index()
