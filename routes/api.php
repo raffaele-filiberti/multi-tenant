@@ -126,6 +126,11 @@ $api->version('v1', function (Router $api) {
         'uses' => 'App\Api\V1\Controllers\CustomerController@store'
     ]);
 
+    $api->get('customers/{customer_id}', [
+        'middleware' => 'permission:view_tasks',
+        'uses' => 'App\Api\V1\Controllers\CustomerController@getTasks'
+    ]);
+
     $api->put('customers/{customer_id}', [
         'middleware' => 'permission:update_customers',
         'uses' => 'App\Api\V1\Controllers\CustomerController@update'

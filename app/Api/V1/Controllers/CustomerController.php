@@ -119,8 +119,10 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function syncUser()
+    public function getTasks($customer_id)
     {
-
+        return response()->json([
+           'tasks' => Customer::findOrFail($customer_id)->tasks()->get()
+        ]);
     }
 }

@@ -13,6 +13,7 @@ toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
 <!-- START_INFO -->
+
 # Info
 
 Welcome to the generated API reference.
@@ -144,10 +145,10 @@ $.ajax(settings).done(function (response) {
 ```bash
 curl -X POST "http://localhost//api/auth/agency/signup" \
 -H "Accept: application/json" \
-    -d "name"="ut" \
-    -d "email"="wendell.gusikowski@example.net" \
-    -d "password"="ut" \
-    -d "agency"="ut" \
+    -d "name"="sint" \
+    -d "email"="okiehn@example.com" \
+    -d "password"="sint" \
+    -d "agency"="sint" \
 
 ```
 
@@ -158,10 +159,10 @@ var settings = {
     "url": "http://localhost//api/auth/agency/signup",
     "method": "POST",
     "data": {
-        "name": "ut",
-        "email": "wendell.gusikowski@example.net",
-        "password": "ut",
-        "agency": "ut"
+        "name": "sint",
+        "email": "okiehn@example.com",
+        "password": "sint",
+        "agency": "sint"
 },
     "headers": {
         "accept": "application/json"
@@ -196,11 +197,11 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost//api/auth/signup" \
 -H "Accept: application/json" \
-    -d "name"="in" \
-    -d "email"="anissa63@example.com" \
-    -d "password"="in" \
-    -d "agency_id"="9" \
-    -d "customer_id"="9" \
+    -d "name"="sit" \
+    -d "email"="kaia.terry@example.com" \
+    -d "password"="sit" \
+    -d "agency_id"="850" \
+    -d "customer_id"="850" \
 
 ```
 
@@ -211,11 +212,11 @@ var settings = {
     "url": "http://localhost//api/auth/signup",
     "method": "POST",
     "data": {
-        "name": "in",
-        "email": "anissa63@example.com",
-        "password": "in",
-        "agency_id": 9,
-        "customer_id": 9
+        "name": "sit",
+        "email": "kaia.terry@example.com",
+        "password": "sit",
+        "agency_id": 850,
+        "customer_id": 850
 },
     "headers": {
         "accept": "application/json"
@@ -251,8 +252,8 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost//api/auth/login" \
 -H "Accept: application/json" \
-    -d "email"="runolfsson.werner@example.com" \
-    -d "password"="corrupti" \
+    -d "email"="walter.lonny@example.org" \
+    -d "password"="non" \
 
 ```
 
@@ -263,8 +264,8 @@ var settings = {
     "url": "http://localhost//api/auth/login",
     "method": "POST",
     "data": {
-        "email": "runolfsson.werner@example.com",
-        "password": "corrupti"
+        "email": "walter.lonny@example.org",
+        "password": "non"
 },
     "headers": {
         "accept": "application/json"
@@ -297,7 +298,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost//api/auth/recovery" \
 -H "Accept: application/json" \
-    -d "email"="delfina.blanda@example.net" \
+    -d "email"="malvina.lockman@example.org" \
 
 ```
 
@@ -308,7 +309,7 @@ var settings = {
     "url": "http://localhost//api/auth/recovery",
     "method": "POST",
     "data": {
-        "email": "delfina.blanda@example.net"
+        "email": "malvina.lockman@example.org"
 },
     "headers": {
         "accept": "application/json"
@@ -340,9 +341,9 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost//api/auth/reset" \
 -H "Accept: application/json" \
-    -d "token"="quia" \
-    -d "email"="richie.christiansen@example.net" \
-    -d "password"="quia" \
+    -d "token"="occaecati" \
+    -d "email"="adolf69@example.com" \
+    -d "password"="occaecati" \
 
 ```
 
@@ -353,9 +354,9 @@ var settings = {
     "url": "http://localhost//api/auth/reset",
     "method": "POST",
     "data": {
-        "token": "quia",
-        "email": "richie.christiansen@example.net",
-        "password": "quia"
+        "token": "occaecati",
+        "email": "adolf69@example.com",
+        "password": "occaecati"
 },
     "headers": {
         "accept": "application/json"

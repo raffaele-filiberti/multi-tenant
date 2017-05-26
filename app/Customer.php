@@ -39,4 +39,9 @@ class Customer extends Model
     {
         return $this->hasMany('App\Project');
     }
+
+    public function tasks()
+    {
+        return $this->hasManyThrough(Task::class, Project::class);
+    }
 }
