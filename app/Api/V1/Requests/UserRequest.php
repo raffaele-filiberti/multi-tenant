@@ -41,7 +41,6 @@ class UserRequest extends FormRequest
                     'email' => 'required|unique:users|email',
                     'password' => 'required|min:6',
                     'customer_id' => 'nullable',
-                    'role_id' => 'required',
                     'first_name' => 'nullable|max:255',
                     'last_name' => 'nullable|max:255',
                     'cell_phone' => 'nullable|max:255',
