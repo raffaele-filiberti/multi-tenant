@@ -38,7 +38,7 @@ class UserRequest extends FormRequest
             {
                 return [
                     'name' => 'required|max:255',
-                    'email' => 'required|unique:users,email',
+                    'email' => 'required',
                     'password' => 'required|min:6',
                     'customer_id' => 'integer|nullable',
                     'role_id' => 'integer|required',
