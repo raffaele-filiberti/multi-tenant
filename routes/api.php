@@ -258,12 +258,6 @@ $api->version('v1', function (Router $api) {
         }
     ]);
 
-    $api->post('users', [
-        'middleware' => 'jwt.auth',
-        'uses' => 'App\Api\V1\Controllers\UserController@getAuthPusher'
-    ]);
-
-
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
 
         //TENANT TEST
