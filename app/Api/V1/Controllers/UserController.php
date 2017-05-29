@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         return Response()->json([
-            'users' => User::with('roles', 'roles.permissions', 'customers')->get()
+            'users' => User::with('roles', 'roles.permissions', 'customers')::where('subscribed','=',true)->get()
         ]);
     }
 
@@ -116,6 +116,29 @@ class UserController extends Controller
             $user->ibernate = true;
             $user->save();
         }
+    }
+
+    public function getAuthPusher(\Dingo\Api\Http\Request $request)
+    {
+        $this->validate($request, [
+            'channel_name' => 'required',
+            'socket_id' => 'required',
+        ]);
+
+        $options = array(
+            'cluster' =>  env('PUSHER_CLUSTER'),
+            'encrypted' => true
+        );
+        $pusher = new \Pusher(
+            env('PUSHER_KEY'),
+            env('PUSHER_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $auth = $pusher->socket_auth($request->channel_name, $request->socket_id);
+
+        return response()->json($auth);
     }
 
 
