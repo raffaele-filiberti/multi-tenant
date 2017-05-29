@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         return Response()->json([
-            'users' => User::with('roles', 'roles.permissions', 'customers')::where('subscribed','=',true)->get()
+            'users' => User::where('subscribed','=',true)::with('roles', 'roles.permissions', 'customers')->get()
         ]);
     }
 
