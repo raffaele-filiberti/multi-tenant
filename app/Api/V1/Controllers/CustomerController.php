@@ -89,14 +89,16 @@ class CustomerController extends Controller
 
         $bucket = preg_replace('/\s*/', '', $customer->agency->name);
 
-        $s3 = AWS::createClient('s3');
-        $s3->copyObject(array(
-            'Bucket' => strtolower($bucket),
-            'CopySource' => $old_name . '/',
-            'Key'    => $customer->name . '/',
-            'Body'   => '',
-        ));
-        unlink('s3://' . strtolower($bucket) . '/' . $customer->name . '/');
+        if($old_name == $customer->name) {
+            $s3 = AWS::createClient('s3');
+            $s3->copyObject(array(
+                'Bucket' => strtolower($bucket),
+                'CopySource' => $old_name . '/',
+                'Key' => $customer->name . '/',
+                'Body' => '',
+            ));
+            unlink('s3://' . strtolower($bucket) . '/' . $customer->name . '/');
+        }
 
         return Response()->json([
             'status' => 'customer updated successfully'
