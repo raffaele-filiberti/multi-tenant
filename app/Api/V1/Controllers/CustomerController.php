@@ -89,7 +89,7 @@ class CustomerController extends Controller
 
         $bucket = preg_replace('/\s*/', '', $customer->agency->name);
 
-        if($old_name == $customer->name) {
+        if($old_name != $customer->name) {
             $s3 = AWS::createClient('s3');
             $s3->copyObject(array(
                 'Bucket' => strtolower($bucket),
