@@ -85,6 +85,8 @@ $api->version('v1', function (Router $api) {
 
         //DETAIL_TEMPLATE ROUTES
         $api->resource('templates/{template_id}/steps/{step_id}/details', 'DetailController', ['except' => ['create', 'edit']]);
+
+        $api->get('roles', '\App\Api\V1\Controllers\RoleController::@index');
     });
 
     //SUBSCRIBE ROUTES
