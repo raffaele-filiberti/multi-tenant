@@ -37,7 +37,7 @@ class Step_Task extends Model
     }
 
     public function detail_step_task() {
-        return $this->hasMany(Detail_Step_Task::class, 'step_task_id', 'detail_id');
+        return $this->hasMany(Detail_Step_Task::class, 'detail_id','step_task_id');
     }
 
 }
