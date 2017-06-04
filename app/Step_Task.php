@@ -32,8 +32,12 @@ class Step_Task extends Model
         return $this->belongsTo(Step::class);
     }
 
-    public function detail_step_task() {
+    public function details() {
         return $this->belongsToMany(Detail::class, 'detail_step_task','step_task_id', 'detail_id');
+    }
+
+    public function detail_step_task() {
+        return $this->hasMany(Detail_Step_Task::class);
     }
 
 }
