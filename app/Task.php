@@ -67,8 +67,12 @@ class Task extends Model
 
     public function steps()
     {
-        return $this->belongsToMany(Step::class)
-            ->withPivot('id', 'ref_id', 'ref_description', 'status', 'missed', 'expiring_date', 'hidden');
+        return $this->belongsToMany(Step::class);
+    }
+
+    public function step_task()
+    {
+        return $this->hasMany(Step::class);
     }
 
     public function detail_step_task()

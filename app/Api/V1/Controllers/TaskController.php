@@ -35,7 +35,13 @@ class TaskController extends Controller
             return Response()->json([
                 'tasks' => Project::find($project_id)->tasks()
                     ->where('archivied', '=', false)
-                    ->with('steps', 'steps.details', 'step_task', 'step_task.detail_step_task.files')
+                    ->with(
+                        'steps',
+                        'steps.details',
+                        'step_task',
+                        'step_task.detail_step_task.files',
+                        'step_task.detail_step_task.dates'
+                    )
                     ->get()
             ]);
         }
