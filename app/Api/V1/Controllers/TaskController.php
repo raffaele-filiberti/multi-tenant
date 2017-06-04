@@ -16,7 +16,6 @@ use App\Http\Controllers\Controller;
 use Aws\Laravel\AwsFacade as AWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Psy\Exception\ErrorException;
 
 /**
  * Class TaskController
@@ -36,7 +35,7 @@ class TaskController extends Controller
             return Response()->json([
                 'tasks' => Project::find($project_id)->tasks()
                     ->where('archivied', '=', false)
-                    ->with('steps', 'steps.details', 'detail_step_task')
+                    ->with('steps', 'steps.details', 'detail_step_task', 'detail_step_task.files')
                     ->get()
             ]);
         }
