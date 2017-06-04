@@ -39,6 +39,7 @@ class TaskController extends Controller
                         'steps',
                         'steps.details',
                         'step_task',
+                        'step_task.detail_step_task',
                         'step_task.detail_step_task.files',
                         'step_task.detail_step_task.dates'
                     )
