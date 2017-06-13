@@ -35,12 +35,12 @@ class TaskRequest extends FormRequest
                 $rules = [
                     'template_id' => 'required|integer',
                     'product_manager_id' => 'integer|nullable',
-                    'item_number' => 'max:255',
-                    'design_type' => 'integer',
+                    'item_number' => 'max:255|nullable',
+                    'design_type' => 'integer|nullable',
                     'name' => 'required|max:255',
                     'description' => 'max:1000|nullable',
                     'deadline' => 'required|date',
-                    'country' => 'max:5',
+                    'country' => 'max:5|nullable',
                     'private' => 'boolean'
                 ];
 
