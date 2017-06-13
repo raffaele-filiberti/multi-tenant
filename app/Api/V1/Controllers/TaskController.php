@@ -109,8 +109,7 @@ class TaskController extends Controller
                     Log::info(
                         ['step task -> ' . $pivot->pivot->id],
                         ['pivot -> ' . $pivot]);
-                    $step_task->details()->attach($detail->id);
-
+                    $step_task->detail_step_task()->attach($detail->id);
                 }
 
             }
