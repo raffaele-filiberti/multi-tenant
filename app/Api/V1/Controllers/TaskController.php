@@ -107,7 +107,6 @@ class TaskController extends Controller
                 foreach ($step->details as $detail) {
                     $step_task = Step_Task::find($pivot[$key]->pivot->id);
                     Log::info(
-                        ['step task -> ' . $pivot->pivot->id],
                         ['pivot -> ' . $pivot]);
                     $step_task->detail_step_task()->attach($detail->id);
                 }
