@@ -47,15 +47,10 @@ class DateController extends Controller
         $count = 0;
         $step_task = Step_Task::find($step_task_id);
         $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
-        $details = $detail_step_task->dates()->get();
-        foreach ($details as $detail_step_task_date) {
+        foreach ($detail_step_task->dates as $detail_step_task_date) {
             if($detail_step_task_date->pivot->status == 1) {
                 $count = 1;
             }
-            return response()->json([
-                'status' => 'detail verified',
-                'obj' => $detail_step_task_date
-            ]);
         }
         if($count)
         {
@@ -94,15 +89,10 @@ class DateController extends Controller
         $count = 0;
         $step_task = Step_Task::find($step_task_id);
         $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
-        $details = $detail_step_task->dates()->get();
-        foreach ($details as $detail_step_task_date) {
+        foreach ($detail_step_task->dates as $detail_step_task_date) {
             if($detail_step_task_date->pivot->status == 1) {
                 $count = 1;
             }
-            return response()->json([
-                'status' => 'detail verified',
-                'obj' => $detail_step_task_date
-            ]);
         }
         if($count)
         {
