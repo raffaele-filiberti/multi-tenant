@@ -187,66 +187,66 @@ $api->version('v1', function (Router $api) {
     ]);
 
     //FILE STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/files', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/files', [
         'middleware' => 'permission:upload_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@storeStepFiles'
     ]);
 
-    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}/download', [
+    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}/download', [
         'middleware' => 'permission:upload_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@downloadFiles'
     ]);
 
     //FILE DELETION STEP TASK ROUTES
-    $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}', [
+    $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}', [
         'middleware' => 'permission:delete_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@deleteStepFiles'
     ]);
 
     //FILE LIST STEP TASK ROUTE
-    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/files', [
+    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/files', [
         'middleware' => 'permission:view_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@getStepFiles'
     ]);
 
     //FILE APPPROVATION STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}/approve', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}/approve', [
         'middleware' => 'permission:approve_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@approveStepFiles'
     ]);
 
     //FILE DISAPPROVATION STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}/disapprove', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/files/{file_id}/disapprove', [
         'middleware' => 'permission:disapprove_step_task_files',
         'uses' => 'App\Api\V1\Controllers\FileController@disapproveStepFiles'
     ]);
 
     //DATE STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/dates', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/dates', [
         'middleware' => 'permission:store_step_task_dates',
         'uses' => 'App\Api\V1\Controllers\DateController@storeStepDates'
     ]);
 
     //DATE LIST STEP TASK ROUTE
-    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/dates', [
+    $api->get('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/dates', [
         'middleware' => 'permission:view_step_task_dates',
         'uses' => 'App\Api\V1\Controllers\DateController@getStepDates'
     ]);
 
     //DATE CONFIRMATION STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/dates/{date_id}/approve', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/dates/{date_id}/approve', [
         'middleware' => 'permission:approve_step_task_dates',
         'uses' => 'App\Api\V1\Controllers\DateController@approveStepDates'
     ]);
 
     //DATE DISAPPROVATION STEP TASK ROUTES
-    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/dates/{date_id}/disapprove', [
+    $api->post('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/dates/{date_id}/disapprove', [
         'middleware' => 'permission:disapprove_step_task_dates',
         'uses' => 'App\Api\V1\Controllers\DateController@disapproveStepDates'
     ]);
 
     //DATE DELETE STEP TASK ROUTES
-    $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}steps/{step_task_id}/details/{detail_step_task_id}/dates/{date_id}', [
+    $api->delete('customers/{customer_id}/projects/{project_id}/tasks/{task_id}/steps/{step_task_id}/details/{detail_step_task_id}/dates/{date_id}', [
         'middleware' => 'permission:delete_step_task_dates',
         'uses' => 'App\Api\V1\Controllers\DateController@destroy'
     ]);
