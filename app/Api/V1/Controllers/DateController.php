@@ -75,7 +75,8 @@ class DateController extends Controller
         }
 
         return response()->json([
-            'status' => 'date approved'
+            'status' => 'date approved',
+            '$detail_step_task->dates' => $detail_step_task->dates
         ]);
     }
 
