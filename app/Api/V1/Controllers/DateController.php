@@ -55,7 +55,7 @@ class DateController extends Controller
         }
         if($count)
         {
-            $step_task->details()->updateExistingPivot($detail_step_task->pivot->detail_id,
+            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
                 [
                     'status' => 1
                 ]);
@@ -102,7 +102,7 @@ class DateController extends Controller
         }
         if($count)
         {
-            $step_task->details()->updateExistingPivot($detail_step_task->pivot->detail_id,
+            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
                 [
                     'status' => 1
                 ]);
