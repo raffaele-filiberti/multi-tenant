@@ -60,6 +60,13 @@ class DateController extends Controller
                     'status' => 1
                 ]);
         }
+        else {
+            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
+                [
+                    'status' => 0
+                ]);
+
+        }
 
         $count = 0;
         //check if step_task is approved
@@ -73,8 +80,12 @@ class DateController extends Controller
         if($count)
         {
             $step_task->status = 1;
-            $step_task->save();
+        } else {
+            $step_task->status = 0;
         }
+
+        $step_task->save();
+
 
         return response()->json([
             'status' => 'date approved',
@@ -107,6 +118,13 @@ class DateController extends Controller
                     'status' => 1
                 ]);
         }
+        else {
+            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
+                [
+                    'status' => 0
+                ]);
+
+        }
 
         $count = 0;
         //check if step_task is approved
@@ -120,8 +138,11 @@ class DateController extends Controller
         if($count)
         {
             $step_task->status = 1;
-            $step_task->save();
+        } else {
+            $step_task->status = 0;
         }
+
+        $step_task->save();
 
         return response()->json([
             'status' => 'date approved',
