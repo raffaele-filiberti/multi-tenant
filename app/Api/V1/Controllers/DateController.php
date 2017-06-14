@@ -55,7 +55,7 @@ class DateController extends Controller
         }
         if($count)
         {
-            $step_task->details()->updateExistingPivot($detail_step_task_id,
+            $step_task->details()->updateExistingPivot($detail_step_task->pivot->detail_id,
                 [
                     'status' => 1
                 ]);
@@ -66,7 +66,7 @@ class DateController extends Controller
         $step_task = Step_Task::find($step_task_id);
         $details = $step_task->details()->get();
         foreach ($details as $detail_step_task) {
-            if($detail_step_task->status == 1) {
+            if($detail_step_task->pivot->status == 1) {
                 $count = 1;
             }
         }
@@ -102,7 +102,7 @@ class DateController extends Controller
         }
         if($count)
         {
-            $step_task->details()->updateExistingPivot($detail_step_task_id,
+            $step_task->details()->updateExistingPivot($detail_step_task->pivot->detail_id,
                 [
                     'status' => 1
                 ]);
@@ -113,7 +113,7 @@ class DateController extends Controller
         $step_task = Step_Task::find($step_task_id);
         $details = $step_task->details()->get();
         foreach ($details as $detail_step_task) {
-            if($detail_step_task->status == 1) {
+            if($detail_step_task->pivot->status == 1) {
                 $count = 1;
             }
         }
