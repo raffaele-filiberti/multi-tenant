@@ -5,11 +5,12 @@ namespace App\Api\V1\Controllers;
 use App\Date;
 use App\Detail_Step_Task;
 use App\Http\Controllers\Controller;
+use App\Step_Task;
 use Dingo\Api\Http\Request;
 
 class DateController extends Controller
 {
-    public function storeStepDates(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
+    public function storeStepDates(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id)
     {
         Detail_Step_Task::find($detail_step_task_id)->dates()->create([
             'data' => $request->input('data'),
@@ -22,7 +23,7 @@ class DateController extends Controller
 
     }
 
-    public function getStepDates(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
+    public function getStepDates(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id)
     {
         $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
 
@@ -31,37 +32,74 @@ class DateController extends Controller
         ]);
     }
 
-    public function approveStepDates(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $date_id)
+    public function approveStepDates(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $date_id)
     {
-        Date::find($date_id)->detail_step_task()->updateExistingPivot(
+        $date = Date::find($date_id)->detail_step_task()->updateExistingPivot(
             $detail_step_task_id, [
             'status' => 1
         ]);
+
+        check($step_task_id, $detail_step_task_id);
 
         return response()->json([
             'status' => 'date approved'
         ]);
     }
 
-    public function disapproveStepDates(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $date_id)
+    public function disapproveStepDates(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $date_id)
     {
         Date::find($date_id)->detail_step_task()->updateExistingPivot(
             $detail_step_task_id, [
             'status' => 0
         ]);
 
+        check($step_task_id, $detail_step_task_id);
+
         return response()->json([
             'status' => 'date disapproved'
         ]);
     }
 
-    public function destroy($customer_id, $project_id, $task_id, $detail_step_task_id, $date_id)
+    public function destroy($customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $date_id)
     {
         $date = Date::find($date_id);
         $date->delete();
+
+        check($step_task_id, $detail_step_task_id);
 
         return Response()->json([
             'status' => 'date deleted successfully'
         ]);
     }
+
+    public function check($step_task_id, $detail_step_task_id){
+        //check if detail_step_task is approved
+        $count = 0;
+        $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
+        foreach ($detail_step_task->dates as $detail_step_task_date) {
+            if($detail_step_task_date->status == 1) {
+                $count = 1;
+            }
+        }
+        if($count)
+        {
+            $detail_step_task->status = 1;
+            $detail_step_task->save();
+        }
+
+        $count = 0;
+        //check if step_task is approved
+        $step_task = Step_Task::find($step_task_id);
+        foreach ($step_task->details as $detail_step_task) {
+            if($detail_step_task->status == 1) {
+                $count = 1;
+            }
+        }
+        if($count)
+        {
+            $step_task->status = 1;
+            $step_task->save();
+        }
+    }
+
 }
