@@ -13,6 +13,7 @@ class DateController extends Controller
     function check($step_task_id, $detail_step_task_id){
         //check if detail_step_task is approved
         $count = 0;
+        $step_task = Step_Task::find($step_task_id);
         $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
         foreach ($detail_step_task->dates as $detail_step_task_date) {
             if($detail_step_task_date->pivot->status == 1) {
@@ -21,8 +22,10 @@ class DateController extends Controller
         }
         if($count)
         {
-            $detail_step_task->status = 1;
-            $detail_step_task->save();
+            $step_task->details()->updateExistingPivot($detail_step_task_id,
+                [
+                    'status' => 1
+                ]);
         }
 
         $count = 0;
