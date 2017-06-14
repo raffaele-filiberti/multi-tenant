@@ -15,7 +15,7 @@ class DateController extends Controller
         $count = 0;
         $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
         foreach ($detail_step_task->dates as $detail_step_task_date) {
-            if($detail_step_task_date->status == 1) {
+            if($detail_step_task_date->pivot->status == 1) {
                 $count = 1;
             }
         }
