@@ -19,6 +19,10 @@ class DateController extends Controller
             if($detail_step_task_date->pivot->status == 1) {
                 $count = 1;
             }
+            return response()->json([
+                'status' => 'detail verified',
+                'obj' => $detail_step_task_date
+            ]);
         }
         if($count)
         {
