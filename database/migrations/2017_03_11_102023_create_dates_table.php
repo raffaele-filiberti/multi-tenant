@@ -27,7 +27,7 @@ class CreateDatesTable extends Migration
         Schema::create('detail_step_task_date', function (Blueprint $table) {
             $table->integer('detail_step_task_id')->unsigned();
             $table->integer('date_id')->unsigned();
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(2);
 
             $table->foreign('detail_step_task_id')->references('id')->on('detail_step_task')
                 ->onUpdate('cascade')->onDelete('cascade');

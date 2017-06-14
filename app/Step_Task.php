@@ -33,7 +33,8 @@ class Step_Task extends Model
     }
 
     public function details() {
-        return $this->belongsToMany(Detail::class, 'detail_step_task','step_task_id', 'detail_id');
+        return $this->belongsToMany(Detail::class, 'detail_step_task','step_task_id', 'detail_id')
+            ->withPivot('status');
     }
 
     public function detail_step_task() {
