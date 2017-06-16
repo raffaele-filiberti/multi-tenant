@@ -69,11 +69,16 @@ $api->version('v1', function (Router $api) {
         $api->post('reset', 'ResetPasswordController@resetPassword');
     });
 
+    //AGENCIES & CUSTOMERS ROUTES FOR FIRST LOGIN
+    $api->get('agencies', 'AgencyController@index');
+    $api->get('customers/{agency_id}','App\Api\V1\Controllers\CustomerController@indexFromAgency');
+
     $api->group(['middleware' => 'role:super_su', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         //AGENCIES ROUTES
-        $api->get('agencies', 'AgencyController@index');
-        $api->get('agencies/{id}', 'AgencyController@show');
         $api->put('agencies/{id}', 'AgencyController@update');
+        $api->get('agencies/{id}', 'AgencyController@show');
+
+        //TODO: route for monitoring
     });
 
     $api->group(['middleware' => 'role:admin', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {

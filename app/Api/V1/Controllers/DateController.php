@@ -12,7 +12,47 @@ class DateController extends Controller
 {
     function check($step_task_id, $detail_step_task_id){
         //check if detail_step_task is approved
+        $count = 0;
+        $step_task = Step_Task::find($step_task_id);
+        $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
+        $dates = $detail_step_task->dates()->get();
+        foreach ($dates as $detail_step_task_date) {
+            if($detail_step_task_date->pivot->status == 1) {
+                $count = 1;
+            }
+        }
+        if($count)
+        {
+            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
+                [
+                    'status' => 1
+                ]);
+        }
+        else {
+            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
+                [
+                    'status' => 0
+                ]);
 
+        }
+
+        $count = 0;
+        //check if step_task is approved
+        $step_task = Step_Task::find($step_task_id);
+        $details = $step_task->details()->get();
+        foreach ($details as $detail_step_task) {
+            if($detail_step_task->pivot->status == 1) {
+                $count = 1;
+            }
+        }
+        if($count)
+        {
+            $step_task->status = 1;
+        } else {
+            $step_task->status = 0;
+        }
+
+        $step_task->save();
     }
 
     public function storeStepDates(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id)
@@ -44,54 +84,10 @@ class DateController extends Controller
             'status' => 1
         ]);
 
-        $count = 0;
-        $step_task = Step_Task::find($step_task_id);
-        $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
-        $dates = $detail_step_task->dates()->get();
-        foreach ($dates as $detail_step_task_date) {
-            if($detail_step_task_date->pivot->status == 1) {
-                $count = 1;
-            }
-        }
-        if($count)
-        {
-            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
-                [
-                    'status' => 1
-                ]);
-        }
-        else {
-            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
-                [
-                    'status' => 0
-                ]);
-
-        }
-
-        $count = 0;
-        //check if step_task is approved
-        $step_task = Step_Task::find($step_task_id);
-        $details = $step_task->details()->get();
-        foreach ($details as $detail_step_task) {
-            if($detail_step_task->pivot->status == 1) {
-                $count = 1;
-            }
-        }
-        if($count)
-        {
-            $step_task->status = 1;
-        } else {
-            $step_task->status = 0;
-        }
-
-        $step_task->save();
-
+        $this->check($step_task_id, $detail_step_task_id);
 
         return response()->json([
-            'status' => 'date approved',
-            '$detail_step_task->dates' => $dates,
-            '$detail_step_task->details' => $details,
-
+            'status' => 'date approved'
         ]);
     }
 
@@ -102,53 +98,10 @@ class DateController extends Controller
             'status' => 0
         ]);
 
-        $count = 0;
-        $step_task = Step_Task::find($step_task_id);
-        $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
-        $dates = $detail_step_task->dates()->get();
-        foreach ($dates as $detail_step_task_date) {
-            if($detail_step_task_date->pivot->status == 1) {
-                $count = 1;
-            }
-        }
-        if($count)
-        {
-            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
-                [
-                    'status' => 1
-                ]);
-        }
-        else {
-            $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
-                [
-                    'status' => 0
-                ]);
-
-        }
-
-        $count = 0;
-        //check if step_task is approved
-        $step_task = Step_Task::find($step_task_id);
-        $details = $step_task->details()->get();
-        foreach ($details as $detail_step_task) {
-            if($detail_step_task->pivot->status == 1) {
-                $count = 1;
-            }
-        }
-        if($count)
-        {
-            $step_task->status = 1;
-        } else {
-            $step_task->status = 0;
-        }
-
-        $step_task->save();
+        $this->check($step_task_id, $detail_step_task_id);
 
         return response()->json([
             'status' => 'date approved',
-            '$detail_step_task->dates' => $dates,
-            '$detail_step_task->details' => $details,
-
         ]);
     }
 
@@ -157,7 +110,7 @@ class DateController extends Controller
         $date = Date::find($date_id);
         $date->delete();
 
-        check($step_task_id, $detail_step_task_id);
+        $this->check($step_task_id, $detail_step_task_id);
 
         return Response()->json([
             'status' => 'date deleted successfully'

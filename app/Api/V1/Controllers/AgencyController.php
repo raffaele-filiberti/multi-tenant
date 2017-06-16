@@ -24,7 +24,7 @@ class AgencyController extends Controller
     public function index()
     {
         return Response()->json([
-            'agencies' => Agency::all()
+            'agencies' => Agency::where('hidden', '=', false)->get()
         ]);
     }
 

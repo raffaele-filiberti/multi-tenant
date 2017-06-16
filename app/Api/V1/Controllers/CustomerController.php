@@ -25,6 +25,14 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function indexFromAgency($agency_id)
+    {
+        return Response()->json([
+            'customers' => Customer::where('agency_id', '=', $agency_id)->get()
+        ]);
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
