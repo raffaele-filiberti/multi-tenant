@@ -33,22 +33,28 @@ class S3BucketCreator implements ShouldQueue
     public function handle()
     {
         $s3 = AWS::createClient('s3');
-        //create bucket
-        $s3->createBucket(array('Bucket' => $this->bucket));
-        //store CORS rules
-        $result = $s3->putBucketCors(array(
-            'Bucket' => $this->bucket,
-            'CORSRules' => array(
-                [
-                    'AllowedHeaders' => ['string', '*'],
-                    'AllowedMethods' => ['string', '*'],
-                    'AllowedOrigins' => ['string', '*'],
-                    'ExposeHeaders' => [
-                        ['string', 'ETag'],
-                        ['string', 'x-amz-server-side-encryption']
+        //TODO: bucket name field in agency table
+        if(!$s3->doesBucketExist($this->bucket)) {
+            $s3->createBucket([
+                'ACL' => 'public-read',
+                'Bucket' => $this->bucket
+                ]);
+            //store CORS rules
+            $result = $s3->putBucketCors([
+                'Bucket' => $this->bucket,
+                'CORSRules' => [
+                    [
+                        'AllowedHeaders' => ['string', '*'],
+                        'AllowedMethods' => ['string', '*'],
+                        'AllowedOrigins' => ['string', '*'],
+                        'ExposeHeaders' => [
+                            ['string', 'ETag'],
+                            ['string', 'x-amz-server-side-encryption']
+                        ],
                     ],
                 ],
-            ),
-        ));
+            ]);
+        }
+
     }
 }

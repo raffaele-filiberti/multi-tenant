@@ -57,6 +57,7 @@ class SignUpController extends Controller
 
         $bucket = preg_replace('/\s*/', '', $agency->name);
 
+        //create a buckets to S3
         $this->dispatch(new S3BucketCreator(strtolower($bucket)));
 
         //  assign role admin to the agency owner
@@ -102,7 +103,9 @@ class SignUpController extends Controller
             Notification::send($users, new NewSubscriberNotification($user));
         }
 
-        $token = $JWTAuth->fromUser($user);
+        //generate token
+        $credentials = $request->only('email', 'password');
+        $token = $JWTAuth->attempt($credentials);
 
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
