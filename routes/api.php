@@ -70,7 +70,7 @@ $api->version('v1', function (Router $api) {
     });
 
     //AGENCIES & CUSTOMERS ROUTES FOR FIRST LOGIN
-    $api->get('agencies', 'AgencyController@index');
+    $api->get('agencies', 'App\Api\V1\ControllersAgencyController@index');
     $api->get('customers/{agency_id}','App\Api\V1\Controllers\CustomerController@indexFromAgency');
 
     $api->group(['middleware' => 'role:super_su', 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
