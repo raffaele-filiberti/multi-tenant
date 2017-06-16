@@ -65,7 +65,9 @@ class SignUpController extends Controller
 
         $token = $JWTAuth->fromUser($user);
         return response()->json([
-            'status' => 'ok',
+            'agency' => Agency::find(Auth::user()->agency_id),
+            'auth' => Auth::user(),
+            'authRole' => Auth::user()->roles()->get(),
             'token' => $token
         ], 201);
     }
@@ -74,7 +76,7 @@ class SignUpController extends Controller
      * @param SignUpAsSubscriberRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function signUpAsSubscriber(SignUpAsSubscriberRequest $request)
+    public function signUpAsSubscriber(SignUpAsSubscriberRequest $request,JWTAuth $JWTAuth)
     {
         $agency = Agency::find($request->input('agency_id'));
         $customer = Customer::find($request->input('customer_id'));
@@ -97,9 +99,13 @@ class SignUpController extends Controller
             Notification::send($users, new NewSubscriberNotification($user));
         }
 
+        $token = $JWTAuth->fromUser($user);
 
         return response()->json([
-            'status' => 'ok',
+            'agency' => Agency::find(Auth::user()->agency_id),
+            'auth' => Auth::user(),
+            'authRole' => Auth::user()->roles()->get(),
+            'token' => $token,
             'message' => 'your request has been sent to administrator'
         ], 201);
     }
