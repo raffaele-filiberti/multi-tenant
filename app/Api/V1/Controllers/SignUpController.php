@@ -63,7 +63,10 @@ class SignUpController extends Controller
         $role = Role::where('name', '=', 'admin')->first();
         $user->roles()->attach($role->id);
 
-        $token = $JWTAuth->fromUser($user);
+        //generate token
+        $credentials = $request->only('email', 'password');
+        $token = $JWTAuth->attempt($credentials);
+
         return response()->json([
             'agency' => Agency::find(Auth::user()->agency_id),
             'auth' => Auth::user(),
