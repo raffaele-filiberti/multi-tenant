@@ -50,8 +50,8 @@ class TaskController extends Controller
         if(Auth::user()->hasRole(['product_manager'])) {
             return Response()->json([
                 'tasks' => Customer::find($customer_id)->tasks()
-                    ->where('archivied', '=', false)
-                    ->where('private', '=', false)
+                    ->where('tasks.archivied', '=', false)
+                    ->where('tasks.private', '=', false)
                     ->with(
                         'steps',
                         'steps.details',
