@@ -91,7 +91,6 @@ $api->version('v1', function (Router $api) {
         //DETAIL_TEMPLATE ROUTES
         $api->resource('templates/{template_id}/steps/{step_id}/details', 'DetailController', ['except' => ['create', 'edit']]);
 
-        $api->get('roles', '\App\Api\V1\Controllers\RoleController@index');
     });
 
     //SUBSCRIBE ROUTES
@@ -100,6 +99,12 @@ $api->version('v1', function (Router $api) {
         $api->post('{user_id}/confirm', 'UserController@confirmSubscribe');
         $api->post('{user_id}/subscription', 'UserController@removeSubscribe');
     });
+
+    //ROLE ROUTES
+    $api->get('roles', [
+        'middleware' => 'permission:view_roles',
+        'uses' => '\App\Api\V1\Controllers\RoleController@index'
+    ]);
 
     //USER ROUTES
     $api->get('users', [
