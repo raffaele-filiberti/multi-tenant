@@ -47,6 +47,23 @@ class TaskController extends Controller
             ]);
         }
 
+        if(Auth::user()->hasRole(['product_manager'])) {
+            return Response()->json([
+                'tasks' => Customer::find($customer_id)->tasks()
+                    ->where('archivied', '=', false)
+                    ->where('private', '=', false)
+                    ->with(
+                        'steps',
+                        'steps.details',
+                        'step_task',
+                        'step_task.detail_step_task',
+                        'step_task.detail_step_task.files',
+                        'step_task.detail_step_task.dates'
+                    )
+                    ->get()
+            ]);
+        }
+
         // i clienti vedono solo i progetti condivisi con loro
         if(Auth::user()->can('view_tasks')) {
             return Response()->json([
