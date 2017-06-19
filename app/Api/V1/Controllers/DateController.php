@@ -21,7 +21,7 @@ class DateController extends Controller
                 $count++;
             }
         }
-        if($count == count($detail_step_task_date))
+        if($count == count($detail_step_task_date) - 1)
         {
             $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
                 [
@@ -45,7 +45,7 @@ class DateController extends Controller
                 $count++;
             }
         }
-        if($count == count($detail_step_task))
+        if($count == count($detail_step_task) - 1)
         {
             $step_task->status = 1;
         } else {
