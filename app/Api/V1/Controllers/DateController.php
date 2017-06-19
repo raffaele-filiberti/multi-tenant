@@ -18,10 +18,10 @@ class DateController extends Controller
         $dates = $detail_step_task->dates()->get();
         foreach ($dates as $detail_step_task_date) {
             if($detail_step_task_date->pivot->status == 1) {
-                $count = 1;
+                $count++;
             }
         }
-        if($count)
+        if($count == count($detail_step_task_date))
         {
             $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
                 [
@@ -42,10 +42,10 @@ class DateController extends Controller
         $details = $step_task->details()->get();
         foreach ($details as $detail_step_task) {
             if($detail_step_task->pivot->status == 1) {
-                $count = 1;
+                $count++;
             }
         }
-        if($count)
+        if($count == count($detail_step_task))
         {
             $step_task->status = 1;
         } else {
