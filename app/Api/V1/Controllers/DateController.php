@@ -7,6 +7,7 @@ use App\Detail_Step_Task;
 use App\Http\Controllers\Controller;
 use App\Step_Task;
 use Dingo\Api\Http\Request;
+use Illuminate\Contracts\Logging\Log;
 
 class DateController extends Controller
 {
@@ -21,7 +22,7 @@ class DateController extends Controller
                 $count++;
             }
         }
-        if($count == count($detail_step_task_date) - 1)
+        if($count == count($detail_step_task_date))
         {
             $step_task->details()->updateExistingPivot($detail_step_task->detail_id,
                 [
@@ -45,7 +46,7 @@ class DateController extends Controller
                 $count++;
             }
         }
-        if($count == count($detail_step_task) - 1)
+        if($count == count($detail_step_task))
         {
             $step_task->status = 1;
         } else {
