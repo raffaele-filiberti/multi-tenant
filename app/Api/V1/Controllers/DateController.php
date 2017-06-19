@@ -46,7 +46,7 @@ class DateController extends Controller
                 $count++;
             }
         }
-        if($count == count($detail_step_task))
+        if($count == count($details))
         {
             $step_task->status = 1;
         } else {
