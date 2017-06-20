@@ -18,7 +18,7 @@ use App\Http\Controllers\Controller;
 class FileController extends Controller
 {
     //TODO:delete
-    public function getStepFiles (Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
+    public function getStepFiles (Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id)
     {
         $detail_step_task = Detail_Step_Task::find($detail_step_task_id);
 
@@ -29,7 +29,7 @@ class FileController extends Controller
     }
 
     //TODO: cloud extra upload
-    public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id)
+    public function storeStepFiles(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id)
     {
         $task = Task::find($task_id);
         Detail_Step_Task::find($detail_step_task_id)->files()->create([
@@ -46,7 +46,7 @@ class FileController extends Controller
         ]);
     }
 
-    public function downloadFiles($customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
+    public function downloadFiles($customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $file_id)
     {
         $task = Task::find($task_id);
         $file = File::findOrFail($file_id);
@@ -65,7 +65,7 @@ class FileController extends Controller
         ]);
     }
 
-    public function approveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
+    public function approveStepFiles(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $file_id)
     {
         File::find($file_id)->detail_step_task()->updateExistingPivot(
             $detail_step_task_id, [
@@ -77,7 +77,7 @@ class FileController extends Controller
         ]);
     }
 
-    public function disapproveStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id)
+    public function disapproveStepFiles(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $file_id)
     {
         File::findOrFail($file_id)->detail_step_task()->updateExistingPivot(
             $detail_step_task_id, [
@@ -89,7 +89,7 @@ class FileController extends Controller
         ]);
     }
 
-    public function deleteStepFiles(Request $request, $customer_id, $project_id, $task_id, $detail_step_task_id, $file_id){
+    public function deleteStepFiles(Request $request, $customer_id, $project_id, $task_id, $step_task_id, $detail_step_task_id, $file_id){
         $file = File::findOrFail($file_id);
 
 //        TODO: file id is missed
