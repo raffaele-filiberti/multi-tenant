@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         if(Auth::user()->hasRole(['admin', 'designer', 'creative_director'])) {
             $agency = Agency::withCount([
-                'users','customers', 'customers.projects', 'customers.projects.tasks'
+                'customers', 'customers.projects', 'customers.projects.tasks', 'users'
             ])->get();
         }
 
