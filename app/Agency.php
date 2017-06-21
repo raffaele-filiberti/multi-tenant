@@ -28,7 +28,14 @@ class Agency extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(User::class);
     }
+
+    public function agency()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+
 
 }
