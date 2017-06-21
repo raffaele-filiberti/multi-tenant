@@ -36,6 +36,16 @@ class Agency extends Model
         return $this->hasMany(Customer::class);
     }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
 
 
 }
