@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function cardsCounter()
     {
         if(Auth::user()->hasRole(['admin', 'designer', 'creative_director'])) {
-            $agency = Agency::withCount([
+            $agency = Agency::where('id', '=', Auth::user()->agency_id)->withCount([
                 'customers', 'projects', 'tasks', 'users'
             ])->get();
         }
