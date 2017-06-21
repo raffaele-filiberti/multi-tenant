@@ -31,7 +31,7 @@ class Agency extends Model
         return $this->hasMany(User::class);
     }
 
-    public function agency()
+    public function customers()
     {
         return $this->hasMany(Customer::class);
     }
