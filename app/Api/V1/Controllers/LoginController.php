@@ -65,7 +65,9 @@ class LoginController extends Controller
 //        Auth::user()->notify(new LoginSuccess(Auth::user()));
 
         return response()->json([
-            'agency' => Agency::find(Auth::user()->agency_id),
+            'agency' => Agency::where('id', '=', Auth::user()->agency_id)->withCount([
+                            'customers', 'projects', 'tasks', 'users'
+                        ])->get(),
             'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
             'token' => $token
         ]);

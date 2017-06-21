@@ -69,8 +69,9 @@ class SignUpController extends Controller
         $token = $JWTAuth->attempt($credentials);
 
         return response()->json([
-            'agency' => Agency::find(Auth::user()->agency_id),
-            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
+            'agency' => Agency::where('id', '=', Auth::user()->agency_id)->withCount([
+                'customers', 'projects', 'tasks', 'users'
+            ])->get(),            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
             'token' => $token
         ], 201);
     }
@@ -107,8 +108,9 @@ class SignUpController extends Controller
         $token = $JWTAuth->attempt($credentials);
 
         return response()->json([
-            'agency' => Agency::find(Auth::user()->agency_id),
-            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
+            'agency' => Agency::where('id', '=', Auth::user()->agency_id)->withCount([
+                'customers', 'projects', 'tasks', 'users'
+            ])->get(),            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
             'token' => $token,
             'message' => 'your request has been sent to administrator'
         ], 201);
