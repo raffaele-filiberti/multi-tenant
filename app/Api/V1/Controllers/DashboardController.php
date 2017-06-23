@@ -44,4 +44,9 @@ class DashboardController extends Controller
             ]);
         }
     }
+
+    public function recentTask()
+    {
+
+    }
 }

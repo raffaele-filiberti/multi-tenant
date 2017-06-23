@@ -93,6 +93,13 @@ $api->version('v1', function (Router $api) {
 
     });
 
+    //CHART
+    $api->get('userChart', [
+        'middleware' => 'permission:view_users',
+        'uses' => 'App\Api\V1\Controllers\DashboardController@userChart'
+    ]);
+
+
     //SUBSCRIBE ROUTES
     $api->group(['middleware' => ['permission:view_subscribers|confirm_subscribers|delete_subscribers'], 'namespace' => 'App\\Api\\V1\\Controllers\\'], function(Router $api) {
         $api->get('subscriber', 'UserController@getSubscriber');
@@ -272,7 +279,6 @@ $api->version('v1', function (Router $api) {
 
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
         $api->get('cards', 'App\Api\V1\Controllers\DashboardController@cardsCounter');
-        $api->get('userChart', 'App\Api\V1\Controllers\DashboardController@userChart');
 
         //TENANT TEST
         $api->get('tenant', function() {
