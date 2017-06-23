@@ -35,8 +35,8 @@ class DashboardController extends Controller
     {
         if(Auth::user()->hasRole(['admin', 'creative_director'])) {
             $user = User::all();
-            $u_label = $user->lists('updated_at');
-            $u_data = $user->lists('name');
+            $u_label = $user->pluck('updated_at');
+            $u_data = $user->pluck('name');
 
             return response()->json([
                 'u_label' => $u_label,
