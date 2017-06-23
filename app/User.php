@@ -108,4 +108,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return  date('m/d/Y', strtotime($value));
+    }
 }
