@@ -33,10 +33,9 @@ class DashboardController extends Controller
     public function userChart()
     {
         if(Auth::user()->hasRole(['admin', 'creative_director'])) {
-            $user = DB::table('users');
+            $user = User::all();
             $u_label = $user->lists('updated_at');
             $u_data = $user->lists('name');
-
 
             return response()->json([
                 'u_label' => $u_label,
