@@ -33,7 +33,10 @@ class DashboardController extends Controller
     public function userChart()
     {
             $u_chart = DB::table('users')
-                ->select(DB::raw("MONTHNAME(created_at) as month"), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"), DB::raw("count(*) as users"))
+                ->select(DB::raw("MONTHNAME(created_at) as month"),
+                    DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"),
+                    DB::raw("count(*) as users"))
+                -where('agency_id', Auth::user()->agency_id)
                 ->groupBy('monthNum')
                 ->get();
 
