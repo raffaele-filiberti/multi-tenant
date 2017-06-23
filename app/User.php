@@ -53,6 +53,7 @@ class User extends Model implements AuthenticatableContract,
     {
         $this->attributes['first_name'] = empty($first_name) ? $this->attributes['first_name'] : $first_name;
     }
+
     public function setLastNameAttribute($last_name)
     {
         $this->attributes['last_name'] = empty($last_name) ? $this->attributes['last_name'] : $last_name;
