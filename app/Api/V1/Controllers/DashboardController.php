@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Agency;
 use App\Http\Controllers\Controller;
 use App\Task;
+use App\User;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
 use DB;
