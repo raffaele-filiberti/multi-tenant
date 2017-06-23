@@ -111,6 +111,6 @@ class User extends Model implements AuthenticatableContract,
 
     public function getCreatedAtAttribute($value)
     {
-        return  date('m/d/Y', strtotime($value));
+        return  date('m/d/Y', strtotime($this->attributes['created_at']));
     }
 }
