@@ -34,7 +34,7 @@ class DashboardController extends Controller
     {
         if(Auth::user()->hasRole(['admin', 'creative_director'])) {
             $chart = DB::table('users')
-                ->select(DB::raw('MONTHNAME(created_at) as month'), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"), DB::raw('count(*) as users'))
+                ->select(DB::raw("MONTHNAME(created_at) as 'month'"), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as 'monthNum'"), DB::raw("count(*) as 'users'"))
                 ->groupBy('monthNum')
                 ->get();
 
