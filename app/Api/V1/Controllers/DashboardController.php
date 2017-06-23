@@ -47,6 +47,11 @@ class DashboardController extends Controller
 
     public function recentTask()
     {
-
+        Task::all()
+            ->where('archived', '=', false)
+            ->where('private', '=', false)
+            ->orderBy('updated_at', 'asc')
+            ->take(10)
+            ->get();
     }
 }
