@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Task;
 use Auth;
 use HipsterJazzbo\Landlord\Facades\Landlord;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -27,5 +28,19 @@ class DashboardController extends Controller
         return response()->json([
             'counter' => $agency
         ]);
+    }
+
+    public function userChart()
+    {
+        if(Auth::user()->hasRole(['admin', 'creative_director'])) {
+            $chart = DB::table('users')
+                ->select(DB::raw('MONTHNAME(created_at) as month'), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"), DB::raw('count(*) as users'))
+                ->groupBy('monthNum')
+                ->get();
+
+            return response()->json([
+                'user_chart_data' => $chart
+            ]);
+        }
     }
 }

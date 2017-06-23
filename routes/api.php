@@ -272,6 +272,7 @@ $api->version('v1', function (Router $api) {
 
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
         $api->get('cards', 'App\Api\V1\Controllers\DashboardController@cardsCounter');
+        $api->get('userChart', 'App\Api\V1\Controllers\DashboardController@userChart');
 
         //TENANT TEST
         $api->get('tenant', function() {
