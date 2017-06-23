@@ -67,7 +67,7 @@ class LoginController extends Controller
         return response()->json([
             'agency' => Agency::where('id', '=', Auth::user()->agency_id)->withCount([
                             'customers', 'projects', 'tasks', 'users'
-                        ])->get(),
+                        ])->first(),
             'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
             'token' => $token
         ]);
