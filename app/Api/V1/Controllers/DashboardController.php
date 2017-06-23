@@ -33,16 +33,14 @@ class DashboardController extends Controller
 
     public function userChart()
     {
-        if(Auth::user()->hasRole(['admin', 'creative_director'])) {
-            $user = User::all();
-            $u_label = $user->pluck('updated_at');
-            $u_data = $user->pluck('name');
+            $u_chart = User::all()
+                ->select(DB::raw("MONTHNAME(created_at) as month"), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"), DB::raw("count(*) as users"))
+                ->groupBy('monthNum')
+                ->get();
 
             return response()->json([
-                'u_label' => $u_label,
-                'u_data' => $u_data
+                'user_chart_data' => $u_chart
             ]);
-        }
     }
 
     public function recentTask()
