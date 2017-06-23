@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -111,6 +112,5 @@ class User extends Model implements AuthenticatableContract,
 
     public function getCreatedAtAttribute($value)
     {
-        return  date('m/d/Y', strtotime($this->attributes['created_at']));
-    }
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('Y-m-d');    }
 }
