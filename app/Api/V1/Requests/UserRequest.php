@@ -51,8 +51,6 @@ class UserRequest extends FormRequest
                     'province' => 'max:255|nullable',
                     'city' => 'max:255|nullable',
                     'nation' => 'max:255|nullable',
-                    'ibernate' => 'boolean',
-                    'notify' => 'boolean',
                     'subscribed' => 'boolean'
                 ];
             }

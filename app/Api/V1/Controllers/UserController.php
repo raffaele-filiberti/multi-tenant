@@ -70,8 +70,6 @@ class UserController extends Controller
         $user->province = $request->input('province', null);
         $user->city = $request->input('city', null);
         $user->nation = $request->input('nation', null);
-        $user->ibernate = $request->input('ibernate', false);
-        $user->notify = $request->input('notify', true);
         $user->save();
 
         if($request->has('customer_id'))
