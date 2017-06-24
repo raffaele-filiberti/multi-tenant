@@ -89,15 +89,15 @@ class User extends Model implements AuthenticatableContract,
 //        $this->attributes['nation'] = empty($nation) ? $this->attributes['nation'] : $nation;
 //    }
 
-    public function setIbernateAttribute($ibernate)
-    {
-        $this->attributes['ibernate'] = empty($ibernate) ? $this->attributes['ibernate'] : $ibernate;
-    }
-
-    public function setNotifyAttribute($notify)
-    {
-        $this->attributes['notify'] = empty($notify) ? $this->attributes['notify'] : $notify;
-    }
+//    public function setIbernateAttribute($ibernate)
+//    {
+//        $this->attributes['ibernate'] = empty($ibernate) ? $this->attributes['ibernate'] : $ibernate;
+//    }
+//
+//    public function setNotifyAttribute($notify)
+//    {
+//        $this->attributes['notify'] = empty($notify) ? $this->attributes['notify'] : $notify;
+//    }
 
     public function agency()
     {
