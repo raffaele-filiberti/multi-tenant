@@ -48,56 +48,56 @@ class User extends Model implements AuthenticatableContract,
         $this->attributes['email'] = empty($email) ? $this->attributes['email'] : $email;
     }
 
-//    public function setFirstNameAttribute($first_name)
-//    {
-//        $this->attributes['first_name'] = empty($first_name) ? $this->attributes['first_name'] : $first_name;
-//    }
-//
-//    public function setLastNameAttribute($last_name)
-//    {
-//        $this->attributes['last_name'] = empty($last_name) ? $this->attributes['last_name'] : $last_name;
-//    }
-//    public function setCellPhoneAttribute($cell_phone)
-//    {
-//        $this->attributes['cell_phone'] = empty($cell_phone) ? $this->attributes['cell_phone'] : $cell_phone;
-//    }
-//    public function setFaxAttribute($fax)
-//    {
-//        $this->attributes['fax'] = empty($fax) ? $this->attributes['fax'] : $fax;
-//    }
-//    public function setAddressAttribute($address)
-//    {
-//        $this->attributes['address'] = empty($address) ? $this->attributes['address'] : $address;
-//    }
-//    public function setPostcodeAttribute($postcode)
-//    {
-//        $this->attributes['postcode'] = empty($postcode) ? $this->attributes['postcode'] : $postcode;
-//    }
-//
-//    public function setProvinceAttribute($province)
-//    {
-//        $this->attributes['province'] = empty($province) ? $this->attributes['province'] : $province;
-//    }
-//
-//    public function setCityAttribute($city)
-//    {
-//        $this->attributes['city'] = empty($city) ? $this->attributes['city'] : $city;
-//    }
-//
-//    public function setNationAttribute($nation)
-//    {
-//        $this->attributes['nation'] = empty($nation) ? $this->attributes['nation'] : $nation;
-//    }
+    public function setFirstNameAttribute($first_name)
+{
+    $this->attributes['first_name'] = empty($first_name) ? $this->attributes['first_name'] : $first_name;
+}
 
-//    public function setIbernateAttribute($ibernate)
-//    {
-//        $this->attributes['ibernate'] = empty($ibernate) ? $this->attributes['ibernate'] : $ibernate;
-//    }
-//
-//    public function setNotifyAttribute($notify)
-//    {
-//        $this->attributes['notify'] = empty($notify) ? $this->attributes['notify'] : $notify;
-//    }
+    public function setLastNameAttribute($last_name)
+    {
+        $this->attributes['last_name'] = empty($last_name) ? $this->attributes['last_name'] : $last_name;
+    }
+    public function setCellPhoneAttribute($cell_phone)
+    {
+        $this->attributes['cell_phone'] = empty($cell_phone) ? $this->attributes['cell_phone'] : $cell_phone;
+    }
+    public function setFaxAttribute($fax)
+    {
+        $this->attributes['fax'] = empty($fax) ? $this->attributes['fax'] : $fax;
+    }
+    public function setAddressAttribute($address)
+    {
+        $this->attributes['address'] = empty($address) ? $this->attributes['address'] : $address;
+    }
+    public function setPostcodeAttribute($postcode)
+    {
+        $this->attributes['postcode'] = empty($postcode) ? $this->attributes['postcode'] : $postcode;
+    }
+
+    public function setProvinceAttribute($province)
+    {
+        $this->attributes['province'] = empty($province) ? $this->attributes['province'] : $province;
+    }
+
+    public function setCityAttribute($city)
+    {
+        $this->attributes['city'] = empty($city) ? $this->attributes['city'] : $city;
+    }
+
+    public function setNationAttribute($nation)
+    {
+        $this->attributes['nation'] = empty($nation) ? $this->attributes['nation'] : $nation;
+    }
+
+    public function setIbernateAttribute($ibernate)
+    {
+        $this->attributes['ibernate'] = empty($ibernate) ? $this->attributes['ibernate'] : $ibernate;
+    }
+
+    public function setNotifyAttribute($notify)
+    {
+        $this->attributes['notify'] = empty($notify) ? $this->attributes['notify'] : $notify;
+    }
 
     public function agency()
     {
