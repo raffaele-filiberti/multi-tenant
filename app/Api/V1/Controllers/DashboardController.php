@@ -44,9 +44,23 @@ class DashboardController extends Controller
             ->groupBy('monthNum')
             ->get();
 
+        $c_chart = DB::table('customers')
+            ->select(DB::raw("MONTHNAME(created_at) as month"), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"), DB::raw("count(*) as customers"))
+            ->where('agency_id', Auth::user()->agency_id)
+            ->groupBy('monthNum')
+            ->get();
+
+        $p_chart = DB::table('projects')
+            ->select(DB::raw("MONTHNAME(created_at) as month"), DB::raw("DATE_FORMAT(created_at,'%Y-%m') as monthNum"), DB::raw("count(*) as projects"))
+            ->where('agency_id', Auth::user()->agency_id)
+            ->groupBy('monthNum')
+            ->get();
+
             return response()->json([
                 'user_chart_data' => $u_chart,
-                'task_chart_data' => $t_chart
+                'task_chart_data' => $t_chart,
+                'customer_chart_data' => $c_chart,
+                'project_chart_data' => $p_chart
 
             ]);
     }
