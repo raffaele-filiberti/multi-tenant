@@ -61,17 +61,15 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->cell_phone = $request->input('cell_phone');
-        $user->fax = $request->input('fax');
-        $user->address = $request->input('address');
-        $user->postcode = $request->input('postcode');
-        $user->province = $request->input('province');
-        $user->city = $request->input('city');
-        $user->nation = $request->input('nation');
-        $user->ibernate = $request->input('ibernate');
-        $user->notify = $request->input('notify');
+        $user->first_name = $request->input('first_name', null);
+        $user->last_name = $request->input('last_name', null);
+        $user->cell_phone = $request->input('cell_phone', null);
+        $user->fax = $request->input('fax', null);
+        $user->address = $request->input('address', null);
+        $user->postcode = $request->input('postcode', null);
+        $user->province = $request->input('province', null);
+        $user->city = $request->input('city', null);
+        $user->nation = $request->input('nation', null);
         $user->save();
 
         if($request->has('customer_id'))

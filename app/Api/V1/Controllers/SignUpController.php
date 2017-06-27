@@ -71,7 +71,8 @@ class SignUpController extends Controller
         return response()->json([
             'agency' => Agency::where('id', '=', Auth::user()->agency_id)->withCount([
                 'customers', 'projects', 'tasks', 'users'
-            ])->get(),            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
+            ])->first(),
+            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
             'token' => $token
         ], 201);
     }
@@ -110,7 +111,8 @@ class SignUpController extends Controller
         return response()->json([
             'agency' => Agency::where('id', '=', Auth::user()->agency_id)->withCount([
                 'customers', 'projects', 'tasks', 'users'
-            ])->get(),            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
+            ])->first(),
+            'auth' => User::with('roles', 'customers')->find(Auth::user()->id),
             'token' => $token,
             'message' => 'your request has been sent to administrator'
         ], 201);
