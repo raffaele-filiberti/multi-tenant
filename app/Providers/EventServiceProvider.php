@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Users\LoginSuccess' => [
             'App\Listeners\Users\LoginSuccessNotification',
         ],
+        'App\Events\Drive\NewFolderCreator' => [
+            'App\Listeners\Drive\NewFolder'
+        ],
+
         'App\Events\Files\FileUpload' => [
             'App\Listeners\Files\GoogleDriveFileUpload'
         ]

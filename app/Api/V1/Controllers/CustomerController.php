@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\GoogleUpload;
 use App\Api\V1\Requests\customerRequest;
 use App\Customer;
+use App\Events\Drive\NewFolderCreator;
 use App\User;
 use Aws\Laravel\AwsFacade as AWS;
 use App\Http\Controllers\Controller;
@@ -42,16 +43,18 @@ class CustomerController extends Controller
     public function store(customerRequest $request)
     {
 //        creo la cartella su drive
-//        $google_drive = new GoogleUpload();
-//        $folder_id = $google_drive->create_folder($request->input('name'));
+        $google_drive = new GoogleUpload();
+        $folder_id = $google_drive->create_folder($request->input('name'));
 
-        $folder_id = null;
+//        $folder_id = null;
 
         $customer = Customer::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'folder_id' => ($folder_id)? $folder_id : null,
         ]);
+
+        event(new NewFolderCreator($customer, $folder_id));
 
         $bucket = preg_replace('/\s*/', '', $customer->agency->name);
 
