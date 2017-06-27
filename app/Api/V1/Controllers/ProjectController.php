@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\GoogleUpload;
 use App\Api\V1\Requests\ProjectRequest;
 
+use App\Events\Drive\NewFolderCreator;
 use App\Project;
 use App\Customer;
 
@@ -49,8 +50,8 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request, $customer_id)
     {
         $customer = Customer::find($customer_id);
-//        $google_drive = new GoogleUpload();
-//        $folder_id = $google_drive->create_folder($request->input('name'), $customer->folder_id);
+        $google_drive = new GoogleUpload();
+        $folder_id = $google_drive->create_folder($request->input('name'), $customer->folder_id);
 
         $project = $customer->projects()->create([
             'folder_id' => null,
@@ -59,6 +60,8 @@ class ProjectController extends Controller
             'description' => $request->input('description'),
             'private' => $request->input('private')
         ]);
+
+        event(new NewFolderCreator('c', $project->id, $folder_id));
 
         $bucket = preg_replace('/\s*/', '', $project->agency->name);
 

@@ -5,6 +5,7 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Requests\SignUpAsAgencyRequest;
 use App\Api\V1\Requests\SignUpAsSubscriberRequest;
 use App\Customer;
+use App\Events\Drive\NewFolderCreator;
 use App\Jobs\S3BucketCreator;
 use App\Notifications\NewSubscriberNotification;
 use App\Permission;
@@ -44,6 +45,9 @@ class SignUpController extends Controller
             'description' => $request->input('description'),
         ]);
 
+        $google_drive = new GoogleUpload();
+        $folder_id = $google_drive->create_folder($request->input('agency'));
+
         Landlord::AddTenant($agency);
         User::bootBelongsToTenants();
 
@@ -59,6 +63,10 @@ class SignUpController extends Controller
 
         //create a buckets to S3
         $this->dispatch(new S3BucketCreator(strtolower($bucket)));
+
+        //store drive folder
+        event(new NewFolderCreator('a', $agency->id, $folder_id));
+
 
         //  assign role admin to the agency owner
         $role = Role::where('name', '=', 'admin')->first();

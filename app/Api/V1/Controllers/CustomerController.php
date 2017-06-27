@@ -54,7 +54,7 @@ class CustomerController extends Controller
             'folder_id' => ($folder_id)? $folder_id : null,
         ]);
 
-        event(new NewFolderCreator($customer, $folder_id));
+        event(new NewFolderCreator('c', $customer->id, $folder_id));
 
         $bucket = preg_replace('/\s*/', '', $customer->agency->name);
 

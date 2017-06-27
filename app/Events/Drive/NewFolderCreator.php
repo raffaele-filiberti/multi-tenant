@@ -15,16 +15,18 @@ class NewFolderCreator
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $customer;
+    public $model;
+    public $model_id;
     public $folder_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Customer $customer, $folder_id)
+    public function __construct($model, $model_id, $folder_id)
     {
-        $this->customer = $customer;
+        $this->model_id = $model_id;
+        $this->model = $model;
         $this->folder_id = $folder_id;
     }
 

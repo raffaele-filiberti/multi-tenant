@@ -93,6 +93,7 @@ class TaskController extends Controller
     {
         $project = Project::findOrFail($project_id);
         $customer = Customer::findOrFail($customer_id);
+        //drive folder
         $google_drive = new GoogleUpload();
         $folder_id = $google_drive->create_folder($request->input('name'), $project->folder_id);
 
@@ -134,7 +135,9 @@ class TaskController extends Controller
                 $step_task->details()->attach($detail->id);
             }
 
-        } 
+        }
+
+        event(new NewFolderCreator('t', $task->id, $folder_id));
 
         $bucket = preg_replace('/\s*/', '', $task->agency->name);
 
